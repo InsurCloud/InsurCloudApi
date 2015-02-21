@@ -1,0 +1,12 @@
+SET NOCOUNT ON
+GO
+-- To disable xp_cmdshell again once we are thru with our work.
+PRINT 'Disabling xp_cmdshell utility...'
+EXEC sp_configure 'xp_cmdshell', 0
+GO
+RECONFIGURE
+GO
+EXEC sp_configure 'show advanced options', 0
+GO
+RECONFIGURE
+GO

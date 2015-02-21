@@ -1,0 +1,20 @@
+SET NOCOUNT ON
+GO
+
+PRINT 'Creating Database'
+IF EXISTS (SELECT 1 FROM SYS.DATABASES WHERE NAME = 'PGM242')
+DROP DATABASE PGM242
+GO
+CREATE DATABASE PGM242
+GO
+
+-- To allow xp_cmdshell execution.
+PRINT 'Enabling xp_cmdshell utility...'
+EXEC sp_configure 'show advanced options', 1
+GO
+RECONFIGURE
+GO
+EXEC sp_configure 'xp_cmdshell', 1
+GO
+RECONFIGURE
+GO
