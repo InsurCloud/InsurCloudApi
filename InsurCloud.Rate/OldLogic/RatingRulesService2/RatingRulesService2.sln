@@ -1,0 +1,53 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "RatingRulesService2", "RatingRulesService2\RatingRulesService2.vbproj", "{81704607-0CBC-4EDB-BD43-5486C447E84F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RatingRulesService2.UnitTest", "RatingRulesService2.UnitTest\RatingRulesService2.UnitTest.csproj", "{15E711B6-38D5-4A50-9DB2-41DDE9230D63}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "RatingRulesLib", "RatingRulesLib\RatingRulesLib.vbproj", "{D6D5CF6C-2EF3-41AE-A35F-4E411147BCFC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Dev|Any CPU = Dev|Any CPU
+		Prod|Any CPU = Prod|Any CPU
+		Release|Any CPU = Release|Any CPU
+		Test|Any CPU = Test|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{81704607-0CBC-4EDB-BD43-5486C447E84F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81704607-0CBC-4EDB-BD43-5486C447E84F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81704607-0CBC-4EDB-BD43-5486C447E84F}.Dev|Any CPU.ActiveCfg = Dev|Any CPU
+		{81704607-0CBC-4EDB-BD43-5486C447E84F}.Dev|Any CPU.Build.0 = Dev|Any CPU
+		{81704607-0CBC-4EDB-BD43-5486C447E84F}.Prod|Any CPU.ActiveCfg = Prod|Any CPU
+		{81704607-0CBC-4EDB-BD43-5486C447E84F}.Prod|Any CPU.Build.0 = Prod|Any CPU
+		{81704607-0CBC-4EDB-BD43-5486C447E84F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81704607-0CBC-4EDB-BD43-5486C447E84F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81704607-0CBC-4EDB-BD43-5486C447E84F}.Test|Any CPU.ActiveCfg = Test|Any CPU
+		{81704607-0CBC-4EDB-BD43-5486C447E84F}.Test|Any CPU.Build.0 = Test|Any CPU
+		{15E711B6-38D5-4A50-9DB2-41DDE9230D63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15E711B6-38D5-4A50-9DB2-41DDE9230D63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15E711B6-38D5-4A50-9DB2-41DDE9230D63}.Dev|Any CPU.ActiveCfg = Dev|Any CPU
+		{15E711B6-38D5-4A50-9DB2-41DDE9230D63}.Dev|Any CPU.Build.0 = Dev|Any CPU
+		{15E711B6-38D5-4A50-9DB2-41DDE9230D63}.Prod|Any CPU.ActiveCfg = Prod|Any CPU
+		{15E711B6-38D5-4A50-9DB2-41DDE9230D63}.Prod|Any CPU.Build.0 = Prod|Any CPU
+		{15E711B6-38D5-4A50-9DB2-41DDE9230D63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15E711B6-38D5-4A50-9DB2-41DDE9230D63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15E711B6-38D5-4A50-9DB2-41DDE9230D63}.Test|Any CPU.ActiveCfg = Test|Any CPU
+		{15E711B6-38D5-4A50-9DB2-41DDE9230D63}.Test|Any CPU.Build.0 = Test|Any CPU
+		{D6D5CF6C-2EF3-41AE-A35F-4E411147BCFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6D5CF6C-2EF3-41AE-A35F-4E411147BCFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6D5CF6C-2EF3-41AE-A35F-4E411147BCFC}.Dev|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6D5CF6C-2EF3-41AE-A35F-4E411147BCFC}.Dev|Any CPU.Build.0 = Debug|Any CPU
+		{D6D5CF6C-2EF3-41AE-A35F-4E411147BCFC}.Prod|Any CPU.ActiveCfg = Release|Any CPU
+		{D6D5CF6C-2EF3-41AE-A35F-4E411147BCFC}.Prod|Any CPU.Build.0 = Release|Any CPU
+		{D6D5CF6C-2EF3-41AE-A35F-4E411147BCFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6D5CF6C-2EF3-41AE-A35F-4E411147BCFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6D5CF6C-2EF3-41AE-A35F-4E411147BCFC}.Test|Any CPU.ActiveCfg = Release|Any CPU
+		{D6D5CF6C-2EF3-41AE-A35F-4E411147BCFC}.Test|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

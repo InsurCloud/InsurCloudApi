@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceDefinition name="AzureCloudService1" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition" schemaVersion="2014-06.2.4">
+  <WebRole name="QuoteWR" vmsize="Small">
+    <Certificates>
+      <Certificate name ="QuoteSSL" storeLocation="LocalMachine" storeName="CA"/>
+    </Certificates>
+    <Sites>
+      <Site name="Web">
+        <Bindings>
+          <!--<Binding name="HttpIn" endpointName="HttpIn"/>-->
+          <Binding name="HttpsIn" endpointName="HttpsIn" />
+        </Bindings>
+      </Site>
+    </Sites>
+    <Endpoints>
+      <!--<InputEndpoint name="HttpIn" protocol="http" port="80"/>-->
+      <InputEndpoint name="HttpsIn" protocol="https" port="443" certificate="QuoteSSL"/>
+    </Endpoints>
+    <Imports>
+      <Import moduleName="Diagnostics" />
+      <Import moduleName="RemoteAccess" />
+      <Import moduleName="RemoteForwarder" />
+    </Imports>
+    <LocalResources>
+      <LocalStorage name="WCFServiceWebRole1.svclog" sizeInMB="1000" cleanOnRoleRecycle="false" />
+    </LocalResources>
+  </WebRole>
+</ServiceDefinition>

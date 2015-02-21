@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Quote" nillable="true" type="Quote" />
+  <xs:complexType name="Quote">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="QuoteID" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Status" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="StatusMessage" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="RateDate" type="xs:dateTime" />
+      <xs:element minOccurs="1" maxOccurs="1" name="EffectiveDate" type="xs:dateTime" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Term" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Options" type="ArrayOfQuoteOption" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfQuoteOption">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="QuoteOption" nillable="true" type="QuoteOption" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="QuoteOption">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="OptionNumber" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="IsDefault" type="xs:boolean" />
+      <xs:element minOccurs="0" maxOccurs="1" name="OptionName" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="OptionDescription" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ImageURL" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ActionURL" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="FullTermPremium" type="xs:decimal" />
+      <xs:element minOccurs="1" maxOccurs="1" name="TotalPolicyFees" type="xs:decimal" />
+      <xs:element minOccurs="1" maxOccurs="1" name="DownPaymentAmt" type="xs:decimal" />
+      <xs:element minOccurs="1" maxOccurs="1" name="NumberOfPayments" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="InstallmentAmount" type="xs:decimal" />
+      <xs:element minOccurs="1" maxOccurs="1" name="InstallmentFeeAmount" type="xs:decimal" />
+      <xs:element minOccurs="1" maxOccurs="1" name="TotalDiscountAmount" type="xs:decimal" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Discounts" type="ArrayOfDiscount" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfDiscount">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Discount" nillable="true" type="Discount" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Discount">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Name" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Amount" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

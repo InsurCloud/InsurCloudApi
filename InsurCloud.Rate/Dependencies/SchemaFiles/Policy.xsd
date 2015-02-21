@@ -1,0 +1,397 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Policy" nillable="true" type="Policy" />
+  <xs:complexType name="Policy">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="EffectiveDate" type="xs:dateTime" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Term" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="PriorCoverageInfo" type="PriorCoverageInfo" />
+      <xs:element minOccurs="0" maxOccurs="1" name="PolicyLevelCoverages" type="ArrayOfCoverage" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Drivers" type="ArrayOfDriver" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Vehicles" type="ArrayOfVehicle" />
+      <xs:element minOccurs="0" maxOccurs="1" name="UWQuestions" type="ArrayOfUnderwritingQuestion" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Notes" type="ArrayOfNote" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PriorCoverageInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="PolicyID" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="CarrierName" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ExpirationDate" type="xs:dateTime" />
+      <xs:element minOccurs="1" maxOccurs="1" name="MonthsContinuousCoverage" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="PriorLimits" type="PriorLimits" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="PriorLimits">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NotApplicable" />
+      <xs:enumeration value="Under_30_60" />
+      <xs:enumeration value="At_30_60" />
+      <xs:enumeration value="At_50_100" />
+      <xs:enumeration value="At_100_300_or_Higher" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ArrayOfCoverage">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Coverage" nillable="true" type="Coverage" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Coverage">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="Group" type="CoverageGroup" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Limit" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Deductible" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="UWQuestions" type="ArrayOfUnderwritingQuestion" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="CoverageGroup">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Policy_BodilyInjury" />
+      <xs:enumeration value="Policy_PropertyDamage" />
+      <xs:enumeration value="Policy_UninsuredUnderinsuredMotoristBI" />
+      <xs:enumeration value="Policy_UninsuredUnderinsuredMotoristPD" />
+      <xs:enumeration value="Policy_MedicalPayments" />
+      <xs:enumeration value="Policy_PersonalInjuryProtection" />
+      <xs:enumeration value="Vehicle_Comprehensive" />
+      <xs:enumeration value="Vehicle_Collision" />
+      <xs:enumeration value="Vehicle_Rental" />
+      <xs:enumeration value="Vehicle_Towing" />
+      <xs:enumeration value="Vehicle_SpecialEquipement" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ArrayOfUnderwritingQuestion">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="UnderwritingQuestion" nillable="true" type="UnderwritingQuestion" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="UnderwritingQuestion">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="QuestionCode" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="QuestionText" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="AnswerText" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="AnswerCode" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfDriver">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Driver" nillable="true" type="Driver" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Driver">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Individual">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="RelationToInsured" type="RelationToInsured" />
+          <xs:element minOccurs="1" maxOccurs="1" name="IsNamedInsured" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="DriverStatus" type="DriverStatus" />
+          <xs:element minOccurs="0" maxOccurs="1" name="DriversLicense" type="DriversLicenseInfo" />
+          <xs:element minOccurs="1" maxOccurs="1" name="OccupancyType" type="OccupancyType" />
+          <xs:element minOccurs="0" maxOccurs="1" name="EmploymentInfo" type="EmploymentInfo" />
+          <xs:element minOccurs="0" maxOccurs="1" name="FRFiling" type="FinancialResponsibilityFiling" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Violations" type="ArrayOfViolation" />
+          <xs:element minOccurs="0" maxOccurs="1" name="UWQuestions" type="ArrayOfUnderwritingQuestion" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Individual">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Entity">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="FirstName" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="MiddleName" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="LastName" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Suffix" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="SSN" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="DOB" type="xs:dateTime" />
+          <xs:element minOccurs="1" maxOccurs="1" name="Gender" type="Gender" />
+          <xs:element minOccurs="1" maxOccurs="1" name="MaritalStatus" type="MaritalStatus" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Entity" abstract="true">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="ContactInfo" type="ContactInfo" />
+      <xs:element minOccurs="1" maxOccurs="1" name="EntityType" type="EntityType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ContactInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Addresses" type="ArrayOfAddress" />
+      <xs:element minOccurs="0" maxOccurs="1" name="PhoneNumbers" type="ArrayOfPhoneNumber" />
+      <xs:element minOccurs="0" maxOccurs="1" name="EmailAddresses" type="ArrayOfEmailAddress" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfAddress">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Address" nillable="true" type="Address" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Address">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="AddressType" type="AddressType" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Address1" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Address2" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="City" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="State" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="PostalCode" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="County" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="AddressType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Mail" />
+      <xs:enumeration value="Billing" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ArrayOfPhoneNumber">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PhoneNumber" nillable="true" type="PhoneNumber" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PhoneNumber">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="PhoneType" type="PhoneType" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Number" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Extension" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="IsDefault" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="PhoneType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Home" />
+      <xs:enumeration value="Work" />
+      <xs:enumeration value="Cell" />
+      <xs:enumeration value="Fax" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ArrayOfEmailAddress">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EmailAddress" nillable="true" type="EmailAddress" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="EmailAddress">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="EmailType" type="EmailType" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Address" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="IsDefault" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="EmailType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Home" />
+      <xs:enumeration value="Work" />
+      <xs:enumeration value="Other" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="EntityType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Individual" />
+      <xs:enumeration value="Company" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="Corporation">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Entity">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="CompanyName" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="DBA" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="FederalIDNo" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="MainContact" type="Individual" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Lienholder">
+    <xs:complexContent mixed="false">
+      <xs:extension base="Corporation">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="LienHolderType" type="LienHolderType" />
+          <xs:element minOccurs="0" maxOccurs="1" name="LoanNumber" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="NumberOfInstallments" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="DownPaymentAmount" type="xs:double" />
+          <xs:element minOccurs="0" maxOccurs="1" name="PaymentInterval" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="FirstPaymentDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" maxOccurs="1" name="PaymentMethod" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="LienHolderType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="AdditionalInsured" />
+      <xs:enumeration value="LossPayee" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="Gender">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Male" />
+      <xs:enumeration value="Female" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="MaritalStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Married" />
+      <xs:enumeration value="Single" />
+      <xs:enumeration value="Widowed" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="RelationToInsured">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Self" />
+      <xs:enumeration value="Spouse" />
+      <xs:enumeration value="Child" />
+      <xs:enumeration value="Parent" />
+      <xs:enumeration value="Sibling" />
+      <xs:enumeration value="Other" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="DriverStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Active" />
+      <xs:enumeration value="LearnersPermit" />
+      <xs:enumeration value="Excluded" />
+      <xs:enumeration value="NotInHousehold" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="DriversLicenseInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="DLN" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="State" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Status" type="LicenseStatus" />
+      <xs:element minOccurs="1" maxOccurs="1" name="IssuanceDate" type="xs:dateTime" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ExpirationDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" maxOccurs="1" name="UWQuestions" type="ArrayOfUnderwritingQuestion" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="LicenseStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Expired" />
+      <xs:enumeration value="IDOnly" />
+      <xs:enumeration value="Revoked_Cancelled" />
+      <xs:enumeration value="Suspended" />
+      <xs:enumeration value="Valid" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="OccupancyType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="OwnHome" />
+      <xs:enumeration value="OwnMobileHomeOwnLand" />
+      <xs:enumeration value="OwnMobileHomeDontOwnLand" />
+      <xs:enumeration value="LiveWithParents" />
+      <xs:enumeration value="LiveWithOthers" />
+      <xs:enumeration value="Rent" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="EmploymentInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Occupation" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Employer" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="YearsWithEmployer" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="UWQuestions" type="ArrayOfUnderwritingQuestion" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FinancialResponsibilityFiling">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="NeedSR22Filing" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="SR22Date" type="xs:dateTime" />
+      <xs:element minOccurs="0" maxOccurs="1" name="CaseCode" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="SR22State" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="UWQuestions" type="ArrayOfUnderwritingQuestion" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfViolation">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Violation" nillable="true" type="Violation" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Violation">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="ViolationDate" type="xs:dateTime" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ConvictionDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ViolationCode" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ViolationDescription" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ViolationType" type="ViolationType" />
+      <xs:element minOccurs="1" maxOccurs="1" name="IsAtFault" type="xs:boolean" />
+      <xs:element minOccurs="0" maxOccurs="1" name="UWQuestions" type="ArrayOfUnderwritingQuestion" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="ViolationType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Citation" />
+      <xs:enumeration value="Accident" />
+      <xs:enumeration value="Claim" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ArrayOfVehicle">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Vehicle" nillable="true" type="Vehicle" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Vehicle">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="VIN" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ModelYear" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Make" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Model" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="BodyStyle" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="StatedAmount" type="xs:double" />
+      <xs:element minOccurs="1" maxOccurs="1" name="AnnualMilesDriven" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="OwnershipType" type="OwnershipType" />
+      <xs:element minOccurs="1" maxOccurs="1" name="UsageType" type="UsageType" />
+      <xs:element minOccurs="1" maxOccurs="1" name="VehicleType" type="VehicleType" />
+      <xs:element minOccurs="0" maxOccurs="1" name="GaragingAddress" type="Address" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Lienholders" type="ArrayOfLienholder" />
+      <xs:element minOccurs="0" maxOccurs="1" name="VehicleLevelCoverages" type="ArrayOfCoverage" />
+      <xs:element minOccurs="0" maxOccurs="1" name="UWQuestions" type="ArrayOfUnderwritingQuestion" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="OwnershipType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Lease" />
+      <xs:enumeration value="OwnWithPayments" />
+      <xs:enumeration value="OwnNoPayments" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="UsageType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Business" />
+      <xs:enumeration value="Commute" />
+      <xs:enumeration value="Pleasure" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="VehicleType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Camper" />
+      <xs:enumeration value="ConventionalTrailer" />
+      <xs:enumeration value="FifthWheel" />
+      <xs:enumeration value="HomemadeTrailer" />
+      <xs:enumeration value="HorseTrailer" />
+      <xs:enumeration value="PopUpTrailer" />
+      <xs:enumeration value="UtilityTrailer" />
+      <xs:enumeration value="Van" />
+      <xs:enumeration value="StatedAmountVehicle" />
+      <xs:enumeration value="PrivatePassenger" />
+      <xs:enumeration value="Trailer" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ArrayOfLienholder">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Lienholder" nillable="true" type="Lienholder" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfNote">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Note" nillable="true" type="Note" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Note">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="NoteText" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="NoteType" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="EntryDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" maxOccurs="1" name="UWQuestions" type="ArrayOfUnderwritingQuestion" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

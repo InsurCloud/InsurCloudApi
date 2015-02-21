@@ -1,0 +1,26 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using CorPolicy;
+using Helpers;
+
+namespace RulesLib.PolicySetup
+{
+    public static class VehiclesAgeSetup
+    {
+        public static string Execute(ref clsPolicyPPA pol, string connectionString, StateInfoHelper stateInfo)
+        {
+            foreach (clsVehicleUnit veh in pol.VehicleUnits)
+            {
+                int vehAge = VehicleHelper.CalculateAge(int.Parse(veh.VehicleYear), pol.EffDate.Year, pol.EffDate.Month);
+                if (vehAge > 41) vehAge = 41;    
+                veh.VehicleAge = vehAge;
+            }
+            return "";
+        }
+
+        
+    }
+}

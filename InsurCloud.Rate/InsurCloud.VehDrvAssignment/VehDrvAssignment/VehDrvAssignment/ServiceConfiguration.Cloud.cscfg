@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ServiceConfiguration serviceName="VehDrvAssignment" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="4" osVersion="*" schemaVersion="2014-06.2.4">
+  <Role name="VehDrvAssignementWR">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.Enabled" value="true" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountUsername" value="matt.price" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountEncryptedPassword" value="MIIBnQYJKoZIhvcNAQcDoIIBjjCCAYoCAQAxggFOMIIBSgIBADAyMB4xHDAaBgNVBAMME1dpbmRvd3MgQXp1cmUgVG9vbHMCEA/8/UT4/EGzQJ6X7OPbjX8wDQYJKoZIhvcNAQEBBQAEggEAjabAbB5/0c34Njko2wVo+9zoY/p7DZMUJWJxuta0Ed6sto+lPPkVFoHfge3RqjaSOURi6wDfzdY9/N1Yd5fmFEWDEhCky99+YCTM5iwmdPX72cvcF7E4Y/6WORGrzV9589RHCM4L30TNqMeO+781q5i20KCbi1KPD8mCohNGUITEhFh1EsuNd4+PLP9xUS1qZ1NcY5bC8wKmoV0GP5QA3KP7FrYRdBnB+ViihvK5cNst7NjnAyEkP6i0LtDh8pL9wk3L32EvD+XwcMr85fr45YkoTRKEpXEuJMxJa2zthSBw80l2NphpZeMOB+HtmFEUDBFlIjLhs6zwVQv5sXyuLzAzBgkqhkiG9w0BBwEwFAYIKoZIhvcNAwcECNkk9FGQSKNygBCC3CiVuQHn7jk7hay7Scje" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountExpiration" value="2015-12-31T23:59:59.0000000-06:00" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteForwarder.Enabled" value="true" />
+    </ConfigurationSettings>
+    <Certificates>
+      <Certificate name="Microsoft.WindowsAzure.Plugins.RemoteAccess.PasswordEncryption" thumbprint="D0F262A7FB696E590C658A92DD6A9C09D2AFD25B" thumbprintAlgorithm="sha1" />
+    </Certificates>
+  </Role>
+</ServiceConfiguration>

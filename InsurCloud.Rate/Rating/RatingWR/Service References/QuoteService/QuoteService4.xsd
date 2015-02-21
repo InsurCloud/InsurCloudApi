@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/CorPolicy.MarketingCRM" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/CorPolicy.MarketingCRM" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="https://quote.insurcloud.com/QuoteService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="Agency">
+    <xs:sequence>
+      <xs:element name="agencyIDField" type="xs:decimal" />
+      <xs:element name="agentCodeField" nillable="true" type="xs:string" />
+      <xs:element name="busTypeCodeField" nillable="true" type="xs:string" />
+      <xs:element name="dBAField" nillable="true" type="xs:string" />
+      <xs:element name="dateField" type="xs:dateTime" />
+      <xs:element name="emailRptGrpField" type="xs:boolean" />
+      <xs:element name="enteredByField" nillable="true" type="xs:string" />
+      <xs:element name="issue1099Field" type="xs:boolean" />
+      <xs:element name="licenseNumField" nillable="true" type="xs:string" />
+      <xs:element name="locationsField" nillable="true" type="tns:ArrayOfLocation" />
+      <xs:element name="nameField" nillable="true" type="xs:string" />
+      <xs:element name="nameLicensedField" nillable="true" type="xs:string" />
+      <xs:element name="uRLField" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Agency" nillable="true" type="tns:Agency" />
+  <xs:complexType name="ArrayOfLocation">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Location" nillable="true" type="tns:Location" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfLocation" nillable="true" type="tns:ArrayOfLocation" />
+  <xs:complexType name="Location">
+    <xs:sequence>
+      <xs:element name="address1Field" nillable="true" type="xs:string" />
+      <xs:element name="address2Field" nillable="true" type="xs:string" />
+      <xs:element name="agencyIDField" nillable="true" type="xs:decimal" />
+      <xs:element name="altAddressesField" nillable="true" type="tns:ArrayOfAltAddress" />
+      <xs:element name="cityField" nillable="true" type="xs:string" />
+      <xs:element name="comparativeRaterField" nillable="true" type="xs:string" />
+      <xs:element name="dateField" type="xs:dateTime" />
+      <xs:element name="defaultAgencyCodeField" nillable="true" type="xs:string" />
+      <xs:element name="edocField" type="xs:boolean" />
+      <xs:element name="emailAddrField" nillable="true" type="xs:string" />
+      <xs:element name="emailRptAgtField" type="xs:boolean" />
+      <xs:element name="enteredByField" nillable="true" type="xs:string" />
+      <xs:element name="epayField" type="xs:boolean" />
+      <xs:element name="faxField" nillable="true" type="xs:string" />
+      <xs:element name="geoCoordLatField" nillable="true" type="xs:string" />
+      <xs:element name="geoCoordLongField" nillable="true" type="xs:string" />
+      <xs:element name="isActiveField" type="xs:boolean" />
+      <xs:element name="isShipAddrField" type="xs:boolean" />
+      <xs:element name="isStatementAddrField" type="xs:boolean" />
+      <xs:element name="locationBanksField" nillable="true" type="tns:ArrayOfLocationBank" />
+      <xs:element name="locationIDField" type="xs:decimal" />
+      <xs:element name="locationIVANsField" nillable="true" type="tns:ArrayOfLocationIVAN" />
+      <xs:element name="locationNameField" nillable="true" type="xs:string" />
+      <xs:element name="locationProgramsField" nillable="true" type="tns:ArrayOfLocationProgram" />
+      <xs:element name="phone1Field" nillable="true" type="xs:string" />
+      <xs:element name="phone2Field" nillable="true" type="xs:string" />
+      <xs:element name="repField" nillable="true" type="tns:Rep" />
+      <xs:element name="repIDField" nillable="true" type="xs:decimal" />
+      <xs:element name="sSNField" nillable="true" type="xs:string" />
+      <xs:element name="stateAbbrField" nillable="true" type="xs:string" />
+      <xs:element name="statusCodeField" nillable="true" type="xs:string" />
+      <xs:element name="taxIDField" nillable="true" type="xs:string" />
+      <xs:element name="transferToAgentField" nillable="true" type="xs:string" />
+      <xs:element name="zipCodeField" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Location" nillable="true" type="tns:Location" />
+  <xs:complexType name="ArrayOfAltAddress">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AltAddress" nillable="true" type="tns:AltAddress" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAltAddress" nillable="true" type="tns:ArrayOfAltAddress" />
+  <xs:complexType name="AltAddress">
+    <xs:sequence>
+      <xs:element name="address1Field" nillable="true" type="xs:string" />
+      <xs:element name="address2Field" nillable="true" type="xs:string" />
+      <xs:element name="addressIDField" type="xs:decimal" />
+      <xs:element name="addressTypeField" nillable="true" type="xs:string" />
+      <xs:element name="cityField" nillable="true" type="xs:string" />
+      <xs:element name="dateField" type="xs:dateTime" />
+      <xs:element name="enteredByField" nillable="true" type="xs:string" />
+      <xs:element name="isActiveField" type="xs:boolean" />
+      <xs:element name="locationIDField" type="xs:decimal" />
+      <xs:element name="stateField" nillable="true" type="xs:string" />
+      <xs:element name="zipField" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AltAddress" nillable="true" type="tns:AltAddress" />
+  <xs:complexType name="ArrayOfLocationBank">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="LocationBank" nillable="true" type="tns:LocationBank" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfLocationBank" nillable="true" type="tns:ArrayOfLocationBank" />
+  <xs:complexType name="LocationBank">
+    <xs:sequence>
+      <xs:element name="accountTypeCodeField" nillable="true" type="xs:string" />
+      <xs:element name="bankField" nillable="true" type="tns:Bank" />
+      <xs:element name="bankIdField" type="xs:decimal" />
+      <xs:element name="dateField" type="xs:dateTime" />
+      <xs:element name="enteredByField" nillable="true" type="xs:string" />
+      <xs:element name="locationIdField" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="LocationBank" nillable="true" type="tns:LocationBank" />
+  <xs:complexType name="Bank">
+    <xs:sequence>
+      <xs:element name="accountNameField" nillable="true" type="xs:string" />
+      <xs:element name="accountNumberField" nillable="true" type="xs:string" />
+      <xs:element name="accountTypeCodeField" nillable="true" type="xs:string" />
+      <xs:element name="bankAccountTypeField" nillable="true" type="xs:string" />
+      <xs:element name="bankIdField" type="xs:decimal" />
+      <xs:element name="bankNameField" nillable="true" type="xs:string" />
+      <xs:element name="dateField" type="xs:dateTime" />
+      <xs:element name="enteredByField" nillable="true" type="xs:string" />
+      <xs:element name="isActiveField" type="xs:boolean" />
+      <xs:element name="routingNumberField" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Bank" nillable="true" type="tns:Bank" />
+  <xs:complexType name="ArrayOfLocationIVAN">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="LocationIVAN" nillable="true" type="tns:LocationIVAN" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfLocationIVAN" nillable="true" type="tns:ArrayOfLocationIVAN" />
+  <xs:complexType name="LocationIVAN">
+    <xs:sequence>
+      <xs:element name="dateField" type="xs:dateTime" />
+      <xs:element name="enteredByField" nillable="true" type="xs:string" />
+      <xs:element name="iVANField" nillable="true" type="tns:IVAN" />
+      <xs:element name="iVANSField" nillable="true" type="xs:string" />
+      <xs:element name="locationIDField" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="LocationIVAN" nillable="true" type="tns:LocationIVAN" />
+  <xs:complexType name="IVAN">
+    <xs:sequence>
+      <xs:element name="aMSField" nillable="true" type="xs:string" />
+      <xs:element name="dateField" type="xs:dateTime" />
+      <xs:element name="enteredByField" nillable="true" type="xs:string" />
+      <xs:element name="iVANSField" nillable="true" type="xs:string" />
+      <xs:element name="isActiveField" type="xs:boolean" />
+      <xs:element name="userIDField" nillable="true" type="xs:string" />
+      <xs:element name="yAccountField" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="IVAN" nillable="true" type="tns:IVAN" />
+  <xs:complexType name="ArrayOfLocationProgram">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="LocationProgram" nillable="true" type="tns:LocationProgram" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfLocationProgram" nillable="true" type="tns:ArrayOfLocationProgram" />
+  <xs:complexType name="LocationProgram">
+    <xs:sequence>
+      <xs:element name="appliesToCodeField" nillable="true" type="xs:string" />
+      <xs:element name="dateField" type="xs:dateTime" />
+      <xs:element name="effDateField" nillable="true" type="xs:dateTime" />
+      <xs:element name="enteredByField" nillable="true" type="xs:string" />
+      <xs:element name="expDateField" nillable="true" type="xs:dateTime" />
+      <xs:element name="locationIdField" type="xs:decimal" />
+      <xs:element name="newBusPctField" nillable="true" type="xs:decimal" />
+      <xs:element name="payCommissionCodeField" nillable="true" type="ser:char" />
+      <xs:element name="pgmProgramField" nillable="true" type="tns:pgmProgram" />
+      <xs:element name="programIdField" type="xs:decimal" />
+      <xs:element name="renewBusPctField" nillable="true" type="xs:decimal" />
+      <xs:element name="rolloverPctField" nillable="true" type="xs:decimal" />
+      <xs:element name="systemCredentialField" nillable="true" type="xs:string" />
+      <xs:element name="xIDField" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="LocationProgram" nillable="true" type="tns:LocationProgram" />
+  <xs:complexType name="pgmProgram">
+    <xs:sequence>
+      <xs:element name="companyCodeField" nillable="true" type="xs:string" />
+      <xs:element name="companyNameField" nillable="true" type="xs:string" />
+      <xs:element name="descriptionField" nillable="true" type="xs:string" />
+      <xs:element name="displayField" type="xs:boolean" />
+      <xs:element name="nameField" nillable="true" type="xs:string" />
+      <xs:element name="productCodeField" nillable="true" type="xs:string" />
+      <xs:element name="productIDField" type="xs:int" />
+      <xs:element name="programCodeField" nillable="true" type="xs:string" />
+      <xs:element name="programIdField" type="xs:decimal" />
+      <xs:element name="stateCodeField" nillable="true" type="xs:string" />
+      <xs:element name="systemCodeField" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="pgmProgram" nillable="true" type="tns:pgmProgram" />
+  <xs:complexType name="Rep">
+    <xs:sequence>
+      <xs:element name="emailField" nillable="true" type="xs:string" />
+      <xs:element name="nameField" nillable="true" type="xs:string" />
+      <xs:element name="phoneExtField" nillable="true" type="xs:string" />
+      <xs:element name="phoneField" nillable="true" type="xs:string" />
+      <xs:element name="repIDField" type="xs:decimal" />
+      <xs:element name="territoryNameField" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Rep" nillable="true" type="tns:Rep" />
+</xs:schema>

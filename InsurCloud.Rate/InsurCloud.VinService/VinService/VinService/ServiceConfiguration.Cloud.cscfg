@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ServiceConfiguration serviceName="VinService" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="4" osVersion="*" schemaVersion="2014-06.2.4">
+  <Role name="VinServiceWR">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="DefaultEndpointsProtocol=https;AccountName=vinservicewr;AccountKey=cb7I1Zmgv0Tteg4Lo3/e5+NUMJ3QkcS9wDUHELVjADroDFHdi+Ehl+4EVnXwKlhC0Knmlsp38+goSMIrfaoMjQ==" />
+    </ConfigurationSettings>
+  </Role>
+</ServiceConfiguration>

@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="My" GeneratedClassName="MySettings" UseMySettingsClassName="true">
+  <Profiles />
+  <Settings>
+    <Setting Name="RatingRulesService2_DLNService_DLNService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://devbsl.imperialfire.com:91/DLNService/DLNService.asmx</Value>
+    </Setting>
+    <Setting Name="RatingRulesService2_MarketingCRMService_MarketingCRMService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://devbsl.imperialfire.com:91/MarketingCRMService/MarketingCRMService.asmx</Value>
+    </Setting>
+    <Setting Name="RatingRulesService2_gov_weather_graphical_ndfdXML" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://graphical.weather.gov/xml/SOAP_server/ndfdXMLserver.php</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

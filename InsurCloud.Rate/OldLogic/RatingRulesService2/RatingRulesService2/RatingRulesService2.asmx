@@ -1,0 +1,1 @@
+﻿<%@ WebService Language="VB" CodeBehind="RatingRulesService2.asmx.vb" Class="RatingRulesService2.RatingRulesService2" %>

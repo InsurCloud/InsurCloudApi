@@ -1,0 +1,1174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/CorPolicy" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/CorPolicy" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://vehdrvassignmentwr.cloudapp.net/VehDrvAssignment.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/CorPolicy.MarketingCRM" />
+  <xs:import schemaLocation="http://vehdrvassignmentwr.cloudapp.net/VehDrvAssignment.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="clsPolicyPPA">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:clsBasePolicy">
+        <xs:sequence>
+          <xs:element name="mbConversionSuccessful" type="xs:boolean" />
+          <xs:element name="moDrivers" nillable="true" type="tns:ArrayOfclsEntityDriver" />
+          <xs:element name="moUWQuestions" nillable="true" type="tns:ArrayOfclsUWQuestion" />
+          <xs:element name="moVehicleUnits" nillable="true" type="tns:ArrayOfclsVehicleUnit" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="clsPolicyPPA" nillable="true" type="tns:clsPolicyPPA" />
+  <xs:complexType name="clsBasePolicy">
+    <xs:sequence>
+      <xs:element name="mbApplyPIFDiscount" type="xs:boolean" />
+      <xs:element name="mbIsEFT" type="xs:boolean" />
+      <xs:element name="mbIsForBringingForwardReversedTrans" type="xs:boolean" />
+      <xs:element name="mbIsForReimport" type="xs:boolean" />
+      <xs:element name="mbIsOffSetTransaction" type="xs:boolean" />
+      <xs:element name="mbIsPremiumEndorsement" type="xs:boolean" />
+      <xs:element name="mbMinPremApplied" type="xs:boolean" />
+      <xs:element name="mbNonRenewalFlag" type="xs:boolean" />
+      <xs:element name="mbPriorInsuranceFlag" type="xs:boolean" />
+      <xs:element name="mdActivityDate" type="xs:dateTime" />
+      <xs:element name="mdAsOfDate" type="xs:dateTime" />
+      <xs:element name="mdChangePremium" type="xs:decimal" />
+      <xs:element name="mdDownPaymentAmt" type="xs:decimal" />
+      <xs:element name="mdFullTermPremium" type="xs:decimal" />
+      <xs:element name="mdOrigQuoteDate" type="xs:dateTime" />
+      <xs:element name="mdProgramEffDate" type="xs:dateTime" />
+      <xs:element name="mdTotalFees" type="xs:decimal" />
+      <xs:element name="mdTransactionEffDate" type="xs:dateTime" />
+      <xs:element name="mdTransactionEffTime" type="xs:dateTime" />
+      <xs:element name="mdWrittenPremium" type="xs:decimal" />
+      <xs:element name="mdtActualRateDate" type="xs:dateTime" />
+      <xs:element name="mdtEffDate" type="xs:dateTime" />
+      <xs:element name="mdtExpDate" type="xs:dateTime" />
+      <xs:element name="mdtOrigTermEffDate" type="xs:dateTime" />
+      <xs:element name="mdtPriorTermEffDate" type="xs:dateTime" />
+      <xs:element name="mdtRateDate" type="xs:dateTime" />
+      <xs:element name="miIndexNum" type="xs:int" />
+      <xs:element name="miOffSetTransactionNum" type="xs:int" />
+      <xs:element name="miSourceTransactionNum" type="xs:int" />
+      <xs:element name="miTerm" type="xs:int" />
+      <xs:element name="miTransactionNum" type="xs:int" />
+      <xs:element name="moAccounts" nillable="true" type="tns:ArrayOfclsBaseAccount" />
+      <xs:element name="moAddlInsureds" nillable="true" type="tns:ArrayOfclsEntityAddlInsured" />
+      <xs:element name="moAgency" nillable="true" type="tns:clsEntityAgency" />
+      <xs:element name="moBilling" nillable="true" type="tns:clsBilling" />
+      <xs:element name="moCurrentCancellation" nillable="true" type="tns:clsCancellation" />
+      <xs:element name="moEndorsementFactors" nillable="true" type="tns:ArrayOfclsEndorsementFactor" />
+      <xs:element name="moFees" nillable="true" type="tns:ArrayOfclsBaseFee" />
+      <xs:element name="moLienHolders" nillable="true" type="tns:ArrayOfclsEntityLienHolder" />
+      <xs:element name="moNotes" nillable="true" type="tns:ArrayOfclsBaseNote" />
+      <xs:element name="moPayments" nillable="true" type="tns:ArrayOfclsBasePayment" />
+      <xs:element name="moPolicyFactors" nillable="true" type="tns:ArrayOfclsBaseFactor" />
+      <xs:element name="moPolicyInsured" nillable="true" type="tns:clsEntityPolicyInsured" />
+      <xs:element name="moPolicyLockInformation" nillable="true" type="tns:clsPolicyLockInformation" />
+      <xs:element name="moPolicySecondaryInsured" nillable="true" type="tns:clsEntityPolicyInsured" />
+      <xs:element name="moProgramInfo" nillable="true" type="tns:clsEntityProgramInfo" />
+      <xs:element name="moRenewalQuote" nillable="true" type="tns:clsRenewalQuote" />
+      <xs:element name="msAgencyCompanionPACarrierName" nillable="true" type="xs:string" />
+      <xs:element name="msAgencyCompanionPAPolicyID" nillable="true" type="xs:string" />
+      <xs:element name="msAppliesToCode" nillable="true" type="xs:string" />
+      <xs:element name="msCallingSystem" nillable="true" type="xs:string" />
+      <xs:element name="msCancellationCode" nillable="true" type="xs:string" />
+      <xs:element name="msCompanionFloodCarrierName" nillable="true" type="xs:string" />
+      <xs:element name="msCompanionFloodPolicyID" nillable="true" type="xs:string" />
+      <xs:element name="msCompanionHOMCarrierName" nillable="true" type="xs:string" />
+      <xs:element name="msCompanionHOMPolicyID" nillable="true" type="xs:string" />
+      <xs:element name="msCompanionPACarrierName" nillable="true" type="xs:string" />
+      <xs:element name="msCompanionPAPolicyID" nillable="true" type="xs:string" />
+      <xs:element name="msFormType" nillable="true" type="xs:string" />
+      <xs:element name="msPASPayPlanCode" nillable="true" type="xs:string" />
+      <xs:element name="msPayCommissionOnInd" nillable="true" type="xs:string" />
+      <xs:element name="msPayPlanCode" nillable="true" type="xs:string" />
+      <xs:element name="msPolicyActionInd" nillable="true" type="xs:string" />
+      <xs:element name="msPolicyID" nillable="true" type="xs:string" />
+      <xs:element name="msPolicyStatus" nillable="true" type="xs:string" />
+      <xs:element name="msPolicyTermTypeInd" nillable="true" type="xs:string" />
+      <xs:element name="msPolicyXML" nillable="true" type="xs:string" />
+      <xs:element name="msPriorCarrierName" nillable="true" type="xs:string" />
+      <xs:element name="msPriorPolicyID" nillable="true" type="xs:string" />
+      <xs:element name="msProduct" nillable="true" type="xs:string" />
+      <xs:element name="msProgram" nillable="true" type="xs:string" />
+      <xs:element name="msProgramCode" nillable="true" type="xs:string" />
+      <xs:element name="msProgramType" nillable="true" type="xs:string" />
+      <xs:element name="msQuoteID" nillable="true" type="xs:string" />
+      <xs:element name="msReinstatementCode" nillable="true" type="xs:string" />
+      <xs:element name="msRolloverType" nillable="true" type="xs:string" />
+      <xs:element name="msStateCode" nillable="true" type="xs:string" />
+      <xs:element name="msStatus" nillable="true" type="xs:string" />
+      <xs:element name="msType" nillable="true" type="xs:string" />
+      <xs:element name="msUWTier" nillable="true" type="xs:string" />
+      <xs:element name="msUserID" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="clsBasePolicy" nillable="true" type="tns:clsBasePolicy" />
+  <xs:complexType name="ArrayOfclsBaseAccount">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="clsBaseAccount" nillable="true" type="tns:clsBaseAccount" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfclsBaseAccount" nillable="true" type="tns:ArrayOfclsBaseAccount" />
+  <xs:complexType name="clsBaseAccount">
+    <xs:sequence>
+      <xs:element name="mbIsMarkedForDelete" type="xs:boolean" />
+      <xs:element name="mbIsModified" type="xs:boolean" />
+      <xs:element name="mbIsNew" type="xs:boolean" />
+      <xs:element name="mbUseForEFT" type="xs:boolean" />
+      <xs:element name="mdtSystemTS" type="xs:dateTime" />
+      <xs:element name="miCreditCardType" type="xs:int" />
+      <xs:element name="miIndexNum" type="xs:int" />
+      <xs:element name="miProcessAttempts" type="xs:int" />
+      <xs:element name="moSecureAcctNums" nillable="true" type="tns:ArrayOfclsSecureAcctNum" />
+      <xs:element name="msAccountNum" nillable="true" type="xs:string" />
+      <xs:element name="msAccountType" nillable="true" type="xs:string" />
+      <xs:element name="msAuthorizationCode" nillable="true" type="xs:string" />
+      <xs:element name="msBankAddress1" nillable="true" type="xs:string" />
+      <xs:element name="msBankAddress2" nillable="true" type="xs:string" />
+      <xs:element name="msBankCity" nillable="true" type="xs:string" />
+      <xs:element name="msBankName" nillable="true" type="xs:string" />
+      <xs:element name="msBankState" nillable="true" type="xs:string" />
+      <xs:element name="msBankZipCode" nillable="true" type="xs:string" />
+      <xs:element name="msBillingAddress1" nillable="true" type="xs:string" />
+      <xs:element name="msBillingAddress2" nillable="true" type="xs:string" />
+      <xs:element name="msBillingCity" nillable="true" type="xs:string" />
+      <xs:element name="msBillingState" nillable="true" type="xs:string" />
+      <xs:element name="msBillingZipCode" nillable="true" type="xs:string" />
+      <xs:element name="msCCExpDate" nillable="true" type="xs:string" />
+      <xs:element name="msCCSecurityCode" nillable="true" type="xs:string" />
+      <xs:element name="msCheckNum" nillable="true" type="xs:string" />
+      <xs:element name="msConfirmationNum" nillable="true" type="xs:string" />
+      <xs:element name="msCreditCardName" nillable="true" type="xs:string" />
+      <xs:element name="msCreditCardNum" nillable="true" type="xs:string" />
+      <xs:element name="msNameOnAcct" nillable="true" type="xs:string" />
+      <xs:element name="msRoutingNum" nillable="true" type="xs:string" />
+      <xs:element name="msUserID" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="clsBaseAccount" nillable="true" type="tns:clsBaseAccount" />
+  <xs:complexType name="ArrayOfclsSecureAcctNum">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="clsSecureAcctNum" nillable="true" type="tns:clsSecureAcctNum" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfclsSecureAcctNum" nillable="true" type="tns:ArrayOfclsSecureAcctNum" />
+  <xs:complexType name="clsSecureAcctNum">
+    <xs:sequence>
+      <xs:element name="_acctNumType" type="tns:AcctNumType" />
+      <xs:element name="_token" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="clsSecureAcctNum" nillable="true" type="tns:clsSecureAcctNum" />
+  <xs:simpleType name="AcctNumType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="CreditCardNum" />
+      <xs:enumeration value="CVV" />
+      <xs:enumeration value="RoutingNum" />
+      <xs:enumeration value="CheckingNum" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="AcctNumType" nillable="true" type="tns:AcctNumType" />
+  <xs:complexType name="ArrayOfclsEntityAddlInsured">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="clsEntityAddlInsured" nillable="true" type="tns:clsEntityAddlInsured" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfclsEntityAddlInsured" nillable="true" type="tns:ArrayOfclsEntityAddlInsured" />
+  <xs:complexType name="clsEntityAddlInsured">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:clsBaseEntity">
+        <xs:sequence>
+          <xs:element name="mdDOB" type="xs:dateTime" />
+          <xs:element name="miAge" nillable="true" type="xs:string" />
+          <xs:element name="moViolations" nillable="true" type="tns:ArrayOfclsBaseViolation" />
+          <xs:element name="msDLN" nillable="true" type="xs:string" />
+          <xs:element name="msDLNState" nillable="true" type="xs:string" />
+          <xs:element name="msGender" nillable="true" type="xs:string" />
+          <xs:element name="msSSN" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="clsEntityAddlInsured" nillable="true" type="tns:clsEntityAddlInsured" />
+  <xs:complexType name="clsBaseEntity">
+    <xs:sequence>
+      <xs:element name="mbIsMarkedForDelete" type="xs:boolean" />
+      <xs:element name="mbIsModified" type="xs:boolean" />
+      <xs:element name="mbIsNew" type="xs:boolean" />
+      <xs:element name="mbIsPrimary" type="xs:boolean" />
+      <xs:element name="miIndexNum" type="xs:int" />
+      <xs:element name="mlEntityNum" type="xs:long" />
+      <xs:element name="msAddress1" nillable="true" type="xs:string" />
+      <xs:element name="msAddress2" nillable="true" type="xs:string" />
+      <xs:element name="msCity" nillable="true" type="xs:string" />
+      <xs:element name="msCounty" nillable="true" type="xs:string" />
+      <xs:element name="msCountyCode" nillable="true" type="xs:string" />
+      <xs:element name="msDeliveryMethod" nillable="true" type="xs:string" />
+      <xs:element name="msENotifyEmail" nillable="true" type="xs:string" />
+      <xs:element name="msENotifyPhone" nillable="true" type="xs:string" />
+      <xs:element name="msESignEmail" nillable="true" type="xs:string" />
+      <xs:element name="msEmail" nillable="true" type="xs:string" />
+      <xs:element name="msEntityInterest" nillable="true" type="xs:string" />
+      <xs:element name="msEntityName1" nillable="true" type="xs:string" />
+      <xs:element name="msEntityName2" nillable="true" type="xs:string" />
+      <xs:element name="msEntityType" nillable="true" type="xs:string" />
+      <xs:element name="msFax" nillable="true" type="xs:string" />
+      <xs:element name="msFederalIDNo" nillable="true" type="xs:string" />
+      <xs:element name="msFirstName" nillable="true" type="xs:string" />
+      <xs:element name="msLastName" nillable="true" type="xs:string" />
+      <xs:element name="msLegalStructureCode" nillable="true" type="xs:string" />
+      <xs:element name="msPhone1" nillable="true" type="xs:string" />
+      <xs:element name="msPhone2" nillable="true" type="xs:string" />
+      <xs:element name="msState" nillable="true" type="xs:string" />
+      <xs:element name="msZip" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="clsBaseEntity" nillable="true" type="tns:clsBaseEntity" />
+  <xs:complexType name="ArrayOfclsBaseViolation">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="clsBaseViolation" nillable="true" type="tns:clsBaseViolation" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfclsBaseViolation" nillable="true" type="tns:ArrayOfclsBaseViolation" />
+  <xs:complexType name="clsBaseViolation">
+    <xs:sequence>
+      <xs:element name="mbAddToXML" type="xs:boolean" />
+      <xs:element name="mbAtFault" type="xs:boolean" />
+      <xs:element name="mbChargeable" type="xs:boolean" />
+      <xs:element name="mbDroppedViol" type="xs:boolean" />
+      <xs:element name="mbIgnoredForRating" type="xs:boolean" />
+      <xs:element name="mbUpdateToXML" type="xs:boolean" />
+      <xs:element name="mdBIInjuryAmt" type="xs:decimal" />
+      <xs:element name="mdPDInjuryAmt" type="xs:decimal" />
+      <xs:element name="mdViolAmt" type="xs:decimal" />
+      <xs:element name="mdtConvictionDate" type="xs:dateTime" />
+      <xs:element name="mdtViolDate" type="xs:dateTime" />
+      <xs:element name="miIndexNum" type="xs:int" />
+      <xs:element name="miLIAForgivePoints" type="xs:int" />
+      <xs:element name="miLIAPoints" type="xs:int" />
+      <xs:element name="miMVRPoints" type="xs:int" />
+      <xs:element name="miPDForgivePoints" type="xs:int" />
+      <xs:element name="miPDPoints" type="xs:int" />
+      <xs:element name="miPoints" type="xs:int" />
+      <xs:element name="miUnitNum" type="xs:int" />
+      <xs:element name="msMVRViolDetail" nillable="true" type="xs:string" />
+      <xs:element name="msViolCode" nillable="true" type="xs:string" />
+      <xs:element name="msViolDesc" nillable="true" type="xs:string" />
+      <xs:element name="msViolGroup" nillable="true" type="xs:string" />
+      <xs:element name="msViolLocation" nillable="true" type="xs:string" />
+      <xs:element name="msViolSourceCode" nillable="true" type="xs:string" />
+      <xs:element name="msViolTypeCode" nillable="true" type="xs:string" />
+      <xs:element name="msViolTypeIndicator" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="clsBaseViolation" nillable="true" type="tns:clsBaseViolation" />
+  <xs:complexType name="clsEntityAgency">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:clsBaseEntity">
+        <xs:sequence>
+          <xs:element name="mbEPay" type="xs:boolean" />
+          <xs:element name="mdPASAgentProgramEffDate" type="xs:dateTime" />
+          <xs:element name="moGroupCodes" nillable="true" type="tns:ArrayOfclsEntityAgency" />
+          <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/CorPolicy.MarketingCRM" name="moMarketingCRMInfo" nillable="true" type="q1:Agency" />
+          <xs:element name="msAgencyGroup" nillable="true" type="xs:string" />
+          <xs:element name="msAgencyGroupID" nillable="true" type="xs:string" />
+          <xs:element name="msAgencyID" nillable="true" type="xs:string" />
+          <xs:element name="msIPAgentCode" nillable="true" type="xs:string" />
+          <xs:element name="msProducer" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="clsEntityAgency" nillable="true" type="tns:clsEntityAgency" />
+  <xs:complexType name="ArrayOfclsEntityAgency">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="clsEntityAgency" nillable="true" type="tns:clsEntityAgency" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfclsEntityAgency" nillable="true" type="tns:ArrayOfclsEntityAgency" />
+  <xs:complexType name="clsBilling">
+    <xs:sequence>
+      <xs:element name="dtBillingDate" type="xs:dateTime" />
+      <xs:element name="dtNextBillingDate" type="xs:dateTime" />
+      <xs:element name="mbIsEFT" type="xs:boolean" />
+      <xs:element name="mbIsPFC" type="xs:boolean" />
+      <xs:element name="mdCnxPendNPGraceDays" type="xs:decimal" />
+      <xs:element name="mdCnxPendNPThresholdAmt" type="xs:decimal" />
+      <xs:element name="mdCurrentDueAmount" type="xs:decimal" />
+      <xs:element name="mdDueAmount" type="xs:decimal" />
+      <xs:element name="mdInstallmentFeeAmt" type="xs:decimal" />
+      <xs:element name="mdLateFeeAmt" type="xs:decimal" />
+      <xs:element name="mdNSFFeeAmt" type="xs:decimal" />
+      <xs:element name="mdNextDueAmount" type="xs:decimal" />
+      <xs:element name="mdPIFAmount" type="xs:decimal" />
+      <xs:element name="mdPastDueAmount" type="xs:decimal" />
+      <xs:element name="mdPastDuePremium" type="xs:decimal" />
+      <xs:element name="mdPriorTermBalance" type="xs:decimal" />
+      <xs:element name="mdRemainingBalance" type="xs:decimal" />
+      <xs:element name="mdTotalBillingFeesAmt" type="xs:decimal" />
+      <xs:element name="mdTotalInstallmentFeesAmt" type="xs:decimal" />
+      <xs:element name="mdTotalPaid" type="xs:decimal" />
+      <xs:element name="mdTotalPremiumAmt" type="xs:decimal" />
+      <xs:element name="mdTotalTFSAmt" type="xs:decimal" />
+      <xs:element name="mdtCurrentDueDate" type="xs:dateTime" />
+      <xs:element name="mdtNextDueDate" type="xs:dateTime" />
+      <xs:element name="mdtPastDueDate" type="xs:dateTime" />
+      <xs:element name="mlConcurrencyNum" type="xs:long" />
+      <xs:element name="moAccountingInfo" nillable="true" type="tns:clsAccountingInfo" />
+      <xs:element name="moActiveCancellations" nillable="true" type="tns:ArrayOfclsCancellation" />
+      <xs:element name="moBillingTransactions" nillable="true" type="tns:ArrayOfclsBillingTransactionItem" />
+      <xs:element name="moCancellations" nillable="true" type="tns:ArrayOfclsCancellation" />
+      <xs:element name="moCashTransactions" nillable="true" type="tns:ArrayOfclsCashTransactionItem" />
+      <xs:element name="moFeeFactors" nillable="true" type="tns:ArrayOfclsBaseFee" />
+      <xs:element name="moFees" nillable="true" type="tns:ArrayOfclsBaseFee" />
+      <xs:element name="moInstallments" nillable="true" type="tns:ArrayOfclsInstallment" />
+      <xs:element name="moLedger" nillable="true" type="tns:clsLedger" />
+      <xs:element name="moNSFFees" nillable="true" type="tns:ArrayOfclsNSFFee" />
+      <xs:element name="moPremFinCo" nillable="true" type="tns:clsEntityLienHolder" />
+      <xs:element name="moTransactions" nillable="true" type="tns:ArrayOfclsBaseTransaction" />
+      <xs:element name="msBillingStatus" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="clsBilling" nillable="true" type="tns:clsBilling" />
+  <xs:complexType name="clsAccountingInfo">
+    <xs:sequence>
+      <xs:element name="bHasFutureTransaction" type="xs:boolean" />
+      <xs:element name="bIsPaymentAllowed" type="xs:boolean" />
+      <xs:element name="mdCurrentDueAmount" type="xs:decimal" />
+      <xs:element name="mdLastPaymentAmount" type="xs:decimal" />
+      <xs:element name="mdMaxPaymentAmount" type="xs:decimal" />
+      <xs:element name="mdMinPaymentAmount" type="xs:decimal" />
+      <xs:element name="mdNextDueAmount" type="xs:decimal" />
+      <xs:element name="mdPastDueAmount" type="xs:decimal" />
+      <xs:element name="mdRemainingBalance" type="xs:decimal" />
+      <xs:element name="mdRenewalFullAmountToRenew" type="xs:decimal" />
+      <xs:element name="mdRenewalFullDownPayAmount" type="xs:decimal" />
+      <xs:element name="mdRenewalMinAmountToRenew" type="xs:decimal" />
+      <xs:element name="mdRenewalMinDownPayAmount" type="xs:decimal" />
+      <xs:element name="mdRenewalPIF" type="xs:decimal" />
+      <xs:element name="mdRenewalRestOfDownPayAmount" type="xs:decimal" />
+      <xs:element name="mdtCurrentDueDate" type="xs:dateTime" />
+      <xs:element name="mdtLastPaymentDate" type="xs:dateTime" />
+      <xs:element name="mdtNextDueDate" type="xs:dateTime" />
+      <xs:element name="mdtPastDueDate" type="xs:dateTime" />
+      <xs:element name="mdtRenewalDueDate" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="clsAccountingInfo" nillable="true" type="tns:clsAccountingInfo" />
+  <xs:complexType name="ArrayOfclsCancellation">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="clsCancellation" nillable="true" type="tns:clsCancellation" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfclsCancellation" nillable="true" type="tns:ArrayOfclsCancellation" />
+  <xs:complexType name="clsCancellation">
+    <xs:sequence>
+      <xs:element name="mdAmtOwedAfterCnx" type="xs:decimal" />
+      <xs:element name="mdCancelNoticePrintMsgID" type="xs:long" />
+      <xs:element name="mdCnxFinalBatchMsgId" type="xs:long" />
+      <xs:element name="mdCnxFinalTransNum" type="xs:long" />
+      <xs:element name="mdCnxPendBatchMsgId" type="xs:long" />
+      <xs:element name="mdDisbursePrintMsgID" type="xs:long" />
+      <xs:element name="mdPASCancellationNum" type="xs:long" />
+      <xs:element name="mdReinstatementPrintMsgID" type="xs:long" />
+      <xs:element name="mdReinstatementTransNum" type="xs:long" />
+      <xs:element name="mdtAddedDate" type="xs:dateTime" />
+      <xs:element name="mdtCancelEquityDate" type="xs:dateTime" />
+      <xs:element name="mdtCnxFinalEffDate" type="xs:dateTime" />
+      <xs:element name="mdtCnxFinalProcessedDate" type="xs:dateTime" />
+      <xs:element name="mdtCnxFinalScheduledDate" type="xs:dateTime" />
+      <xs:element name="mdtCnxPendProcessedDate" type="xs:dateTime" />
+      <xs:element name="mdtLastUpdateDate" type="xs:dateTime" />
+      <xs:element name="mdtReinstatementEffDate" type="xs:dateTime" />
+      <xs:element name="mdtReinstatementProcessedDate" type="xs:dateTime" />
+      <xs:element name="miCancelID" type="xs:int" />
+      <xs:element name="miOOSReinstatementFinalTransNum" type="xs:int" />
+      <xs:element name="moVehicleUnits" nillable="true" type="tns:ArrayOfclsVehicleUnit" />
+      <xs:element name="msAddedUserID" nillable="true" type="xs:string" />
+      <xs:element name="msCancelCode" nillable="true" type="xs:string" />
+      <xs:element name="msCancelDesc" nillable="true" type="xs:string" />
+      <xs:element name="msCancelType" nillable="true" type="xs:string" />
+      <xs:element name="msLastUpdatedUserID" nillable="true" type="xs:string" />
+      <xs:element name="msReinstatementCode" nillable="true" type="xs:string" />
+      <xs:element name="msReinstatementDesc" nillable="true" type="xs:string" />
+      <xs:element name="msStatus" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="clsCancellation" nillable="true" type="tns:clsCancellation" />
+  <xs:complexType name="ArrayOfclsVehicleUnit">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="clsVehicleUnit" nillable="true" type="tns:clsVehicleUnit" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfclsVehicleUnit" nillable="true" type="tns:ArrayOfclsVehicleUnit" />
+  <xs:complexType name="clsVehicleUnit">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:clsBaseUnit">
+        <xs:sequence>
+          <xs:element name="mbIncompleteVehicle" type="xs:boolean" />
+          <xs:element name="mbVINOverrideYN" type="xs:boolean" />
+          <xs:element name="mbValidVIN" type="xs:boolean" />
+          <xs:element name="mbVehicleRegistrationYN" type="xs:boolean" />
+          <xs:element name="mdCustomEquipmentAmt" type="xs:decimal" />
+          <xs:element name="mdStatedAmt" type="xs:decimal" />
+          <xs:element name="miAssignedDriverNum" type="xs:int" />
+          <xs:element name="miVehicleAge" type="xs:int" />
+          <xs:element name="mlAnnualMiles" type="xs:long" />
+          <xs:element name="mlDriverToWorkMiles" type="xs:long" />
+          <xs:element name="moCoverages" nillable="true" type="tns:ArrayOfclsPACoverage" />
+          <xs:element name="moCustomEquipment" nillable="true" type="tns:ArrayOfclsVehicleCustomEquipment" />
+          <xs:element name="moFactors" nillable="true" type="tns:ArrayOfclsVehicleFactor" />
+          <xs:element name="msAssignedLocation" nillable="true" type="xs:string" />
+          <xs:element name="msCollSymbolCode" nillable="true" type="xs:string" />
+          <xs:element name="msCompSymbolCode" nillable="true" type="xs:string" />
+          <xs:element name="msLiabilitySymbolCode" nillable="true" type="xs:string" />
+          <xs:element name="msPIPMedSymbolCode" nillable="true" type="xs:string" />
+          <xs:element name="msPriceNewSymbolCode" nillable="true" type="xs:string" />
+          <xs:element name="msRegisteredOwnerLicense" nillable="true" type="xs:string" />
+          <xs:element name="msRegisteredOwnerStateCode" nillable="true" type="xs:string" />
+          <xs:element name="msTypeOfUseCode" nillable="true" type="xs:string" />
+          <xs:element name="msVehicleABSCode" nillable="true" type="xs:string" />
+          <xs:element name="msVehicleAntiTheftCode" nillable="true" type="xs:string" />
+          <xs:element name="msVehicleBodyStyleCode" nillable="true" type="xs:string" />
+          <xs:element name="msVehicleClassCode" nillable="true" type="xs:string" />
+          <xs:element name="msVehicleCylinderCode" nillable="true" type="xs:string" />
+          <xs:element name="msVehicleDaytimeLightCode" nillable="true" type="xs:string" />
+          <xs:element name="msVehicleEngineTypeCode" nillable="true" type="xs:string" />
+          <xs:element name="msVehicleMakeCode" nillable="true" type="xs:string" />
+          <xs:element name="msVehicleModelCode" nillable="true" type="xs:string" />
+          <xs:element name="msVehiclePerformanceCode" nillable="true" type="xs:string" />
+          <xs:element name="msVehicleRestraintTypeCode" nillable="true" type="xs:string" />
+          <xs:element name="msVehicleSymbolCode" nillable="true" type="xs:string" />
+          <xs:element name="msVehicleTypeCode" nillable="true" type="xs:string" />
+          <xs:element name="msVehicleYear" nillable="true" type="xs:string" />
+          <xs:element name="msVinNo" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="clsVehicleUnit" nillable="true" type="tns:clsVehicleUnit" />
+  <xs:complexType name="clsBaseUnit">
+    <xs:sequence>
+      <xs:element name="mbIsMarkedForDelete" type="xs:boolean" />
+      <xs:element name="mbIsModified" type="xs:boolean" />
+      <xs:element name="mbIsNew" type="xs:boolean" />
+      <xs:element name="mdFullTermPremium" type="xs:decimal" />
+      <xs:element name="mdWrittenPremium" type="xs:decimal" />
+      <xs:element name="mdtAddrScrubberOrderedDate" type="xs:dateTime" />
+      <xs:element name="mdtLocationDBOrderedDate" type="xs:dateTime" />
+      <xs:element name="miIndexNum" type="xs:int" />
+      <xs:element name="moClaims" nillable="true" type="tns:ArrayOfclsBaseClaim" />
+      <xs:element name="moLienHolders" nillable="true" type="tns:ArrayOfclsEntityLienHolder" />
+      <xs:element name="msAddrScrubberConfirmID" nillable="true" type="xs:string" />
+      <xs:element name="msAddrScrubberOrderStatus" nillable="true" type="xs:string" />
+      <xs:element name="msAddress1" nillable="true" type="xs:string" />
+      <xs:element name="msAddress2" nillable="true" type="xs:string" />
+      <xs:element name="msCity" nillable="true" type="xs:string" />
+      <xs:element name="msCounty" nillable="true" type="xs:string" />
+      <xs:element name="msLatitude" type="xs:double" />
+      <xs:element name="msLocationDBConfirmID" nillable="true" type="xs:string" />
+      <xs:element name="msLocationDBOrderStatus" nillable="true" type="xs:string" />
+      <xs:element name="msLongitude" type="xs:double" />
+      <xs:element name="msRegion" nillable="true" type="xs:string" />
+      <xs:element name="msState" nillable="true" type="xs:string" />
+      <xs:element name="msTerritory" nillable="true" type="xs:string" />
+      <xs:element name="msZip" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="clsBaseUnit" nillable="true" type="tns:clsBaseUnit" />
+  <xs:complexType name="ArrayOfclsBaseClaim">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="clsBaseClaim" nillable="true" type="tns:clsBaseClaim" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfclsBaseClaim" nillable="true" type="tns:ArrayOfclsBaseClaim" />
+  <xs:complexType name="clsBaseClaim">
+    <xs:sequence>
+      <xs:element name="mbChargeable" type="xs:boolean" />
+      <xs:element name="mbIsMarkedForDelete" type="xs:boolean" />
+      <xs:element name="mbIsModified" type="xs:boolean" />
+      <xs:element name="mbIsNew" type="xs:boolean" />
+      <xs:element name="mdClaimAmt" type="xs:decimal" />
+      <xs:element name="mdtClaimDate" type="xs:dateTime" />
+      <xs:element name="miClaimTypeIndicator" nillable="true" type="xs:string" />
+      <xs:element name="miIndexNum" type="xs:int" />
+      <xs:element name="miUnitNum" type="xs:int" />
+      <xs:element name="msChargeableAgainst" nillable="true" type="xs:string" />
+      <xs:element name="msClaimComment" nillable="true" type="xs:string" />
+      <xs:element name="msClaimDesc" nillable="true" type="xs:string" />
+      <xs:element name="msClaimLocation" nillable="true" type="xs:string" />
+      <xs:element name="msClaimSource" nillable="true" type="xs:string" />
+      <xs:element name="msClaimStatus" nillable="true" type="xs:string" />
+      <xs:element name="msClaimType" nillable="true" type="xs:string" />
+      <xs:element name="msMatchType" nillable="true" type="xs:string" />
+      <xs:element name="msSourceClaimType" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="clsBaseClaim" nillable="true" type="tns:clsBaseClaim" />
+  <xs:complexType name="ArrayOfclsEntityLienHolder">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="clsEntityLienHolder" nillable="true" type="tns:clsEntityLienHolder" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfclsEntityLienHolder" nillable="true" type="tns:ArrayOfclsEntityLienHolder" />
+  <xs:complexType name="clsEntityLienHolder">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:clsBaseEntity">
+        <xs:sequence>
+          <xs:element name="mdDownPaymentAmount" type="xs:double" />
+          <xs:element name="mdtFirstPaypmentDate" type="xs:dateTime" />
+          <xs:element name="miDownPaymentPercentage" type="xs:int" />
+          <xs:element name="miNumInstallments" type="xs:int" />
+          <xs:element name="moDocuments" nillable="true" type="tns:ArrayOfclsEntityLienHolder.Documents" />
+          <xs:element name="msLoanNum" nillable="true" type="xs:string" />
+          <xs:element name="msPaymentInterval" nillable="true" type="xs:string" />
+          <xs:element name="msPaymentMethod" nillable="true" type="xs:string" />
+          <xs:element name="msQuoteID" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="clsEntityLienHolder" nillable="true" type="tns:clsEntityLienHolder" />
+  <xs:complexType name="ArrayOfclsEntityLienHolder.Documents">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="clsEntityLienHolder.Documents" type="tns:clsEntityLienHolder.Documents" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfclsEntityLienHolder.Documents" nillable="true" type="tns:ArrayOfclsEntityLienHolder.Documents" />
+  <xs:complexType name="clsEntityLienHolder.Documents">
+    <xs:annotation>
+      <xs:appinfo>
+        <IsValueType xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsValueType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DocumentName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="URL" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="clsEntityLienHolder.Documents" nillable="true" type="tns:clsEntityLienHolder.Documents" />
+  <xs:complexType name="ArrayOfclsPACoverage">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="clsPACoverage" nillable="true" type="tns:clsPACoverage" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfclsPACoverage" nillable="true" type="tns:ArrayOfclsPACoverage" />
+  <xs:complexType name="clsPACoverage">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:clsBaseCoverage">
+        <xs:sequence>
+          <xs:element name="mbHasSubCode" type="xs:boolean" />
+          <xs:element name="mbPolicyLevel" type="xs:boolean" />
+          <xs:element name="mdDed1" type="xs:decimal" />
+          <xs:element name="mdDed2" type="xs:decimal" />
+          <xs:element name="mdLimit1Amt" type="xs:decimal" />
+          <xs:element name="mdLimit2Amt" type="xs:decimal" />
+          <xs:element name="mdLimit3Amt" type="xs:decimal" />
+          <xs:element name="mdLimit4Amt" type="xs:decimal" />
+          <xs:element name="mdLimit5Amt" type="xs:decimal" />
+          <xs:element name="mdLimit6Amt" type="xs:decimal" />
+          <xs:element name="mdLimit7Amt" type="xs:decimal" />
+          <xs:element name="mdLimit8Amt" type="xs:decimal" />
+          <xs:element name="miNumberOfEndorsements" type="xs:int" />
+          <xs:element name="moUWQuestions" nillable="true" type="tns:ArrayOfclsUWQuestion" />
+          <xs:element name="msSymbol" nillable="true" type="xs:string" />
+          <xs:element name="msTerritory" nillable="true" type="xs:string" />
+          <xs:element name="msTranAccountCode" nillable="true" type="xs:string" />
+          <xs:element name="msTranTypeCode" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="clsPACoverage" nillable="true" type="tns:clsPACoverage" />
+  <xs:complexType name="clsBaseCoverage">
+    <xs:sequence>
+      <xs:element name="mbIsMarkedForDelete" type="xs:boolean" />
+      <xs:element name="mbIsModified" type="xs:boolean" />
+      <xs:element name="mbIsNew" type="xs:boolean" />
+      <xs:element name="mdChangePremium" type="xs:decimal" />
+      <xs:element name="mdFullTermPremium" type="xs:decimal" />
+      <xs:element name="mdReturnPremium" type="xs:decimal" />
+      <xs:element name="mdWrittenPremium" type="xs:decimal" />
+      <xs:element name="miIndexNum" type="xs:int" />
+      <xs:element name="miUnitNum" type="xs:int" />
+      <xs:element name="moFactors" nillable="true" type="tns:ArrayOfclsPremiumFactor" />
+      <xs:element name="msCovCode" nillable="true" type="xs:string" />
+      <xs:element name="msCovDeductible" nillable="true" type="xs:string" />
+      <xs:element name="msCovDesc" nillable="true" type="xs:string" />
+      <xs:element name="msCovGroup" nillable="true" type="xs:string" />
+      <xs:element name="msCovLimit" nillable="true" type="xs:string" />
+      <xs:element name="msCovPrintLimit" nillable="true" type="xs:string" />
+      <xs:element name="msSystemCode" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="clsBaseCoverage" nillable="true" type="tns:clsBaseCoverage" />
+  <xs:complexType name="ArrayOfclsPremiumFactor">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="clsPremiumFactor" nillable="true" type="tns:clsPremiumFactor" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfclsPremiumFactor" nillable="true" type="tns:ArrayOfclsPremiumFactor" />
+  <xs:complexType name="clsPremiumFactor">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:clsBaseFactor">
+        <xs:sequence>
+          <xs:element name="msType" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="clsPremiumFactor" nillable="true" type="tns:clsPremiumFactor" />
+  <xs:complexType name="clsBaseFactor">
+    <xs:sequence>
+      <xs:element name="mdFactorAmt" type="xs:decimal" />
+      <xs:element name="miFactorNum" type="xs:int" />
+      <xs:element name="miIndexNum" type="xs:int" />
+      <xs:element name="msCovType" nillable="true" type="xs:string" />
+      <xs:element name="msFactorCode" nillable="true" type="xs:string" />
+      <xs:element name="msFactorDesc" nillable="true" type="xs:string" />
+      <xs:element name="msFactorName" nillable="true" type="xs:string" />
+      <xs:element name="msFactorType" nillable="true" type="xs:string" />
+      <xs:element name="msRatedFactor" nillable="true" type="xs:string" />
+      <xs:element name="msSystemCode" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="clsBaseFactor" nillable="true" type="tns:clsBaseFactor" />
+  <xs:complexType name="ArrayOfclsUWQuestion">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="clsUWQuestion" nillable="true" type="tns:clsUWQuestion" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfclsUWQuestion" nillable="true" type="tns:ArrayOfclsUWQuestion" />
+  <xs:complexType name="clsUWQuestion">
+    <xs:sequence>
+      <xs:element name="mbIsMarkedForDelete" type="xs:boolean" />
+      <xs:element name="mbIsModified" type="xs:boolean" />
+      <xs:element name="mbIsNew" type="xs:boolean" />
+      <xs:element name="miIndexNum" type="xs:int" />
+      <xs:element name="msAnswerCode" nillable="true" type="xs:string" />
+      <xs:element name="msAnswerText" nillable="true" type="xs:string" />
+      <xs:element name="msQuestionCode" nillable="true" type="xs:string" />
+      <xs:element name="msQuestionText" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="clsUWQuestion" nillable="true" type="tns:clsUWQuestion" />
+  <xs:complexType name="ArrayOfclsVehicleCustomEquipment">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="clsVehicleCustomEquipment" nillable="true" type="tns:clsVehicleCustomEquipment" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfclsVehicleCustomEquipment" nillable="true" type="tns:ArrayOfclsVehicleCustomEquipment" />
+  <xs:complexType name="clsVehicleCustomEquipment">
+    <xs:sequence>
+      <xs:element name="mdAmount" type="xs:decimal" />
+      <xs:element name="miIndexNum" type="xs:int" />
+      <xs:element name="miVehNum" type="xs:int" />
+      <xs:element name="msDescription" nillable="true" type="xs:string" />
+      <xs:element name="msTypeCode" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="clsVehicleCustomEquipment" nillable="true" type="tns:clsVehicleCustomEquipment" />
+  <xs:complexType name="ArrayOfclsVehicleFactor">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="clsVehicleFactor" nillable="true" type="tns:clsVehicleFactor" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfclsVehicleFactor" nillable="true" type="tns:ArrayOfclsVehicleFactor" />
+  <xs:complexType name="clsVehicleFactor">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:clsUnitFactor">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="clsVehicleFactor" nillable="true" type="tns:clsVehicleFactor" />
+  <xs:complexType name="clsUnitFactor">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:clsBaseFactor">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="clsUnitFactor" nillable="true" type="tns:clsUnitFactor" />
+  <xs:complexType name="ArrayOfclsBillingTransactionItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="clsBillingTransactionItem" nillable="true" type="tns:clsBillingTransactionItem" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfclsBillingTransactionItem" nillable="true" type="tns:ArrayOfclsBillingTransactionItem" />
+  <xs:complexType name="clsBillingTransactionItem">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:clsBaseTransaction">
+        <xs:sequence>
+          <xs:element name="bInvoicedFlag" type="xs:boolean" />
+          <xs:element name="bIsAdditionalInstallment" type="xs:boolean" />
+          <xs:element name="dBalance" type="xs:double" />
+          <xs:element name="dBillingFeeAmt" type="xs:double" />
+          <xs:element name="dCredit" type="xs:double" />
+          <xs:element name="dTFSAmt" type="xs:double" />
+          <xs:element name="dtDueDate" type="xs:dateTime" />
+          <xs:element name="sInstallmentNum" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="clsBillingTransactionItem" nillable="true" type="tns:clsBillingTransactionItem" />
+  <xs:complexType name="clsBaseTransaction">
+    <xs:sequence>
+      <xs:element name="dRunningBalance" type="xs:double" />
+      <xs:element name="dTotalTransAmt" type="xs:double" />
+      <xs:element name="dTransAmt" type="xs:double" />
+      <xs:element name="dtTransDate" type="xs:dateTime" />
+      <xs:element name="oBillingTransDetails" nillable="true" type="tns:ArrayOfclsBillingTransactionDetail" />
+      <xs:element name="sTransType" nillable="true" type="xs:string" />
+      <xs:element name="sTypeCode" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="clsBaseTransaction" nillable="true" type="tns:clsBaseTransaction" />
+  <xs:complexType name="ArrayOfclsBillingTransactionDetail">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="clsBillingTransactionDetail" nillable="true" type="tns:clsBillingTransactionDetail" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfclsBillingTransactionDetail" nillable="true" type="tns:ArrayOfclsBillingTransactionDetail" />
+  <xs:complexType name="clsBillingTransactionDetail">
+    <xs:sequence>
+      <xs:element name="dAmt" type="xs:double" />
+      <xs:element name="dtPostDate" type="xs:dateTime" />
+      <xs:element name="dtTermEffDate" type="xs:dateTime" />
+      <xs:element name="sDescription" nillable="true" type="xs:string" />
+      <xs:element name="sPolTransNum" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="clsBillingTransactionDetail" nillable="true" type="tns:clsBillingTransactionDetail" />
+  <xs:complexType name="ArrayOfclsCashTransactionItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="clsCashTransactionItem" nillable="true" type="tns:clsCashTransactionItem" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfclsCashTransactionItem" nillable="true" type="tns:ArrayOfclsCashTransactionItem" />
+  <xs:complexType name="clsCashTransactionItem">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:clsBaseTransaction">
+        <xs:sequence>
+          <xs:element name="iNSFStatus" type="xs:int" />
+          <xs:element name="sCashDisbursementNum" nillable="true" type="xs:string" />
+          <xs:element name="sCashReceiptNum" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="clsCashTransactionItem" nillable="true" type="tns:clsCashTransactionItem" />
+  <xs:complexType name="ArrayOfclsBaseFee">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="clsBaseFee" nillable="true" type="tns:clsBaseFee" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfclsBaseFee" nillable="true" type="tns:ArrayOfclsBaseFee" />
+  <xs:complexType name="clsBaseFee">
+    <xs:sequence>
+      <xs:element name="mdFeeAmt" type="xs:decimal" />
+      <xs:element name="miFeeNum" type="xs:int" />
+      <xs:element name="miIndexNum" type="xs:int" />
+      <xs:element name="msFactorType" nillable="true" type="xs:string" />
+      <xs:element name="msFeeApplicationType" nillable="true" type="xs:string" />
+      <xs:element name="msFeeCode" nillable="true" type="xs:string" />
+      <xs:element name="msFeeDesc" nillable="true" type="xs:string" />
+      <xs:element name="msFeeName" nillable="true" type="xs:string" />
+      <xs:element name="msFeeType" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="clsBaseFee" nillable="true" type="tns:clsBaseFee" />
+  <xs:complexType name="ArrayOfclsInstallment">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="clsInstallment" nillable="true" type="tns:clsInstallment" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfclsInstallment" nillable="true" type="tns:ArrayOfclsInstallment" />
+  <xs:complexType name="clsInstallment">
+    <xs:sequence>
+      <xs:element name="mbInvoicedFlag" type="xs:boolean" />
+      <xs:element name="mdBillingFeeAmt" type="xs:decimal" />
+      <xs:element name="mdDueAmt" type="xs:decimal" />
+      <xs:element name="mdPremiumAmt" type="xs:decimal" />
+      <xs:element name="mdTFSAmt" type="xs:decimal" />
+      <xs:element name="mdtDueDate" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="clsInstallment" nillable="true" type="tns:clsInstallment" />
+  <xs:complexType name="clsLedger">
+    <xs:sequence>
+      <xs:element name="_LedgerEntries" nillable="true" type="tns:ArrayOfclsLedgerEntry" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="clsLedger" nillable="true" type="tns:clsLedger" />
+  <xs:complexType name="ArrayOfclsLedgerEntry">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="clsLedgerEntry" nillable="true" type="tns:clsLedgerEntry" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfclsLedgerEntry" nillable="true" type="tns:ArrayOfclsLedgerEntry" />
+  <xs:complexType name="clsLedgerEntry">
+    <xs:sequence>
+      <xs:element name="_amt" type="xs:decimal" />
+      <xs:element name="_cashDisbursementNum" type="xs:long" />
+      <xs:element name="_cashReceiptNum" type="xs:long" />
+      <xs:element name="_disbursementDetail" nillable="true" type="tns:clsDisbursementDetail" />
+      <xs:element name="_entryDetails" nillable="true" type="tns:ArrayOfclsLedgerEntryDetail" />
+      <xs:element name="_polTransEffDate" type="xs:dateTime" />
+      <xs:element name="_polTransEffTime" type="xs:dateTime" />
+      <xs:element name="_polTransNum" type="xs:int" />
+      <xs:element name="_policyId" nillable="true" type="xs:string" />
+      <xs:element name="_postDate" type="xs:dateTime" />
+      <xs:element name="_runningBalance" type="xs:decimal" />
+      <xs:element name="_termEffDate" type="xs:dateTime" />
+      <xs:element name="_transactionAccountCategoryCode" nillable="true" type="xs:string" />
+      <xs:element name="_type" nillable="true" type="xs:string" />
+      <xs:element name="_typeDescription" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="clsLedgerEntry" nillable="true" type="tns:clsLedgerEntry" />
+  <xs:complexType name="clsDisbursementDetail">
+    <xs:sequence>
+      <xs:element name="_checkClearedDate" type="xs:dateTime" />
+      <xs:element name="_checkNum" nillable="true" type="xs:string" />
+      <xs:element name="_checkPrintDate" type="xs:dateTime" />
+      <xs:element name="_payee" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="clsDisbursementDetail" nillable="true" type="tns:clsDisbursementDetail" />
+  <xs:complexType name="ArrayOfclsLedgerEntryDetail">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="clsLedgerEntryDetail" nillable="true" type="tns:clsLedgerEntryDetail" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfclsLedgerEntryDetail" nillable="true" type="tns:ArrayOfclsLedgerEntryDetail" />
+  <xs:complexType name="clsLedgerEntryDetail">
+    <xs:sequence>
+      <xs:element name="_amount" type="xs:decimal" />
+      <xs:element name="_appliedToAccountCode" nillable="true" type="xs:string" />
+      <xs:element name="_billDate" type="xs:dateTime" />
+      <xs:element name="_codeDescription" nillable="true" type="xs:string" />
+      <xs:element name="_dueDate" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="clsLedgerEntryDetail" nillable="true" type="tns:clsLedgerEntryDetail" />
+  <xs:complexType name="ArrayOfclsNSFFee">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="clsNSFFee" nillable="true" type="tns:clsNSFFee" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfclsNSFFee" nillable="true" type="tns:ArrayOfclsNSFFee" />
+  <xs:complexType name="clsNSFFee">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:clsBaseFee">
+        <xs:sequence>
+          <xs:element name="msNSFNum" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="clsNSFFee" nillable="true" type="tns:clsNSFFee" />
+  <xs:complexType name="ArrayOfclsBaseTransaction">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="clsBaseTransaction" nillable="true" type="tns:clsBaseTransaction" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfclsBaseTransaction" nillable="true" type="tns:ArrayOfclsBaseTransaction" />
+  <xs:complexType name="ArrayOfclsEndorsementFactor">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="clsEndorsementFactor" nillable="true" type="tns:clsEndorsementFactor" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfclsEndorsementFactor" nillable="true" type="tns:ArrayOfclsEndorsementFactor" />
+  <xs:complexType name="clsEndorsementFactor">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:clsBaseFactor">
+        <xs:sequence>
+          <xs:element name="mbHasSubCode" type="xs:boolean" />
+          <xs:element name="mbIsMarkedForDelete" type="xs:boolean" />
+          <xs:element name="mbIsModified" type="xs:boolean" />
+          <xs:element name="mbIsNew" type="xs:boolean" />
+          <xs:element name="miNumberOfEndorsements" type="xs:int" />
+          <xs:element name="mlLimit" type="xs:long" />
+          <xs:element name="moUWQuestions" nillable="true" type="tns:ArrayOfclsUWQuestion" />
+          <xs:element name="msType" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="clsEndorsementFactor" nillable="true" type="tns:clsEndorsementFactor" />
+  <xs:complexType name="ArrayOfclsBaseNote">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="clsBaseNote" nillable="true" type="tns:clsBaseNote" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfclsBaseNote" nillable="true" type="tns:ArrayOfclsBaseNote" />
+  <xs:complexType name="clsBaseNote">
+    <xs:sequence>
+      <xs:element name="mPolicyTransactionNum" type="xs:int" />
+      <xs:element name="mbIsNew" type="xs:boolean" />
+      <xs:element name="mbRedFlag" type="xs:boolean" />
+      <xs:element name="mdChangePremium" type="xs:double" />
+      <xs:element name="mdTermEffDate" type="xs:dateTime" />
+      <xs:element name="mdTermExpDate" type="xs:dateTime" />
+      <xs:element name="mdtChangeEffDate" type="xs:dateTime" />
+      <xs:element name="mdtSystemTS" type="xs:dateTime" />
+      <xs:element name="miIndexNum" type="xs:int" />
+      <xs:element name="msNoteDesc" nillable="true" type="xs:string" />
+      <xs:element name="msNoteText" nillable="true" type="xs:string" />
+      <xs:element name="msSourceCode" nillable="true" type="xs:string" />
+      <xs:element name="msUserID" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="clsBaseNote" nillable="true" type="tns:clsBaseNote" />
+  <xs:complexType name="ArrayOfclsBasePayment">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="clsBasePayment" nillable="true" type="tns:clsBasePayment" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfclsBasePayment" nillable="true" type="tns:ArrayOfclsBasePayment" />
+  <xs:complexType name="clsBasePayment">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:clsBaseAccount">
+        <xs:sequence>
+          <xs:element name="mdPaymentDate" type="xs:dateTime" />
+          <xs:element name="miPaymentID" type="xs:int" />
+          <xs:element name="msAgentOfRecord" nillable="true" type="xs:string" />
+          <xs:element name="msCashReceiptNum" nillable="true" type="xs:string" />
+          <xs:element name="msComments" nillable="true" type="xs:string" />
+          <xs:element name="msCompanyCode" nillable="true" type="xs:string" />
+          <xs:element name="msInsuredName" nillable="true" type="xs:string" />
+          <xs:element name="msPaymentAmt" type="xs:decimal" />
+          <xs:element name="msPaymentStatus" nillable="true" type="xs:string" />
+          <xs:element name="msPaymentType" nillable="true" type="xs:string" />
+          <xs:element name="msPaymentTypeInd" nillable="true" type="xs:string" />
+          <xs:element name="msProgramCode" nillable="true" type="xs:string" />
+          <xs:element name="msReceiptingAgent" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="clsBasePayment" nillable="true" type="tns:clsBasePayment" />
+  <xs:complexType name="ArrayOfclsBaseFactor">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="clsBaseFactor" nillable="true" type="tns:clsBaseFactor" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfclsBaseFactor" nillable="true" type="tns:ArrayOfclsBaseFactor" />
+  <xs:complexType name="clsEntityPolicyInsured">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:clsEntityDriver">
+        <xs:sequence>
+          <xs:element name="mbCurrentAddrDiff" type="xs:boolean" />
+          <xs:element name="mbFiledBankruptcy" type="xs:boolean" />
+          <xs:element name="mbPCRelationship" type="xs:boolean" />
+          <xs:element name="miEmployerYears" type="xs:int" />
+          <xs:element name="miMonthsAtResidence" type="xs:int" />
+          <xs:element name="msCurrentAddress1" nillable="true" type="xs:string" />
+          <xs:element name="msCurrentAddress2" nillable="true" type="xs:string" />
+          <xs:element name="msCurrentCity" nillable="true" type="xs:string" />
+          <xs:element name="msCurrentCounty" nillable="true" type="xs:string" />
+          <xs:element name="msCurrentCountyCode" nillable="true" type="xs:string" />
+          <xs:element name="msCurrentState" nillable="true" type="xs:string" />
+          <xs:element name="msCurrentZip" nillable="true" type="xs:string" />
+          <xs:element name="msEmployer" nillable="true" type="xs:string" />
+          <xs:element name="msMobilePhoneNo" nillable="true" type="xs:string" />
+          <xs:element name="msOccupancyType" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="clsEntityPolicyInsured" nillable="true" type="tns:clsEntityPolicyInsured" />
+  <xs:complexType name="clsEntityDriver">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:clsBaseEntity">
+        <xs:sequence>
+          <xs:element name="mbAddToXML" type="xs:boolean" />
+          <xs:element name="mbAwayAtSchool" type="xs:boolean" />
+          <xs:element name="mbDrivingCourse" type="xs:boolean" />
+          <xs:element name="mbIsInexperiencedDriver" type="xs:boolean" />
+          <xs:element name="mbIsNewDriver" type="xs:boolean" />
+          <xs:element name="mbMailingAddrDiff" type="xs:boolean" />
+          <xs:element name="mbMatureDriver" type="xs:boolean" />
+          <xs:element name="mbMilitary" type="xs:boolean" />
+          <xs:element name="mbSR22" type="xs:boolean" />
+          <xs:element name="mbSR22IsMarkedForDelete" type="xs:boolean" />
+          <xs:element name="mbSR22IsNew" type="xs:boolean" />
+          <xs:element name="mbScholastic" type="xs:boolean" />
+          <xs:element name="mdDOB" type="xs:dateTime" />
+          <xs:element name="mdtAddedDate" type="xs:dateTime" />
+          <xs:element name="mdtClaimOrderedDate" type="xs:dateTime" />
+          <xs:element name="mdtDrivingCourseDate" type="xs:dateTime" />
+          <xs:element name="mdtLicenseExpireDate" type="xs:dateTime" />
+          <xs:element name="mdtLicenseIssueDate" type="xs:dateTime" />
+          <xs:element name="mdtLicenseStateDate" type="xs:dateTime" />
+          <xs:element name="mdtMVROrderedDate" type="xs:dateTime" />
+          <xs:element name="mdtMatureDriverCourseDate" type="xs:dateTime" />
+          <xs:element name="mdtMilitaryExpDate" type="xs:dateTime" />
+          <xs:element name="mdtPriorExpDate" type="xs:dateTime" />
+          <xs:element name="mdtSR22Date" type="xs:dateTime" />
+          <xs:element name="mdtUDIOrderedDate" type="xs:dateTime" />
+          <xs:element name="miAge" nillable="true" type="xs:string" />
+          <xs:element name="miClaimsTimesOrdered" type="xs:int" />
+          <xs:element name="miCreditScore" type="xs:int" />
+          <xs:element name="miCreditTimesOrdered" type="xs:int" />
+          <xs:element name="miDaysLapse" type="xs:int" />
+          <xs:element name="miHigherEducationYears" type="xs:int" />
+          <xs:element name="miMVRTimesOrdered" type="xs:int" />
+          <xs:element name="miMonthsPriorContCov" type="xs:int" />
+          <xs:element name="miPoints" nillable="true" type="xs:string" />
+          <xs:element name="miPriorTerm" type="xs:int" />
+          <xs:element name="miUDITimesOrdered" type="xs:int" />
+          <xs:element name="moFactors" nillable="true" type="tns:ArrayOfclsBaseFactor" />
+          <xs:element name="moViolations" nillable="true" type="tns:ArrayOfclsBaseViolation" />
+          <xs:element name="msClaimConfirmID" nillable="true" type="xs:string" />
+          <xs:element name="msClaimOrderStatus" nillable="true" type="xs:string" />
+          <xs:element name="msCreditConfirmID" nillable="true" type="xs:string" />
+          <xs:element name="msCreditOrderedDate" type="xs:dateTime" />
+          <xs:element name="msCreditSSN" nillable="true" type="xs:string" />
+          <xs:element name="msCreditStatus" nillable="true" type="xs:string" />
+          <xs:element name="msCreditTier" nillable="true" type="xs:string" />
+          <xs:element name="msDLN" nillable="true" type="xs:string" />
+          <xs:element name="msDLNState" nillable="true" type="xs:string" />
+          <xs:element name="msDLNStatus" nillable="true" type="xs:string" />
+          <xs:element name="msDriverStatus" nillable="true" type="xs:string" />
+          <xs:element name="msGender" nillable="true" type="xs:string" />
+          <xs:element name="msLicenseStatus" nillable="true" type="xs:string" />
+          <xs:element name="msMVRConfirmID" nillable="true" type="xs:string" />
+          <xs:element name="msMVROrderStatus" nillable="true" type="xs:string" />
+          <xs:element name="msMailingAddress1" nillable="true" type="xs:string" />
+          <xs:element name="msMailingAddress2" nillable="true" type="xs:string" />
+          <xs:element name="msMailingCity" nillable="true" type="xs:string" />
+          <xs:element name="msMailingCounty" nillable="true" type="xs:string" />
+          <xs:element name="msMailingCountyCode" nillable="true" type="xs:string" />
+          <xs:element name="msMailingState" nillable="true" type="xs:string" />
+          <xs:element name="msMailingZip" nillable="true" type="xs:string" />
+          <xs:element name="msMaritalStatus" nillable="true" type="xs:string" />
+          <xs:element name="msMiddleName" nillable="true" type="xs:string" />
+          <xs:element name="msOccupation" nillable="true" type="xs:string" />
+          <xs:element name="msOperatorType" nillable="true" type="xs:string" />
+          <xs:element name="msPriorLimitsCode" nillable="true" type="xs:string" />
+          <xs:element name="msRelationToInsured" nillable="true" type="xs:string" />
+          <xs:element name="msSR22CaseCode" nillable="true" type="xs:string" />
+          <xs:element name="msSSN" nillable="true" type="xs:string" />
+          <xs:element name="msUDIConfirmID" nillable="true" type="xs:string" />
+          <xs:element name="msUDIOrderStatus" nillable="true" type="xs:string" />
+          <xs:element name="msUWTier" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="clsEntityDriver" nillable="true" type="tns:clsEntityDriver" />
+  <xs:complexType name="clsPolicyLockInformation">
+    <xs:sequence>
+      <xs:element name="moLockedBySystemSource" type="tns:SystemSource" />
+      <xs:element name="moPolLibrary" type="tns:clsPolicyLockInformation.PolicyLibrary" />
+      <xs:element name="moPolLock" type="tns:clsPolicyLockInformation.PolicyLock" />
+      <xs:element name="moPolOutOfSequence" type="tns:clsPolicyLockInformation.PolicyOutOfSequence" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="clsPolicyLockInformation" nillable="true" type="tns:clsPolicyLockInformation" />
+  <xs:simpleType name="SystemSource">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None" />
+      <xs:enumeration value="CancellationBatch" />
+      <xs:enumeration value="PaymentPosting" />
+      <xs:enumeration value="Endorsement" />
+      <xs:enumeration value="OutOfSequenceEndorsement" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="SystemSource" nillable="true" type="tns:SystemSource" />
+  <xs:complexType name="clsPolicyLockInformation.PolicyLibrary">
+    <xs:annotation>
+      <xs:appinfo>
+        <IsValueType xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsValueType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="CheckOutDate" type="xs:dateTime" />
+      <xs:element name="TermEffDate" type="xs:dateTime" />
+      <xs:element name="UserID" nillable="true" type="xs:string" />
+      <xs:element name="UserType" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="clsPolicyLockInformation.PolicyLibrary" nillable="true" type="tns:clsPolicyLockInformation.PolicyLibrary" />
+  <xs:complexType name="clsPolicyLockInformation.PolicyLock">
+    <xs:annotation>
+      <xs:appinfo>
+        <IsValueType xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsValueType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="CheckOutDate" type="xs:dateTime" />
+      <xs:element name="LockID" type="xs:int" />
+      <xs:element name="TermEffDate" type="xs:dateTime" />
+      <xs:element name="TransactionEffDate" type="xs:dateTime" />
+      <xs:element name="TransactionNum" type="xs:int" />
+      <xs:element name="UserID" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="clsPolicyLockInformation.PolicyLock" nillable="true" type="tns:clsPolicyLockInformation.PolicyLock" />
+  <xs:complexType name="clsPolicyLockInformation.PolicyOutOfSequence">
+    <xs:annotation>
+      <xs:appinfo>
+        <IsValueType xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsValueType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="CheckOutDate" type="xs:dateTime" />
+      <xs:element name="CurrentOutOfSequenceTransNum" type="xs:int" />
+      <xs:element name="EndorsementStatus" nillable="true" type="xs:string" />
+      <xs:element name="FinalOutOfSequenceTransNum" type="xs:int" />
+      <xs:element name="FirstOutOfSequenceTransNum" type="xs:int" />
+      <xs:element name="NumOfTransOffset" type="xs:int" />
+      <xs:element name="OutOfSequenceID" type="xs:int" />
+      <xs:element name="ProcessedDate" type="xs:dateTime" />
+      <xs:element name="TermEffDate" type="xs:dateTime" />
+      <xs:element name="TransactionEffDate" type="xs:dateTime" />
+      <xs:element name="UserID" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="clsPolicyLockInformation.PolicyOutOfSequence" nillable="true" type="tns:clsPolicyLockInformation.PolicyOutOfSequence" />
+  <xs:complexType name="clsEntityProgramInfo">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:clsBaseEntity">
+        <xs:sequence>
+          <xs:element name="msCompanyCode" nillable="true" type="xs:string" />
+          <xs:element name="msMonolineProductCode" nillable="true" type="xs:string" />
+          <xs:element name="msNAICNo" nillable="true" type="xs:string" />
+          <xs:element name="msPhysicalAddress1" nillable="true" type="xs:string" />
+          <xs:element name="msPhysicalAddress2" nillable="true" type="xs:string" />
+          <xs:element name="msPhysicalCity" nillable="true" type="xs:string" />
+          <xs:element name="msPhysicalState" nillable="true" type="xs:string" />
+          <xs:element name="msPhysicalZip" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="clsEntityProgramInfo" nillable="true" type="tns:clsEntityProgramInfo" />
+  <xs:complexType name="clsRenewalQuote">
+    <xs:sequence>
+      <xs:element name="mdRenewalAmount" type="xs:double" />
+      <xs:element name="mdRenewalFees" type="xs:double" />
+      <xs:element name="mdRenewalFirstInstallAmount" type="xs:double" />
+      <xs:element name="mdRenewalPIFAmount" type="xs:double" />
+      <xs:element name="mdRenewalPIFPremiumAmt" type="xs:double" />
+      <xs:element name="mdtQuoteExpirationDate" type="xs:dateTime" />
+      <xs:element name="mdtRenewalEffDate" type="xs:dateTime" />
+      <xs:element name="mdtRenewalFirstInstallDueDate" type="xs:dateTime" />
+      <xs:element name="mdtRenewalPIFEffDate" type="xs:dateTime" />
+      <xs:element name="miQuoteVersionNum" type="xs:int" />
+      <xs:element name="miRequiredNumOfGraceDays" type="xs:int" />
+      <xs:element name="msQuoteNum" nillable="true" type="xs:string" />
+      <xs:element name="msRenewalAgentCode" nillable="true" type="xs:string" />
+      <xs:element name="msRenewalSourceTrans" nillable="true" type="xs:string" />
+      <xs:element name="msRenewalStatus" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="clsRenewalQuote" nillable="true" type="tns:clsRenewalQuote" />
+  <xs:complexType name="ArrayOfclsEntityDriver">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="clsEntityDriver" nillable="true" type="tns:clsEntityDriver" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfclsEntityDriver" nillable="true" type="tns:ArrayOfclsEntityDriver" />
+</xs:schema>

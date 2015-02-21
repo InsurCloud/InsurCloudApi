@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="com.insurcloud" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="com.insurcloud" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="com.insurcloud">
+      <s:element name="TestLoggingWithReference">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SourceSystem" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ReferenceType" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ReferenceID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="SystemTS" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TestLoggingWithReferenceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="TestLoggingWithReferenceResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TestLogging">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SourceSystem" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="SystemTS" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TestLoggingResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="TestLoggingResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LogErrorXML">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sXML">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="SourceSystem" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="SystemTS" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LogErrorXMLResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="LogErrorXMLResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LogErrorXMLWithReference">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sXML">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="SourceSystem" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ReferenceType" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ReferenceID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="SystemTS" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LogErrorXMLWithReferenceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="LogErrorXMLWithReferenceResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="TestLoggingWithReferenceSoapIn">
+    <wsdl:part name="parameters" element="tns:TestLoggingWithReference" />
+  </wsdl:message>
+  <wsdl:message name="TestLoggingWithReferenceSoapOut">
+    <wsdl:part name="parameters" element="tns:TestLoggingWithReferenceResponse" />
+  </wsdl:message>
+  <wsdl:message name="TestLoggingSoapIn">
+    <wsdl:part name="parameters" element="tns:TestLogging" />
+  </wsdl:message>
+  <wsdl:message name="TestLoggingSoapOut">
+    <wsdl:part name="parameters" element="tns:TestLoggingResponse" />
+  </wsdl:message>
+  <wsdl:message name="LogErrorXMLSoapIn">
+    <wsdl:part name="parameters" element="tns:LogErrorXML" />
+  </wsdl:message>
+  <wsdl:message name="LogErrorXMLSoapOut">
+    <wsdl:part name="parameters" element="tns:LogErrorXMLResponse" />
+  </wsdl:message>
+  <wsdl:message name="LogErrorXMLWithReferenceSoapIn">
+    <wsdl:part name="parameters" element="tns:LogErrorXMLWithReference" />
+  </wsdl:message>
+  <wsdl:message name="LogErrorXMLWithReferenceSoapOut">
+    <wsdl:part name="parameters" element="tns:LogErrorXMLWithReferenceResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ErrorLoggingServiceSoap">
+    <wsdl:operation name="TestLoggingWithReference">
+      <wsdl:input message="tns:TestLoggingWithReferenceSoapIn" />
+      <wsdl:output message="tns:TestLoggingWithReferenceSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="TestLogging">
+      <wsdl:input message="tns:TestLoggingSoapIn" />
+      <wsdl:output message="tns:TestLoggingSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LogErrorXML">
+      <wsdl:input message="tns:LogErrorXMLSoapIn" />
+      <wsdl:output message="tns:LogErrorXMLSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LogErrorXMLWithReference">
+      <wsdl:input message="tns:LogErrorXMLWithReferenceSoapIn" />
+      <wsdl:output message="tns:LogErrorXMLWithReferenceSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ErrorLoggingServiceSoap" type="tns:ErrorLoggingServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="TestLoggingWithReference">
+      <soap:operation soapAction="com.insurcloud/TestLoggingWithReference" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TestLogging">
+      <soap:operation soapAction="com.insurcloud/TestLogging" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LogErrorXML">
+      <soap:operation soapAction="com.insurcloud/LogErrorXML" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LogErrorXMLWithReference">
+      <soap:operation soapAction="com.insurcloud/LogErrorXMLWithReference" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ErrorLoggingServiceSoap12" type="tns:ErrorLoggingServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="TestLoggingWithReference">
+      <soap12:operation soapAction="com.insurcloud/TestLoggingWithReference" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TestLogging">
+      <soap12:operation soapAction="com.insurcloud/TestLogging" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LogErrorXML">
+      <soap12:operation soapAction="com.insurcloud/LogErrorXML" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LogErrorXMLWithReference">
+      <soap12:operation soapAction="com.insurcloud/LogErrorXMLWithReference" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ErrorLoggingService">
+    <wsdl:port name="ErrorLoggingServiceSoap" binding="tns:ErrorLoggingServiceSoap">
+      <soap:address location="http://localhost:7705/ErrorLoggingService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ErrorLoggingServiceSoap12" binding="tns:ErrorLoggingServiceSoap12">
+      <soap12:address location="http://localhost:7705/ErrorLoggingService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

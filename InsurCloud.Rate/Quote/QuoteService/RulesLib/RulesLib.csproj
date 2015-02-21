@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1BF14EEC-6B23-42D5-8B6F-0F45F8FB5666}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RulesLib</RootNamespace>
+    <AssemblyName>RulesLib</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Staging|AnyCPU'">
+    <OutputPath>bin\Staging\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CorFunctions">
+      <HintPath>..\..\..\Dependencies\CorFunctions.dll</HintPath>
+    </Reference>
+    <Reference Include="CorPolicy">
+      <HintPath>..\..\..\Dependencies\CorPolicy.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="PolicySetup\FactorDriverAutoApplySetup.cs" />
+    <Compile Include="PolicySetup\FactorPolicyAutoApplySetup.cs" />
+    <Compile Include="PolicySetup\FactorVehicleAutoApplySetup.cs" />
+    <Compile Include="PolicySetup\NoteSetup.cs" />
+    <Compile Include="PolicySetup\VehicleDriverAssignmentSetup.cs" />
+    <Compile Include="PolicySetup\VehicleSymbolSetup.cs" />
+    <Compile Include="Rules\IPPAStateRule.cs" />
+    <Compile Include="Rules\IPPARule.cs" />
+    <Compile Include="PolicySetup\CreditTierSetup.cs" />
+    <Compile Include="PolicySetup\DaysLapseSetup.cs" />
+    <Compile Include="PolicySetup\DriverSR22Setup.cs" />
+    <Compile Include="PolicySetup\ISetupDataDB.cs" />
+    <Compile Include="PolicySetup\MonthsPriorContCovSetup.cs" />
+    <Compile Include="PolicySetup\PriorExpDateSetup.cs" />
+    <Compile Include="PolicySetup\PriorLimitsSetup.cs" />
+    <Compile Include="PolicySetup\UWTierSetup.cs" />
+    <Compile Include="PolicySetup\VehcileTrueAgeSetup.cs" />
+    <Compile Include="PolicySetup\VehiclesAgeSetup.cs" />
+    <Compile Include="PolicySetup\ViolationPointsSetup.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rules\Rules2.cs" />
+    <Compile Include="Rules\StateRules242.cs" />
+    <Compile Include="Rules\StateRules2.cs" />
+    <Compile Include="Service References\VehicleDriverAssignmentService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\VINService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Properties\DataSources\CorPolicy.clsPolicyPPA.datasource" />
+    <None Include="Properties\DataSources\System.Data.DataSet.datasource" />
+    <None Include="Service References\VehicleDriverAssignmentService\VehDrvAssignment.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\VehicleDriverAssignmentService\VehDrvAssignment1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\VehicleDriverAssignmentService\VehDrvAssignment2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\VehicleDriverAssignmentService\VehDrvAssignment3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\VehicleDriverAssignmentService\VehDrvAssignmentService.wsdl" />
+    <None Include="Service References\VINService\VinService.wsdl" />
+    <None Include="Service References\VINService\VinService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\VINService\VinService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\VINService\VinService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\VehicleDriverAssignmentService\" />
+    <WCFMetadataStorage Include="Service References\VINService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\VINService\VinService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\VINService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\VINService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\VINService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\VehicleDriverAssignmentService\VehDrvAssignment.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\VehicleDriverAssignmentService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\VehicleDriverAssignmentService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\VehicleDriverAssignmentService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Helpers\Helpers.csproj">
+      <Project>{b81fefe3-3a7f-45c4-a006-bd4818e8e022}</Project>
+      <Name>Helpers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\InsurCloud.VehDrvAssignment\VehDrvAssignment\VehDrvAssignmentLib\VehDrvAssignmentLib.csproj">
+      <Project>{30efae67-c453-409d-b064-925a7cf80a8f}</Project>
+      <Name>VehDrvAssignmentLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\InsurCloud.VinService\VinService\VINServiceLib\VINServiceLib.csproj">
+      <Project>{9a842224-51d5-4d00-9a90-31733ae590fc}</Project>
+      <Name>VINServiceLib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

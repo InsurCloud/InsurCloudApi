@@ -1,0 +1,1251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="com.insurcloud" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s1="http://microsoft.com/wsdl/types/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="com.insurcloud" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="com.insurcloud">
+      <s:import namespace="http://microsoft.com/wsdl/types/" />
+      <s:element name="InsertAgency">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="oAgency" type="tns:Agency" />
+            <s:element minOccurs="1" maxOccurs="1" name="isPASAgency" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Agency">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="AgencyID" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DBA" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BusTypeCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="URL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AgentCode" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="issue1099" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="EmailRptGrp" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="NameLicensed" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LicenseNum" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Date" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="EnteredBy" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Locations" type="tns:ArrayOfLocation" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfLocation">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Location" nillable="true" type="tns:Location" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Location">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="LocationID" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="LocationName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Address1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Address2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StateAbbr" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZipCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GeoCoordLat" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GeoCoordLong" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Phone1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Phone2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Fax" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EmailAddr" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="AgencyID" nillable="true" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="RepID" nillable="true" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="isActive" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="isShipAddr" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="isStatementAddr" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="isESignature" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="EmailRptAgt" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Epay" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Edoc" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="DefaultAgencyCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StatusCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TaxID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SSN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TransferToAgent" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ComparativeRater" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Date" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="EnteredBy" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AltAddresses" type="tns:ArrayOfAltAddress" />
+          <s:element minOccurs="0" maxOccurs="1" name="LocationBanks" type="tns:ArrayOfLocationBank" />
+          <s:element minOccurs="0" maxOccurs="1" name="LocationIVANs" type="tns:ArrayOfLocationIVAN" />
+          <s:element minOccurs="0" maxOccurs="1" name="LocationPrograms" type="tns:ArrayOfLocationProgram" />
+          <s:element minOccurs="0" maxOccurs="1" name="Rep" type="tns:Rep" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfAltAddress">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="AltAddress" nillable="true" type="tns:AltAddress" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AltAddress">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="AddressID" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="LocationID" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="AddressType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Address1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Address2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="State" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Zip" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="isActive" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Date" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="EnteredBy" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfLocationBank">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="LocationBank" nillable="true" type="tns:LocationBank" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="LocationBank">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="LocationId" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="BankId" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="AccountTypeCode" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Date" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="EnteredBy" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Bank" type="tns:Bank" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Bank">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="BankId" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="AccountName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BankName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AccountNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RoutingNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AccountTypeCode" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="isActive" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="BankAccountType" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Date" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="EnteredBy" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfLocationIVAN">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="LocationIVAN" nillable="true" type="tns:LocationIVAN" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="LocationIVAN">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="LocationID" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="IVANS" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Date" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="EnteredBy" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IVAN" type="tns:IVAN" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="IVAN">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="IVANS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AMS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YAccount" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="isActive" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserID" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Date" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="EnteredBy" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfLocationProgram">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="LocationProgram" nillable="true" type="tns:LocationProgram" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="LocationProgram">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="xID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ProgramId" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="LocationId" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="SystemCredential" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="NewBusPct" nillable="true" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="RenewBusPct" nillable="true" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="RolloverPct" nillable="true" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="PayCommissionCode" nillable="true" type="s1:char" />
+          <s:element minOccurs="1" maxOccurs="1" name="EffDate" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="ExpDate" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="Date" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="EnteredBy" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AppliesToCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="pgmProgram" type="tns:pgmProgram" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="pgmProgram">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ProgramId" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="CompanyName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CompanyCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProductCode" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ProductID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="StateCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProgramCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SystemCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Display" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Rep">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="RepID" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Phone" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PhoneExt" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Email" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TerritoryName" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="InsertAgencyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InsertAgencyResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="oAgency" type="tns:Agency" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertLocation">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="oLoc" type="tns:Location" />
+            <s:element minOccurs="0" maxOccurs="1" name="oAgent" type="tns:Agency" />
+            <s:element minOccurs="1" maxOccurs="1" name="isPASAgency" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertLocationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InsertLocationResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="oLoc" type="tns:Location" />
+            <s:element minOccurs="0" maxOccurs="1" name="oAgent" type="tns:Agency" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertBank">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="oObject" />
+            <s:element minOccurs="0" maxOccurs="1" name="oBank" type="tns:Bank" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertBankResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InsertBankResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="oBank" type="tns:Bank" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetActivePrograms">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="productCode" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="stateCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Program">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ProgramID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProgramCode" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ProductCode" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="StateCode" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="AppliesToCode" type="s1:char" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProgramType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Product" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ExpDate" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfProgram">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Program" nillable="true" type="tns:Program" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetActiveProgramsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetActiveProgramsResult" type="tns:ArrayOfProgram" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertProgram">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="oProg" type="tns:LocationProgram" />
+            <s:element minOccurs="0" maxOccurs="1" name="ProgramCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertProgramResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InsertProgramResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="oProg" type="tns:LocationProgram" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadAgency">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AgentCode" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="LoadAll" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="ProgramCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadAgencyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoadAgencyResult" type="tns:Agency" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOptions">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AgentCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOptionsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetOptionsResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="isInSameGroup">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AgentCode1" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AgentCode2" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="isInSameGroupResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="isInSameGroupResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsCommissionStatementPaperless">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="agencyId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsCommissionStatementPaperlessResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="IsCommissionStatementPaperlessResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CommissionStatementPaperlessUpdate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="agencyId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="isPaperless" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CommissionStatementPaperlessUpdateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CommissionStatementPaperlessUpdateResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CommissionLoginIsAllowed">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LocationCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CommissionLoginIsAllowedResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CommissionLoginIsAllowedResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CommissionLoginCreate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LocationCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CreatedBy" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CommissionLoginCreateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CommissionLoginCreateResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CommissionLoginUpdate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LocationCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NewPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UpdatedPasswordBy" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CommissionLoginUpdateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CommissionLoginUpdateResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CommissionLoginUpdateForAgent">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LocationCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="OldPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NewPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UpdatedPasswordBy" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CommissionLoginUpdateForAgentResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CommissionLoginUpdateForAgentResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CommissionLoginIsRegistered">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LocationCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CommissionLoginIsRegisteredResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CommissionLoginIsRegisteredResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CommissionLoginIsRegisteredInfoValid">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LocationCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TaxIDorSSN" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ZipCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CommissionLoginIsRegisteredInfoValidResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CommissionLoginIsRegisteredInfoValidResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CommissionLogin">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LocationCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CommissionLoginResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CommissionLoginResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CommissionLoginEmailUpdate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LocationCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NewEmail" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CommissionLoginEmailUpdateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CommissionLoginEmailUpdateResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ESignatureStatusUpdate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="agencyId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="isESignature" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ESignatureStatusUpdateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ESignatureStatusUpdateResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ResetAgentPassword">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="agent" type="tns:BaseAgent" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="BaseAgent" abstract="true">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="EmailAddress" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Agent">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseAgent" />
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="ResetAgentPasswordResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ResetAgentPasswordResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateAgentPassword">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="agent" type="tns:BaseAgent" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateAgentPasswordResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UpdateAgentPasswordResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsAgentRequiredToUpdatePassword">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="agent" type="tns:BaseAgent" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsAgentRequiredToUpdatePasswordResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="IsAgentRequiredToUpdatePasswordResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadMarketingComboBox">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sProgramType" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sCategory" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sSubCategory" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sAppliesToCode" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="dtRateDate" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadMarketingComboBoxResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoadMarketingComboBoxResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://microsoft.com/wsdl/types/">
+      <s:simpleType name="char">
+        <s:restriction base="s:unsignedShort" />
+      </s:simpleType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="InsertAgencySoapIn">
+    <wsdl:part name="parameters" element="tns:InsertAgency" />
+  </wsdl:message>
+  <wsdl:message name="InsertAgencySoapOut">
+    <wsdl:part name="parameters" element="tns:InsertAgencyResponse" />
+  </wsdl:message>
+  <wsdl:message name="InsertLocationSoapIn">
+    <wsdl:part name="parameters" element="tns:InsertLocation" />
+  </wsdl:message>
+  <wsdl:message name="InsertLocationSoapOut">
+    <wsdl:part name="parameters" element="tns:InsertLocationResponse" />
+  </wsdl:message>
+  <wsdl:message name="InsertBankSoapIn">
+    <wsdl:part name="parameters" element="tns:InsertBank" />
+  </wsdl:message>
+  <wsdl:message name="InsertBankSoapOut">
+    <wsdl:part name="parameters" element="tns:InsertBankResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetActiveProgramsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetActivePrograms" />
+  </wsdl:message>
+  <wsdl:message name="GetActiveProgramsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetActiveProgramsResponse" />
+  </wsdl:message>
+  <wsdl:message name="InsertProgramSoapIn">
+    <wsdl:part name="parameters" element="tns:InsertProgram" />
+  </wsdl:message>
+  <wsdl:message name="InsertProgramSoapOut">
+    <wsdl:part name="parameters" element="tns:InsertProgramResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoadAgencySoapIn">
+    <wsdl:part name="parameters" element="tns:LoadAgency" />
+  </wsdl:message>
+  <wsdl:message name="LoadAgencySoapOut">
+    <wsdl:part name="parameters" element="tns:LoadAgencyResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetOptionsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOptions" />
+  </wsdl:message>
+  <wsdl:message name="GetOptionsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOptionsResponse" />
+  </wsdl:message>
+  <wsdl:message name="isInSameGroupSoapIn">
+    <wsdl:part name="parameters" element="tns:isInSameGroup" />
+  </wsdl:message>
+  <wsdl:message name="isInSameGroupSoapOut">
+    <wsdl:part name="parameters" element="tns:isInSameGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="IsCommissionStatementPaperlessSoapIn">
+    <wsdl:part name="parameters" element="tns:IsCommissionStatementPaperless" />
+  </wsdl:message>
+  <wsdl:message name="IsCommissionStatementPaperlessSoapOut">
+    <wsdl:part name="parameters" element="tns:IsCommissionStatementPaperlessResponse" />
+  </wsdl:message>
+  <wsdl:message name="CommissionStatementPaperlessUpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:CommissionStatementPaperlessUpdate" />
+  </wsdl:message>
+  <wsdl:message name="CommissionStatementPaperlessUpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:CommissionStatementPaperlessUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="CommissionLoginIsAllowedSoapIn">
+    <wsdl:part name="parameters" element="tns:CommissionLoginIsAllowed" />
+  </wsdl:message>
+  <wsdl:message name="CommissionLoginIsAllowedSoapOut">
+    <wsdl:part name="parameters" element="tns:CommissionLoginIsAllowedResponse" />
+  </wsdl:message>
+  <wsdl:message name="CommissionLoginCreateSoapIn">
+    <wsdl:part name="parameters" element="tns:CommissionLoginCreate" />
+  </wsdl:message>
+  <wsdl:message name="CommissionLoginCreateSoapOut">
+    <wsdl:part name="parameters" element="tns:CommissionLoginCreateResponse" />
+  </wsdl:message>
+  <wsdl:message name="CommissionLoginUpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:CommissionLoginUpdate" />
+  </wsdl:message>
+  <wsdl:message name="CommissionLoginUpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:CommissionLoginUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="CommissionLoginUpdateForAgentSoapIn">
+    <wsdl:part name="parameters" element="tns:CommissionLoginUpdateForAgent" />
+  </wsdl:message>
+  <wsdl:message name="CommissionLoginUpdateForAgentSoapOut">
+    <wsdl:part name="parameters" element="tns:CommissionLoginUpdateForAgentResponse" />
+  </wsdl:message>
+  <wsdl:message name="CommissionLoginIsRegisteredSoapIn">
+    <wsdl:part name="parameters" element="tns:CommissionLoginIsRegistered" />
+  </wsdl:message>
+  <wsdl:message name="CommissionLoginIsRegisteredSoapOut">
+    <wsdl:part name="parameters" element="tns:CommissionLoginIsRegisteredResponse" />
+  </wsdl:message>
+  <wsdl:message name="CommissionLoginIsRegisteredInfoValidSoapIn">
+    <wsdl:part name="parameters" element="tns:CommissionLoginIsRegisteredInfoValid" />
+  </wsdl:message>
+  <wsdl:message name="CommissionLoginIsRegisteredInfoValidSoapOut">
+    <wsdl:part name="parameters" element="tns:CommissionLoginIsRegisteredInfoValidResponse" />
+  </wsdl:message>
+  <wsdl:message name="CommissionLoginSoapIn">
+    <wsdl:part name="parameters" element="tns:CommissionLogin" />
+  </wsdl:message>
+  <wsdl:message name="CommissionLoginSoapOut">
+    <wsdl:part name="parameters" element="tns:CommissionLoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="CommissionLoginEmailUpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:CommissionLoginEmailUpdate" />
+  </wsdl:message>
+  <wsdl:message name="CommissionLoginEmailUpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:CommissionLoginEmailUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="ESignatureStatusUpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:ESignatureStatusUpdate" />
+  </wsdl:message>
+  <wsdl:message name="ESignatureStatusUpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:ESignatureStatusUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="ResetAgentPasswordSoapIn">
+    <wsdl:part name="parameters" element="tns:ResetAgentPassword" />
+  </wsdl:message>
+  <wsdl:message name="ResetAgentPasswordSoapOut">
+    <wsdl:part name="parameters" element="tns:ResetAgentPasswordResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateAgentPasswordSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateAgentPassword" />
+  </wsdl:message>
+  <wsdl:message name="UpdateAgentPasswordSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateAgentPasswordResponse" />
+  </wsdl:message>
+  <wsdl:message name="IsAgentRequiredToUpdatePasswordSoapIn">
+    <wsdl:part name="parameters" element="tns:IsAgentRequiredToUpdatePassword" />
+  </wsdl:message>
+  <wsdl:message name="IsAgentRequiredToUpdatePasswordSoapOut">
+    <wsdl:part name="parameters" element="tns:IsAgentRequiredToUpdatePasswordResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoadMarketingComboBoxSoapIn">
+    <wsdl:part name="parameters" element="tns:LoadMarketingComboBox" />
+  </wsdl:message>
+  <wsdl:message name="LoadMarketingComboBoxSoapOut">
+    <wsdl:part name="parameters" element="tns:LoadMarketingComboBoxResponse" />
+  </wsdl:message>
+  <wsdl:portType name="InsurCloudAMSServiceSoap">
+    <wsdl:operation name="InsertAgency">
+      <wsdl:input message="tns:InsertAgencySoapIn" />
+      <wsdl:output message="tns:InsertAgencySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertLocation">
+      <wsdl:input message="tns:InsertLocationSoapIn" />
+      <wsdl:output message="tns:InsertLocationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertBank">
+      <wsdl:input message="tns:InsertBankSoapIn" />
+      <wsdl:output message="tns:InsertBankSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetActivePrograms">
+      <wsdl:input message="tns:GetActiveProgramsSoapIn" />
+      <wsdl:output message="tns:GetActiveProgramsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertProgram">
+      <wsdl:input message="tns:InsertProgramSoapIn" />
+      <wsdl:output message="tns:InsertProgramSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadAgency">
+      <wsdl:input message="tns:LoadAgencySoapIn" />
+      <wsdl:output message="tns:LoadAgencySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOptions">
+      <wsdl:input message="tns:GetOptionsSoapIn" />
+      <wsdl:output message="tns:GetOptionsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="isInSameGroup">
+      <wsdl:input message="tns:isInSameGroupSoapIn" />
+      <wsdl:output message="tns:isInSameGroupSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsCommissionStatementPaperless">
+      <wsdl:input message="tns:IsCommissionStatementPaperlessSoapIn" />
+      <wsdl:output message="tns:IsCommissionStatementPaperlessSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CommissionStatementPaperlessUpdate">
+      <wsdl:input message="tns:CommissionStatementPaperlessUpdateSoapIn" />
+      <wsdl:output message="tns:CommissionStatementPaperlessUpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CommissionLoginIsAllowed">
+      <wsdl:input message="tns:CommissionLoginIsAllowedSoapIn" />
+      <wsdl:output message="tns:CommissionLoginIsAllowedSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CommissionLoginCreate">
+      <wsdl:input message="tns:CommissionLoginCreateSoapIn" />
+      <wsdl:output message="tns:CommissionLoginCreateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CommissionLoginUpdate">
+      <wsdl:input message="tns:CommissionLoginUpdateSoapIn" />
+      <wsdl:output message="tns:CommissionLoginUpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CommissionLoginUpdateForAgent">
+      <wsdl:input message="tns:CommissionLoginUpdateForAgentSoapIn" />
+      <wsdl:output message="tns:CommissionLoginUpdateForAgentSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CommissionLoginIsRegistered">
+      <wsdl:input message="tns:CommissionLoginIsRegisteredSoapIn" />
+      <wsdl:output message="tns:CommissionLoginIsRegisteredSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CommissionLoginIsRegisteredInfoValid">
+      <wsdl:input message="tns:CommissionLoginIsRegisteredInfoValidSoapIn" />
+      <wsdl:output message="tns:CommissionLoginIsRegisteredInfoValidSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CommissionLogin">
+      <wsdl:input message="tns:CommissionLoginSoapIn" />
+      <wsdl:output message="tns:CommissionLoginSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CommissionLoginEmailUpdate">
+      <wsdl:input message="tns:CommissionLoginEmailUpdateSoapIn" />
+      <wsdl:output message="tns:CommissionLoginEmailUpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ESignatureStatusUpdate">
+      <wsdl:input message="tns:ESignatureStatusUpdateSoapIn" />
+      <wsdl:output message="tns:ESignatureStatusUpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ResetAgentPassword">
+      <wsdl:input message="tns:ResetAgentPasswordSoapIn" />
+      <wsdl:output message="tns:ResetAgentPasswordSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateAgentPassword">
+      <wsdl:input message="tns:UpdateAgentPasswordSoapIn" />
+      <wsdl:output message="tns:UpdateAgentPasswordSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsAgentRequiredToUpdatePassword">
+      <wsdl:input message="tns:IsAgentRequiredToUpdatePasswordSoapIn" />
+      <wsdl:output message="tns:IsAgentRequiredToUpdatePasswordSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadMarketingComboBox">
+      <wsdl:input message="tns:LoadMarketingComboBoxSoapIn" />
+      <wsdl:output message="tns:LoadMarketingComboBoxSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="InsurCloudAMSServiceSoap" type="tns:InsurCloudAMSServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="InsertAgency">
+      <soap:operation soapAction="com.insurcloud/InsertAgency" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertLocation">
+      <soap:operation soapAction="com.insurcloud/InsertLocation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertBank">
+      <soap:operation soapAction="com.insurcloud/InsertBank" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetActivePrograms">
+      <soap:operation soapAction="com.insurcloud/GetActivePrograms" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertProgram">
+      <soap:operation soapAction="com.insurcloud/InsertProgram" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadAgency">
+      <soap:operation soapAction="com.insurcloud/LoadAgency" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOptions">
+      <soap:operation soapAction="com.insurcloud/GetOptions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="isInSameGroup">
+      <soap:operation soapAction="com.insurcloud/isInSameGroup" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsCommissionStatementPaperless">
+      <soap:operation soapAction="com.insurcloud/IsCommissionStatementPaperless" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CommissionStatementPaperlessUpdate">
+      <soap:operation soapAction="com.insurcloud/CommissionStatementPaperlessUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CommissionLoginIsAllowed">
+      <soap:operation soapAction="com.insurcloud/CommissionLoginIsAllowed" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CommissionLoginCreate">
+      <soap:operation soapAction="com.insurcloud/CommissionLoginCreate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CommissionLoginUpdate">
+      <soap:operation soapAction="com.insurcloud/CommissionLoginUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CommissionLoginUpdateForAgent">
+      <soap:operation soapAction="com.insurcloud/CommissionLoginUpdateForAgent" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CommissionLoginIsRegistered">
+      <soap:operation soapAction="com.insurcloud/CommissionLoginIsRegistered" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CommissionLoginIsRegisteredInfoValid">
+      <soap:operation soapAction="com.insurcloud/CommissionLoginIsRegisteredInfoValid" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CommissionLogin">
+      <soap:operation soapAction="com.insurcloud/CommissionLogin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CommissionLoginEmailUpdate">
+      <soap:operation soapAction="com.insurcloud/CommissionLoginEmailUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ESignatureStatusUpdate">
+      <soap:operation soapAction="com.insurcloud/ESignatureStatusUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResetAgentPassword">
+      <soap:operation soapAction="com.insurcloud/ResetAgentPassword" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateAgentPassword">
+      <soap:operation soapAction="com.insurcloud/UpdateAgentPassword" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsAgentRequiredToUpdatePassword">
+      <soap:operation soapAction="com.insurcloud/IsAgentRequiredToUpdatePassword" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadMarketingComboBox">
+      <soap:operation soapAction="com.insurcloud/LoadMarketingComboBox" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="InsurCloudAMSServiceSoap12" type="tns:InsurCloudAMSServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="InsertAgency">
+      <soap12:operation soapAction="com.insurcloud/InsertAgency" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertLocation">
+      <soap12:operation soapAction="com.insurcloud/InsertLocation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertBank">
+      <soap12:operation soapAction="com.insurcloud/InsertBank" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetActivePrograms">
+      <soap12:operation soapAction="com.insurcloud/GetActivePrograms" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertProgram">
+      <soap12:operation soapAction="com.insurcloud/InsertProgram" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadAgency">
+      <soap12:operation soapAction="com.insurcloud/LoadAgency" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOptions">
+      <soap12:operation soapAction="com.insurcloud/GetOptions" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="isInSameGroup">
+      <soap12:operation soapAction="com.insurcloud/isInSameGroup" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsCommissionStatementPaperless">
+      <soap12:operation soapAction="com.insurcloud/IsCommissionStatementPaperless" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CommissionStatementPaperlessUpdate">
+      <soap12:operation soapAction="com.insurcloud/CommissionStatementPaperlessUpdate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CommissionLoginIsAllowed">
+      <soap12:operation soapAction="com.insurcloud/CommissionLoginIsAllowed" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CommissionLoginCreate">
+      <soap12:operation soapAction="com.insurcloud/CommissionLoginCreate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CommissionLoginUpdate">
+      <soap12:operation soapAction="com.insurcloud/CommissionLoginUpdate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CommissionLoginUpdateForAgent">
+      <soap12:operation soapAction="com.insurcloud/CommissionLoginUpdateForAgent" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CommissionLoginIsRegistered">
+      <soap12:operation soapAction="com.insurcloud/CommissionLoginIsRegistered" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CommissionLoginIsRegisteredInfoValid">
+      <soap12:operation soapAction="com.insurcloud/CommissionLoginIsRegisteredInfoValid" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CommissionLogin">
+      <soap12:operation soapAction="com.insurcloud/CommissionLogin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CommissionLoginEmailUpdate">
+      <soap12:operation soapAction="com.insurcloud/CommissionLoginEmailUpdate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ESignatureStatusUpdate">
+      <soap12:operation soapAction="com.insurcloud/ESignatureStatusUpdate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResetAgentPassword">
+      <soap12:operation soapAction="com.insurcloud/ResetAgentPassword" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateAgentPassword">
+      <soap12:operation soapAction="com.insurcloud/UpdateAgentPassword" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsAgentRequiredToUpdatePassword">
+      <soap12:operation soapAction="com.insurcloud/IsAgentRequiredToUpdatePassword" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadMarketingComboBox">
+      <soap12:operation soapAction="com.insurcloud/LoadMarketingComboBox" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="InsurCloudAMSService">
+    <wsdl:port name="InsurCloudAMSServiceSoap" binding="tns:InsurCloudAMSServiceSoap">
+      <soap:address location="http://localhost:62965/InsurCloudAMSService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="InsurCloudAMSServiceSoap12" binding="tns:InsurCloudAMSServiceSoap12">
+      <soap12:address location="http://localhost:62965/InsurCloudAMSService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

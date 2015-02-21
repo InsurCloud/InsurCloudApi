@@ -1,0 +1,1 @@
+﻿<%@ WebService Language="VB" CodeBehind="Logging.asmx.vb" Class="LoggingService.Logging" %>

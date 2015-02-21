@@ -1,0 +1,49 @@
+<Project DefaultTargets = "Run" ToolsVersion="4.0" 
+    xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
+	<Import Project="C:\Program Files\MSBuild\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets" />
+
+	<UsingTask TaskName="TransformXml" AssemblyFile="C:\Program Files\MSBuild\Microsoft\VisualStudio\v10.0\Web\Microsoft.Web.Publishing.Tasks.dll" />
+
+	<PropertyGroup>
+		<PublishPath>c:\builds\publish\$(MSBuildProjectName)</PublishPath>
+	</PropertyGroup>
+	
+	<ItemGroup>
+		<Configs Include="Dev" />
+		<Configs Include="Test" />
+		<Configs Include="Prod" />
+	</ItemGroup>
+	
+	<Target Name="Run">
+		<CallTarget Targets="Build" />
+	</Target>
+
+	<Target Name="GetDependenciesFromVSS">
+        <VssGet DatabasePath="\\DalVSSDev01\VSS\srcsafe.ini" 
+            Path="$/DLLs" 
+            LocalPath="c:\imperial\source\DLLs" 
+			UserName="ci.user" 
+			Password="" />
+    </Target>
+		
+    <Target Name="Build" DependsOnTargets="GetDependenciesFromVSS"> 
+        <MSBuild Projects="$(MSBuildProjectDirectory)\$(MSBuildProjectName).sln" Properties="Configuration=Release" /> 
+    </Target>
+	
+	<Target Name="Publish">
+		<CallTarget Targets="GetDependenciesFromVSS" />
+		<CallTarget Targets="BuildDeploy"  />
+	</Target>
+	
+	<Target Name="BuildDeploy" Inputs="@(Configs)" Outputs="%(Configs.Identity)">
+		<PropertyGroup>
+			<Configuration>%(Configs.Identity)</Configuration>
+		</PropertyGroup>
+		<RemoveDir Directories="$(PublishPath)\$(Configuration)" ContinueOnError="true" />
+		<MSBuild Projects="$(MSBuildProjectDirectory)\$(MSBuildProjectName)\$(MSBuildProjectName).vbproj"
+			   Targets="Clean; Build; ResolveReferences; _WPPCopyWebApplication"
+			   Properties="WebProjectOutputDir=$(PublishPath)\$(Configuration); Configuration=$(Configuration)" />
+	</Target>
+</Project>
+
+

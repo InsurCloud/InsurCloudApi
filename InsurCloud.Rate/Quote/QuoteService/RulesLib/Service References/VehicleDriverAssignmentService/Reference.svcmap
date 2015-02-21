@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="3066a81e-b12e-4140-959f-c84153b9b749" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>false</ReferenceAllAssemblies>
+    <ReferencedAssemblies>
+      <ReferencedAssembly AssemblyName="CorPolicy" />
+    </ReferencedAssemblies>
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://vehdrvassignmentwr.cloudapp.net/VehDrvAssignment.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="VehDrvAssignmentService.wsdl" MetadataType="Wsdl" ID="26aa0c30-778f-4867-86c1-d34f63932c4b" SourceId="1" SourceUrl="http://vehdrvassignmentwr.cloudapp.net/VehDrvAssignment.svc?wsdl" />
+    <MetadataFile FileName="VehDrvAssignment.xsd" MetadataType="Schema" ID="fce2d2fe-be8b-41de-8216-e05936e519cc" SourceId="1" SourceUrl="http://vehdrvassignmentwr.cloudapp.net/VehDrvAssignment.svc?xsd=xsd2" />
+    <MetadataFile FileName="VehDrvAssignment1.xsd" MetadataType="Schema" ID="85b87470-062c-4c6c-b448-60049fe64a19" SourceId="1" SourceUrl="http://vehdrvassignmentwr.cloudapp.net/VehDrvAssignment.svc?xsd=xsd3" />
+    <MetadataFile FileName="VehDrvAssignment2.xsd" MetadataType="Schema" ID="f0f56a15-5815-4cc6-9cfd-18fccf802197" SourceId="1" SourceUrl="http://vehdrvassignmentwr.cloudapp.net/VehDrvAssignment.svc?xsd=xsd0" />
+    <MetadataFile FileName="VehDrvAssignment3.xsd" MetadataType="Schema" ID="01cb47c9-1555-4492-8751-546d1799a15f" SourceId="1" SourceUrl="http://vehdrvassignmentwr.cloudapp.net/VehDrvAssignment.svc?xsd=xsd1" />
+    <MetadataFile FileName="VehDrvAssignment.disco" MetadataType="Disco" ID="1c5243f6-e197-4142-aeca-90e92ade2c73" SourceId="1" SourceUrl="http://vehdrvassignmentwr.cloudapp.net/VehDrvAssignment.svc?disco" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

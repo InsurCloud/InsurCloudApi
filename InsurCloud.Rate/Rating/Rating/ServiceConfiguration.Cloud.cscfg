@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ServiceConfiguration serviceName="Rating" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="4" osVersion="*" schemaVersion="2014-06.2.4">
+  <Role name="RatingWR">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="DefaultEndpointsProtocol=https;AccountName=vehdriverassignmentwr;AccountKey=+OALhnCasX0+ISu8LXe+hPQT4uxBE4lNeBAYDXP2zw2mFQ9nw9nbMQIDkozHEeD+IdC98F9H2G5d5rLkxRP+9g==" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.Enabled" value="true" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountUsername" value="matt.price" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountEncryptedPassword" value="MIIBnQYJKoZIhvcNAQcDoIIBjjCCAYoCAQAxggFOMIIBSgIBADAyMB4xHDAaBgNVBAMME1dpbmRvd3MgQXp1cmUgVG9vbHMCEEVBSvMnyQSuSr/VA7+KS/8wDQYJKoZIhvcNAQEBBQAEggEAACuGvBmIeH4OVOUPsqtYeIX181pt07Ht3ylvlQX1WgvSDKkIYqDfDui0m1HUOFDaFPy6pc104G7CBzGQNTspp3dX5OZps+jUdsG5CKniInmZ6g2SmzeVjuBu5vvmERJraZDSQaTqFzRQbOf5XRXn9ry83lxqRU0i8RQQYyhDo04KOnjOcp1EYIFLKp9sWspe0wZcaZNWKBpjeZUhqZFlR76oek+W1pHp4sa+kCgY+kdsF6eexN9xvxg96fzQgkLDGxzNnu6qguZryoIBFXxb1bgACorPQxm4eT39IGO71a+Ne9jiVcBVR3H/Fiiu2yM4BDZ91G9LUW1mcn1qO2IAYzAzBgkqhkiG9w0BBwEwFAYIKoZIhvcNAwcECM0CIbslM541gBDlrsdxqrzg9d3XLY/ZQ0G9" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountExpiration" value="2015-12-31T23:59:59.0000000-06:00" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteForwarder.Enabled" value="true" />
+    </ConfigurationSettings>
+    <Certificates>
+      <Certificate name="RatingSSL" thumbprint="A4AD26597E012EDF881544A422093CC8C90C6AA3" thumbprintAlgorithm="sha1"/>
+      <Certificate name="Microsoft.WindowsAzure.Plugins.RemoteAccess.PasswordEncryption" thumbprint="8C2869A9CD4D43DC11092E6772C3414BFA55BF6D" thumbprintAlgorithm="sha1" />
+    </Certificates>
+  </Role>
+</ServiceConfiguration>

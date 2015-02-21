@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="9201f7be-ca60-4c40-8369-876e39dc82a1" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>false</ReferenceAllAssemblies>
+    <ReferencedAssemblies>
+      <ReferencedAssembly AssemblyName="CorPolicy" />
+    </ReferencedAssemblies>
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://vinservicewr.cloudapp.net/VinService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="VinService.xsd" MetadataType="Schema" ID="881223b6-3ab9-48df-98f6-e19e3977b5a2" SourceId="1" SourceUrl="http://vinservicewr.cloudapp.net/VinService.svc?xsd=xsd2" />
+    <MetadataFile FileName="VinService1.xsd" MetadataType="Schema" ID="5788db68-e0fb-4f09-8aa1-4c6de3c716ba" SourceId="1" SourceUrl="http://vinservicewr.cloudapp.net/VinService.svc?xsd=xsd0" />
+    <MetadataFile FileName="VinService.disco" MetadataType="Disco" ID="3f9fa9a0-848b-4039-b542-f08285d6335e" SourceId="1" SourceUrl="http://vinservicewr.cloudapp.net/VinService.svc?disco" />
+    <MetadataFile FileName="VinService.wsdl" MetadataType="Wsdl" ID="75fd46bd-b98e-45c8-a414-6005ecd47612" SourceId="1" SourceUrl="http://vinservicewr.cloudapp.net/VinService.svc?wsdl" />
+    <MetadataFile FileName="VinService2.xsd" MetadataType="Schema" ID="33e543f6-22e3-45b0-ad22-fedc57c2436a" SourceId="1" SourceUrl="http://vinservicewr.cloudapp.net/VinService.svc?xsd=xsd1" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
