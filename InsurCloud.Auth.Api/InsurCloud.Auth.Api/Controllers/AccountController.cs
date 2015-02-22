@@ -284,7 +284,7 @@ namespace InsurCloud.Auth.Api.Controllers
                 SendEmailInfo emailInfo = new SendEmailInfo();
                 emailInfo.EmailAddress = token.Subject;
                 emailInfo.Token = token.ProtectedTicket;
-                emailInfo.EmailType = EmailType.ForgotPasswordToken;
+                emailInfo.EmailType = EmailType.PasswordChanged;
 
                 AccountEmailService svc = new AccountEmailService();
                 await svc.SendEmail(emailInfo);

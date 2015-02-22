@@ -1,6 +1,7 @@
 ﻿using SendGrid;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -104,8 +105,9 @@ namespace InsurCloud.Auth.Api.Services
                 msg.Subject = "Password Reset";
 
                 //Add the HTML and Text bodies
+                var hostname = ConfigurationManager.AppSettings["HostName"];
                 msg.Html = "<h1>Hello!</h1><hr/><p>A forgot password request was recently submitted at InsurCloud.com. Click the link below to reset your password.<br/><br/><h3>If you did not request this password change request, please report this to your administrator.</h3><br/><br/>Thank you!</p>";
-                msg.Html += "<br/><br/><br/><center><a href='http://localhost:59099/reset.html#/reset?token=" + emailInfo.Token + "'>http://localhost:59099/reset.html#/reset?token=" + emailInfo.Token + "</a></center>";
+                msg.Html += "<br/><br/><br/><center><a href='" + hostname + "/#/reset?token=" + emailInfo.Token + "'>" + hostname + "/#/reset?token=" + emailInfo.Token + "</a></center>";
                 return msg;
 
             }
