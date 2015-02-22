@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Authentication.Api")]
+[assembly: AssemblyTitle("InsurCloud.Auth.Api")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Imperial Fire")]
-[assembly: AssemblyProduct("Authentication.Api")]
-[assembly: AssemblyCopyright("Copyright © Imperial Fire 2015")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("InsurCloud.Auth.Api")]
+[assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("5fa229c7-4791-46f3-880f-a2d7832a3600")]
+[assembly: Guid("39ee8a58-6b2e-4ee6-bdb8-9970337b3f04")]
 
 // Version information for an assembly consists of the following four values:
 //

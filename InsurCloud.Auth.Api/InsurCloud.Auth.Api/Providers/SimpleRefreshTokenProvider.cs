@@ -1,6 +1,4 @@
-﻿
-using InsurCloud.Auth.Api.Helpers;
-using InsurCloud.Auth.Api.Models;
+﻿using CoreAuthentication.Helpers;
 using CoreAuthentication.Model;
 using CoreAuthentication.Repository;
 using Microsoft.Owin.Security.Infrastructure;

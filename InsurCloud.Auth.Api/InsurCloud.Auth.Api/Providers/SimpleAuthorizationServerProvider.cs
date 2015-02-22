@@ -1,6 +1,5 @@
-﻿using InsurCloud.Auth.Api.Helpers;
-using InsurCloud.Auth.Api.Models;
-using CoreAuthentication.Enum;
+﻿using CoreAuthentication.Enum;
+using CoreAuthentication.Helpers;
 using CoreAuthentication.Model;
 using CoreAuthentication.Repository;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -91,7 +90,7 @@ namespace InsurCloud.Auth.Api.Providers
             ExtendedIdentityUser user;
             using (AuthRepository _repo = new AuthRepository())
             {
-                 user = await _repo.FindUser(context.UserName, context.Password);
+                user = await _repo.FindUser(context.UserName, context.Password);
 
                 if (user == null)
                 {
@@ -99,20 +98,14 @@ namespace InsurCloud.Auth.Api.Providers
                     return;
                 }
 
-                
-            }
 
-            
+            }
 
             var identity = new ClaimsIdentity(context.Options.AuthenticationType);
             identity.AddClaim(new Claim(ClaimTypes.Name, context.UserName));
             identity.AddClaim(new Claim("sub", context.UserName));
-            foreach (IdentityUserClaim c in user.Claims)
-            {
-                identity.AddClaim(new Claim(c.ClaimType, c.ClaimValue));
-            }
+            identity.AddClaim(new Claim("role", "user"));
             
-
             var props = new AuthenticationProperties(new Dictionary<string, string>
                 {
                     { 

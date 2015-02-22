@@ -6,7 +6,6 @@ using System.Web;
 
 namespace InsurCloud.Auth.Api.Models
 {
-   
     public class UserViewModel
     {
         public string FirstName { get; set; }
@@ -36,5 +35,5 @@ namespace InsurCloud.Auth.Api.Models
             this.HasProfileImage = !string.IsNullOrEmpty(this.ImageURL);
         }
 
-    }
+    }   
 }

@@ -1,5 +1,10 @@
-﻿using InsurCloud.Auth.Api.Models;
+﻿using CoreAuthentication.Helpers;
+using CoreAuthentication.Model;
+using CoreAuthentication.Repository;
+using InsurCloud.Auth.Api.Models;
+using InsurCloud.Auth.Api.Providers;
 using InsurCloud.Auth.Api.Results;
+using InsurCloud.Auth.Api.Services;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -14,13 +19,9 @@ using System.Net.Http;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web.Http;
-using InsurCloud.Auth.Api.Attributes;
-using CoreAuthentication.Repository;
-using CoreAuthentication.Model;
 
 namespace InsurCloud.Auth.Api.Controllers
 {
-    
     [RoutePrefix("api/Account")]
     public class AccountController : ApiController
     {
@@ -62,13 +63,13 @@ namespace InsurCloud.Auth.Api.Controllers
         }
 
         [Authorize]
-        [Route("v1/user", Name= "user")]
+        [Route("v1/user", Name = "user")]
         public async Task<IHttpActionResult> Get()
         {
             try
             {
                 ExtendedIdentityUser user = await _repo.FindCurrentUser(User.Identity.GetUserName());
-                UserViewModel rUser = new UserViewModel(user);                
+                UserViewModel rUser = new UserViewModel(user);
                 return Ok(rUser);
             }
             catch
@@ -149,8 +150,16 @@ namespace InsurCloud.Auth.Api.Controllers
                 return BadRequest(ModelState);
             }
 
-            IdentityResult result = await _repo.RegisterUser(userModel);
-
+            IdentityResult result = null;
+            try
+            {
+                result = await _repo.RegisterUser(userModel);
+            }
+            catch
+            {
+                //Do Nothing
+            }
+            
             IHttpActionResult errorResult = GetErrorResult(result);
 
             if (errorResult != null)
@@ -160,6 +169,135 @@ namespace InsurCloud.Auth.Api.Controllers
 
             return Ok();
         }
+
+        // POST api/Account/Register
+        [AllowAnonymous]
+        //[VersionedRoute("register", 1)]
+        [Route("v1/forgot")]
+        public async Task<IHttpActionResult> ForgotPassword(ForgotModel userModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            ExtendedIdentityUser result = null;
+            try
+            {
+                result = await _repo.FindCurrentUser(userModel.EmailAddress);   
+            }
+            catch
+            {
+                //Do Nothing
+                return BadRequest("Unable to locate user");
+            }
+            if (result == null)
+            {
+                return BadRequest("User not found");
+            }
+
+            RefreshToken token = new RefreshToken();
+            try
+            {
+                token.Id = Guid.NewGuid().ToString();
+                token.Subject = userModel.EmailAddress;
+                token.ClientId = userModel.ClientId;
+                token.IssuedUtc = DateTime.UtcNow;
+                token.ExpiresUtc = DateTime.UtcNow.AddMinutes(20);
+                token.ProtectedTicket = Helper.GetHash(string.Concat(token.Id, "|", token.Subject, "|", token.ClientId, "|", token.IssuedUtc.ToString(), "|", token.ExpiresUtc.ToString()));
+
+                var tokenResult = await _repo.AddRefreshToken(token);
+
+                if (!tokenResult)
+                {
+                    return BadRequest("Unable to create unique email");
+                }
+            }
+            catch
+            {
+                return BadRequest("Unable to create unique email");
+            }
+            
+            SendEmailInfo emailInfo = new SendEmailInfo();
+            emailInfo.EmailAddress = token.Subject;
+            emailInfo.Token = token.Id;
+            emailInfo.EmailType = EmailType.ForgotPasswordToken;
+
+            AccountEmailService svc = new AccountEmailService();
+            if (await svc.SendEmail(emailInfo))
+            {
+                return Ok();
+            }
+            return BadRequest("Unable to send email");
+            
+            
+        }
+
+        // POST api/Account/Register
+        [AllowAnonymous]
+        //[VersionedRoute("register", 1)]
+        [Route("v1/reset")]
+        public async Task<IHttpActionResult> ResetPassword(ResetModel userModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            if (userModel.Password != userModel.ConfirmPassword)
+            {
+                return BadRequest("Password's do not match");
+            }
+
+            RefreshToken token = null;
+            try
+            {
+                token = await _repo.FindRefreshToken(userModel.Token);                
+            }
+            catch
+            {
+                //Do Nothing
+                return BadRequest("Invalid Reset Token");
+            }
+            if (token == null || token.ExpiresUtc < DateTime.UtcNow)
+            {
+                return BadRequest("Invalid Reset Token");
+            }
+
+
+            IdentityResult result = null;
+            try
+            {
+                result = await _repo.ResetPassword(userModel, token);
+            }
+            catch
+            {
+                //Do Nothing
+            }
+
+            if (result.Errors.Count() != 0)
+            {
+                return BadRequest("Unable to reset password");
+            }
+            
+            try
+            {
+                SendEmailInfo emailInfo = new SendEmailInfo();
+                emailInfo.EmailAddress = token.Subject;
+                emailInfo.Token = token.ProtectedTicket;
+                emailInfo.EmailType = EmailType.ForgotPasswordToken;
+
+                AccountEmailService svc = new AccountEmailService();
+                await svc.SendEmail(emailInfo);
+            }
+            catch
+            {
+                //TODO: Add logging/alert
+            }
+
+            return Ok();
+
+        }
+
 
         // POST api/Account/RegisterExternal
         [AllowAnonymous]
@@ -198,7 +336,7 @@ namespace InsurCloud.Auth.Api.Controllers
 
             var info = new ExternalLoginInfo()
             {
-                DefaultUserName = model.UserName,               
+                DefaultUserName = model.UserName,
                 Login = new UserLoginInfo(model.Provider, verifiedAccessToken.user_id)
             };
 

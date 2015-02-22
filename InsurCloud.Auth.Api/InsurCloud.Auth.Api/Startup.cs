@@ -1,8 +1,10 @@
-﻿using InsurCloud.Auth.Api.Providers;
+﻿using InsurCloud.Auth.Api.App_Start;
+using InsurCloud.Auth.Api.Providers;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Facebook;
 using Microsoft.Owin.Security.Google;
 using Microsoft.Owin.Security.OAuth;
+using Microsoft.Owin.Security.Twitter;
 using Owin;
 using System;
 using System.Collections.Generic;
@@ -10,14 +12,15 @@ using System.Linq;
 using System.Web;
 using System.Web.Http;
 
-[assembly: OwinStartup(typeof(InsurCloud.Auth.Api.Startup))]
 namespace InsurCloud.Auth.Api
 {
+    [assembly: OwinStartup(typeof(InsurCloud.Auth.Api.Startup))]
     public class Startup
     {
         public static OAuthBearerAuthenticationOptions OAuthBearerOptions { get; private set; }
         public static GoogleOAuth2AuthenticationOptions googleAuthOptions { get; private set; }
         public static FacebookAuthenticationOptions facebookAuthOptions { get; private set; }
+        public static TwitterAuthenticationOptions twitterAuthOptions { get; private set; }
 
         public void Configuration(IAppBuilder app)
         {
@@ -68,7 +71,7 @@ namespace InsurCloud.Auth.Api
             };
             app.UseFacebookAuthentication(facebookAuthOptions);
 
-            
+
 
         }
 
