@@ -1,10 +1,10 @@
 ﻿using CoreAuthentication.Helpers;
 using CoreAuthentication.Model;
 using CoreAuthentication.Repository;
+using CoreAuthentication.Services;
+using InsurCloud.Auth.Api.Attributes;
 using InsurCloud.Auth.Api.Models;
-using InsurCloud.Auth.Api.Providers;
 using InsurCloud.Auth.Api.Results;
-using InsurCloud.Auth.Api.Services;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -13,6 +13,7 @@ using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -21,7 +22,8 @@ using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace InsurCloud.Auth.Api.Controllers
-{
+{    
+    [RequireHttps]
     [RoutePrefix("api/Account")]
     public class AccountController : ApiController
     {
@@ -37,6 +39,7 @@ namespace InsurCloud.Auth.Api.Controllers
             get { return Request.GetOwinContext().Authentication; }
         }
 
+        
         [Authorize]
         [HttpGet]
         [Route("v1/users", Name = "users")]
@@ -123,12 +126,13 @@ namespace InsurCloud.Auth.Api.Controllers
 
             bool hasRegistered = user != null;
 
-            redirectUri = string.Format("{0}#external_access_token={1}&provider={2}&haslocalaccount={3}&external_user_name={4}",
+            redirectUri = string.Format("{0}#external_access_token={1}&provider={2}&haslocalaccount={3}&external_user_name={4}&external_email=={5}",
                                             redirectUri,
                                             externalLogin.ExternalAccessToken,
                                             externalLogin.LoginProvider,
                                             hasRegistered.ToString(),
-                                            externalLogin.UserName);
+                                            externalLogin.UserName, 
+                                            externalLogin.EmailAddress);
 
             return Redirect(redirectUri);
 
@@ -165,6 +169,21 @@ namespace InsurCloud.Auth.Api.Controllers
             if (errorResult != null)
             {
                 return errorResult;
+            }
+
+            SendEmailInfo emailInfo = new SendEmailInfo();
+            emailInfo.EmailType = EmailType.NewAccountCreated;
+            emailInfo.EmailAddress = userModel.EmailAddress;
+            emailInfo.HostName = ConfigurationManager.AppSettings["HostName"];
+
+            AccountEmailService svc = new AccountEmailService();
+            if (await svc.SendEmail(emailInfo))
+            {
+                return Ok();
+            }
+            else
+            {
+                //TODO: Add Logging of failed events
             }
 
             return Ok();
@@ -222,6 +241,7 @@ namespace InsurCloud.Auth.Api.Controllers
             emailInfo.EmailAddress = token.Subject;
             emailInfo.Token = token.Id;
             emailInfo.EmailType = EmailType.ForgotPasswordToken;
+            emailInfo.HostName = ConfigurationManager.AppSettings["HostName"];
 
             AccountEmailService svc = new AccountEmailService();
             if (await svc.SendEmail(emailInfo))
@@ -310,6 +330,10 @@ namespace InsurCloud.Auth.Api.Controllers
             {
                 return BadRequest(ModelState);
             }
+            if (!model.TermsAccepted)
+            {
+                return BadRequest("You must accept the terms to register.");
+            }
 
             var verifiedAccessToken = await VerifyExternalAccessToken(model.Provider, model.ExternalAccessToken);
             if (verifiedAccessToken == null)
@@ -326,13 +350,21 @@ namespace InsurCloud.Auth.Api.Controllers
                 return BadRequest("External user is already registered");
             }
 
-            user = new ExtendedIdentityUser() { UserName = model.UserName };
-
-            IdentityResult result = await _repo.CreateAsync(user);
-            if (!result.Succeeded)
+            IdentityResult result;
+            user = new ExtendedIdentityUser() { UserName = model.UserName, Email = model.UserName, FirstName = model.FirstName, LastName = model.LastName };
+            try
             {
-                return GetErrorResult(result);
+                 result = await _repo.CreateAsync(user);
+                if (!result.Succeeded)
+                {
+                    return GetErrorResult(result);
+                }
             }
+            catch
+            {
+                return InternalServerError();
+            }
+            
 
             var info = new ExternalLoginInfo()
             {
@@ -494,7 +526,7 @@ namespace InsurCloud.Auth.Api.Controllers
                 //You can get it from here: https://developers.facebook.com/tools/accesstoken/
                 //More about debug_tokn here: http://stackoverflow.com/questions/16641083/how-does-one-get-the-app-access-token-for-debug-token-inspection-on-facebook
 
-                var appToken = "xxxxx";
+                var appToken = "1638934106334873|0ia8RyFtsTIFwI09kLdlCCzebTg";
                 verifyTokenEndPoint = string.Format("https://graph.facebook.com/debug_token?input_token={0}&access_token={1}", accessToken, appToken);
             }
             else if (provider == "Google")
@@ -563,8 +595,17 @@ namespace InsurCloud.Auth.Api.Controllers
 
             var ticket = new AuthenticationTicket(identity, props);
 
-            var accessToken = Startup.OAuthBearerOptions.AccessTokenFormat.Protect(ticket);
+            string accessToken = "";
+            try
+            {
+                accessToken = Startup.OAuthBearerOptions.AccessTokenFormat.Protect(ticket);
+            }
+            catch
+            {
+                //TODO: log failures
+            }
 
+            
             JObject tokenResponse = new JObject(
                                         new JProperty("userName", userName),
                                         new JProperty("access_token", accessToken),
@@ -577,41 +618,7 @@ namespace InsurCloud.Auth.Api.Controllers
             return tokenResponse;
         }
 
-        private class ExternalLoginData
-        {
-            public string LoginProvider { get; set; }
-            public string ProviderKey { get; set; }
-            public string UserName { get; set; }
-            public string ExternalAccessToken { get; set; }
-
-            public static ExternalLoginData FromIdentity(ClaimsIdentity identity)
-            {
-                if (identity == null)
-                {
-                    return null;
-                }
-
-                Claim providerKeyClaim = identity.FindFirst(ClaimTypes.NameIdentifier);
-
-                if (providerKeyClaim == null || String.IsNullOrEmpty(providerKeyClaim.Issuer) || String.IsNullOrEmpty(providerKeyClaim.Value))
-                {
-                    return null;
-                }
-
-                if (providerKeyClaim.Issuer == ClaimsIdentity.DefaultIssuer)
-                {
-                    return null;
-                }
-
-                return new ExternalLoginData
-                {
-                    LoginProvider = providerKeyClaim.Issuer,
-                    ProviderKey = providerKeyClaim.Value,
-                    UserName = identity.FindFirstValue(ClaimTypes.Name),
-                    ExternalAccessToken = identity.FindFirstValue("ExternalAccessToken"),
-                };
-            }
-        }
+        
 
     }
 }

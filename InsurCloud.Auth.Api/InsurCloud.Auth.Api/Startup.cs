@@ -1,5 +1,5 @@
-﻿using InsurCloud.Auth.Api.App_Start;
-using InsurCloud.Auth.Api.Providers;
+﻿using CoreAuthentication.Providers;
+using InsurCloud.Auth.Api.App_Start;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Facebook;
 using Microsoft.Owin.Security.Google;
@@ -40,6 +40,7 @@ namespace InsurCloud.Auth.Api
             app.UseExternalSignInCookie(Microsoft.AspNet.Identity.DefaultAuthenticationTypes.ExternalCookie);
             OAuthBearerOptions = new OAuthBearerAuthenticationOptions();
 
+
             OAuthAuthorizationServerOptions OAuthServerOptions = new OAuthAuthorizationServerOptions()
             {
                 AllowInsecureHttp = true,
@@ -51,13 +52,13 @@ namespace InsurCloud.Auth.Api
 
             // Token Generation
             app.UseOAuthAuthorizationServer(OAuthServerOptions);
-            app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
+            app.UseOAuthBearerAuthentication(OAuthBearerOptions);
 
             //Configure Google External Login
             googleAuthOptions = new GoogleOAuth2AuthenticationOptions()
             {
-                ClientId = "xxx",
-                ClientSecret = "xxx",
+                ClientId = "416809628888-petkvp0rj5g9j3hvafjb44m3edbk5gho.apps.googleusercontent.com",
+                ClientSecret = "xjsAlpMl-MLQfuqDSYGPtDo6",
                 Provider = new GoogleAuthProvider()
             };
             app.UseGoogleAuthentication(googleAuthOptions);
@@ -65,8 +66,8 @@ namespace InsurCloud.Auth.Api
             //Configure Facebook External Login
             facebookAuthOptions = new FacebookAuthenticationOptions()
             {
-                AppId = "xxx",
-                AppSecret = "xxx",
+                AppId = "1638934106334873",
+                AppSecret = "8728908bb5e2f08e2e9ede50f5876f96",
                 Provider = new FacebookAuthProvider()
             };
             app.UseFacebookAuthentication(facebookAuthOptions);
