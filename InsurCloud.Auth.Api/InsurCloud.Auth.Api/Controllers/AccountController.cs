@@ -2,7 +2,7 @@
 using CoreAuthentication.Model;
 using CoreAuthentication.Repository;
 using CoreAuthentication.Services;
-using InsurCloud.Auth.Api.Attributes;
+using CoreCommon.Attributes;
 using InsurCloud.Auth.Api.Models;
 using InsurCloud.Auth.Api.Results;
 using Microsoft.AspNet.Identity;
