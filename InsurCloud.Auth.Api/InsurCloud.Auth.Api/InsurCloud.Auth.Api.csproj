@@ -158,7 +158,11 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AgencyController.cs" />
+    <Compile Include="Controllers\DiaryController.cs" />
+    <Compile Include="Controllers\PolicyController.cs" />
     <Compile Include="Models\AgencyUserView.cs" />
+    <Compile Include="Models\DiaryNotifcationView.cs" />
+    <Compile Include="Models\PolicyView.cs" />
     <Compile Include="Models\UserViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
