@@ -5,24 +5,42 @@ using System.Web;
 
 namespace InsurCloud.Auth.Api.Models
 {
-    public class PolicyView
+    public interface IPolicy
     {
-        public PolicyView()
-        {
+
+    }
+
+    public class Policy : IPolicy
+    {
+        public Policy(){
             HouseholdMembers = new List<HouseholdMember>();
             CoveredUnits = new List<ICoveredUnit>();
             Company = new CompanyView();
             PrimaryNamedInsured = new HouseholdMember();
             Producer = new ProducerView();
         }
+        
         public string PolicyUniqueId { get; set; }
         public string PolicyNumber { get; set; }
         public DateTime EffectiveDate { get; set; }
+        public string EffectiveDateFormatted
+        {
+            get { return EffectiveDate.ToString("MM/dd/yyyy"); }
+        }
         public DateTime ExpirationDate { get; set; }
+        public string ExpirationDateFormatted
+        {
+            get { return ExpirationDate.ToString("MM/dd/yyyy"); }
+        }
+        
+        public DateTime RateDate { get; set; }
+        public string RateDateFormatted
+        {
+            get { return RateDate.ToString("MM/dd/yyyy"); }
+        }
         public string PolicyTermType { get; set; }
         public string PayPlan { get; set; }
-        public CompanyView Company { get; set; }
-        public string PolicyStatus { get; set; }
+        public CompanyView Company { get; set; }        
         public HouseholdMember PrimaryNamedInsured { get; set; }
         public HouseholdMember JointNamedInsured { get; set; }
         public List<HouseholdMember> HouseholdMembers { get; set; }
@@ -30,12 +48,38 @@ namespace InsurCloud.Auth.Api.Models
         public ProducerView Producer { get; set; }
         public List<Lienholder> AdditionalInsureds { get; set; }
     }
+
+
+    public class QuoteView : Policy
+    {
+        public string QuoteUniqueId { get; set; }
+        public string QuoteStatus { get; set; }
+        public DateTime LastRateDate { get; set; }
+    }
+
+    public class PolicyView : Policy
+    {
+        public DateTime CancellationDate { get; set; }
+        public string CancellationDateFormatted
+        {
+            get { return CancellationDate.ToString("MM/dd/yyyy"); }
+        }
+        public string PolicyStatus { get; set; }
+    }
     public class PolicyNote
     {
         public string UniqueID { get; set; }
         public int TransactionNumber { get; set; }
         public DateTime EffectiveDate { get; set; }
+        public string EffectiveDateFormatted
+        {
+            get { return EffectiveDate.ToString("MM/dd/yyyy"); }
+        }
         public DateTime EntryDate { get; set; }
+        public string EntryDateFormatted
+        {
+            get { return EntryDate.ToString("MM/dd/yyyy"); }
+        }
         public string NoteText { get; set; }
         public string NoteType { get; set; }
         public string SourceCode { get; set; }
@@ -74,6 +118,7 @@ namespace InsurCloud.Auth.Api.Models
         public string Program { get; set; }
         public string ProductLine { get; set; }
         public string Product { get; set; }
+        public string StateAbbreviation { get; set; }
         public string CompanyName { get; set; }
         public string ImageURL { get; set; }
         public List<ContactView> ContactInfo { get; set; }
@@ -110,7 +155,11 @@ namespace InsurCloud.Auth.Api.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public ContactView ContactInfo { get; set; }
-        public DateTime DateOfBirth { get; set; }
+        public DateTime BirthDate { get; set; }
+        public string BirthDateFormatted
+        {
+            get { return BirthDate.ToString("MM/dd/yyyy"); }
+        }
         public string RelationToInsured { get; set; }
         public string MaritalStatus { get; set; }
         public string Gender { get; set; }
@@ -124,6 +173,10 @@ namespace InsurCloud.Auth.Api.Models
         public int Points { get; set; }
         public string ViolationDescription { get; set; }
         public DateTime ViolationDate { get; set; }
+        public string ViolationDateFormatted
+        {
+            get { return ViolationDate.ToString("MM/dd/yyyy"); }
+        }
     }
     public interface ICoveredUnit {
         List<Coverage> Coverages();
@@ -197,8 +250,16 @@ namespace InsurCloud.Auth.Api.Models
         }
         public double RemainingBalance { get; set; }
         public DateTime LastPaymentReceivedDate { get; set; }
+        public string LastPaymentReceivedDateFormatted
+        {
+            get { return LastPaymentReceivedDate.ToString("MM/dd/yyyy"); }
+        }
         public double LastPaymentReceivedAmount { get; set; }
         public DateTime CurrentDueDate { get; set; }
+        public string CurrentDueDateFormatted
+        {
+            get { return CurrentDueDate.ToString("MM/dd/yyyy"); }
+        }
         public double CurrentDueAmount { get; set; }
         public double PastDueAmount { get; set; }
         public int DaysPastDue { get; set; }
@@ -210,6 +271,10 @@ namespace InsurCloud.Auth.Api.Models
         public string PaymentUniqueID { get; set; }
         public int IndexNumber { get; set; }
         public DateTime TransactionDate { get; set; }
+        public string TransactionDateFormatted
+        {
+            get { return TransactionDate.ToString("MM/dd/yyyy"); }
+        }
         public string PaymentType { get; set; }
         public double Amount { get; set; }
     }
@@ -218,6 +283,14 @@ namespace InsurCloud.Auth.Api.Models
         public string DocumentUniqueID { get; set; }
         public string DocumentType { get; set; }
         public DateTime CreatedDate { get; set; }
+        public string CreatedDateFormatted
+        {
+            get { return CreatedDate.ToString("MM/dd/yyyy"); }
+        }
         public DateTime PrintedDate { get; set; }
+        public string PrintedDateFormatted
+        {
+            get { return PrintedDate.ToString("MM/dd/yyyy"); }
+        }
     }
 }
