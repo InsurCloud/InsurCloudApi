@@ -118,14 +118,18 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controller\MakeController.cs" />
-    <Compile Include="Model\VehicleE.cs" />
-    <Compile Include="Model\VehicleEF.cs" />
+    <Compile Include="Model\VehicleOption.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Attribute\" />
-    <Folder Include="Context\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EdmundsVehicles\EdmundsVehicles.csproj">
+      <Project>{f6baaf56-74d2-476a-9207-77becebe1e27}</Project>
+      <Name>EdmundsVehicles</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

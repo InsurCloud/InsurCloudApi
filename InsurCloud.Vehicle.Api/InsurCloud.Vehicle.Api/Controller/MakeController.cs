@@ -1,5 +1,4 @@
-﻿using InsurCloud.Vehicle.Api.Model.EdmundsMake;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +7,9 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Threading;
+using InsurCloud.Vehicle.Api.Model;
+using EdmundsVehicles.Repository;
 
 namespace InsurCloud.Vehicle.Api.Controller
 {
@@ -15,7 +17,7 @@ namespace InsurCloud.Vehicle.Api.Controller
     public class MakeController : ApiController
     {
 
-        public List<ExtendedModelStyle> styles = new List<ExtendedModelStyle>();
+        private static List<VehicleOption> items = new List<VehicleOption>();
 
         [AllowAnonymous]
         [HttpGet]
@@ -24,9 +26,11 @@ namespace InsurCloud.Vehicle.Api.Controller
         {
             try
             {
-                EdmundMakes makes = await GetMakes();
-                makes = await GetModelStyles(makes);
-                return Ok(makes);
+                if (items.Count == 0)
+                {
+                    LoadItems();
+                }
+                return Ok(items);
 
             }
             catch
@@ -36,97 +40,18 @@ namespace InsurCloud.Vehicle.Api.Controller
 
         }
 
-        private async Task<EdmundMakes> GetMakes()
+        private void LoadItems()
         {
-            using (var client = new HttpClient())
+            var repo = new EdmundsVehicles.Context.VehicleContext();
+            foreach (EdmundsVehicles.Model.Vehicle veh in repo.Vehicles)
             {
-                client.BaseAddress = new Uri("https://insurcloudauthapi.azurewebsites.net/");
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                // HTTP GET
-                HttpResponseMessage response = await client.GetAsync("https://api.edmunds.com/api/vehicle/v2/makes?view=basic&fmt=json&api_key=b8mw4mqz8sskr372pu28gh9k");
-                if (response.IsSuccessStatusCode)
-                {
-                    return await response.Content.ReadAsAsync<EdmundMakes>();
-                }
+                VehicleOption v = new VehicleOption();
+                v.id = veh.modelStyleId;
+                v.value = String.Concat(veh.modelYear.ToString(), " ", veh.makeName, " ", veh.modelName, " ", veh.modelStyleName);
+                items.Add(v);
             }
-            return null;
-        }
+            
 
-        private async Task<EdmundMakes> GetModelStyles(EdmundMakes makes)
-        {
-
-            foreach (Make m in makes.makes)
-            {
-                string urlStub = "https://api.edmunds.com/api/vehicle/v2/" + m.niceName + "/";
-                for (int i = 0; i < m.models.Count; i++)
-                {
-                    string url = urlStub + m.models[i].niceName + "?fmt=json&api_key=b8mw4mqz8sskr372pu28gh9k";
-                    try
-                    {
-                        m.models[i] = await GetModelStyle(m.models[i], url);
-                    }
-                    catch
-                    {
-                        return null;
-                    }
-                    
-                }  
-            }
-
-            return null;
-
-        }
-
-        private async Task<Model.EdmundsMake.Model> GetModelStyle(Model.EdmundsMake.Model t, string url)
-        {
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri("https://insurcloudauthapi.azurewebsites.net/");
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                // HTTP GET
-                HttpResponseMessage response = await client.GetAsync(url);
-                if (response.IsSuccessStatusCode)
-                {
-                    return await response.Content.ReadAsAsync<Model.EdmundsMake.Model>();
-                    //foreach (VehicleModelYear y in t.years)
-                    //{
-                    //    for(int a = 0; a < y.styles.Count; a++)
-                    //    {
-                    //        ExtendedModelStyle newStyle = await GetStyleDetails(y.styles[a]);
-                    //        styles.Add(newStyle);
-                    //    }
-                    //}
-                }
-            }
-            return null;
-        }
-
-        public async Task<ExtendedModelStyle> GetStyleDetails(ModelStyle s)
-        {
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri("https://insurcloudauthapi.azurewebsites.net/");
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                string url = "https://api.edmunds.com/api/vehicle/v2/styles/" + s.id + "?view=full&fmt=json&api_key=b8mw4mqz8sskr372pu28gh9k";
-                // HTTP GET
-                HttpResponseMessage response = await client.GetAsync(url);
-                if (response.IsSuccessStatusCode)
-                {
-                    //JObject test = await response.Content.ReadAsAsync<JObject>();
-                    //ExtendedModelStyle result = await response.Content.ReadAsAsync<ExtendedModelStyle>();
-                    //ExtendedModelStyle result = new ExtendedModelStyle();
-                    //return result;
-                    return await response.Content.ReadAsAsync<ExtendedModelStyle>();
-                    
-                }
-            }
-            return null;
         }
     }
 }

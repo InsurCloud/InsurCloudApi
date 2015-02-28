@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace InsurCloud.Vehicle.Api.Model.EdmundsMake
+namespace EdmundsVehicles.Model
 {
     public class EdmundMakes
     {
@@ -21,6 +20,13 @@ namespace InsurCloud.Vehicle.Api.Model.EdmundsMake
         public virtual List<Model> models { get; set; }
     }
 
+    public class VehicleMake
+    {
+        public string id { get; set; }
+        public string name { get; set; }
+        public string niceName { get; set; }
+    }
+
     public class Model
     {
         public string id { get; set; }
@@ -29,11 +35,18 @@ namespace InsurCloud.Vehicle.Api.Model.EdmundsMake
         public List<VehicleModelYear> years { get; set; }
     }
 
+    public class VehicleModel
+    {
+        public string id { get; set; }
+        public string name { get; set; }
+        public string niceName { get; set; }
+    }
+
     public class VehicleModelYear
     {
         public string id { get; set; }
         public int year { get; set; }
-        public List<ModelStyle> styles { get; set; }        
+        public List<ModelStyle> styles { get; set; }
     }
 
     public class ModelStyle
@@ -41,7 +54,7 @@ namespace InsurCloud.Vehicle.Api.Model.EdmundsMake
         public string id { get; set; }
         public string name { get; set; }
         public string trim { get; set; }
-        public virtual SubModel submodel {get; set;}
+        public virtual SubModel submodel { get; set; }
     }
 
     public class SubModel
@@ -53,7 +66,6 @@ namespace InsurCloud.Vehicle.Api.Model.EdmundsMake
         public string modelName { get; set; }
         public string niceName { get; set; }
     }
-
 
     public class ExtendedModelStyle
     {
@@ -94,7 +106,7 @@ namespace InsurCloud.Vehicle.Api.Model.EdmundsMake
         public float usedTmvRetail { get; set; }
         public float usedPrivateParty { get; set; }
         public float usedTradeIn { get; set; }
-        public float estimateTmv { get; set; }        
+        public float estimateTmv { get; set; }
     }
 
     public class VehicleEngine
@@ -116,7 +128,8 @@ namespace InsurCloud.Vehicle.Api.Model.EdmundsMake
         public string compressorType { get; set; }
     }
 
-    public class VehicleTransmission {
+    public class VehicleTransmission
+    {
         public string id { get; set; }
         public string name { get; set; }
         public string automaticType { get; set; }
@@ -129,6 +142,7 @@ namespace InsurCloud.Vehicle.Api.Model.EdmundsMake
         public string category { get; set; }
         public List<Option> options { get; set; }
     }
+
     public class ColorOptions
     {
         public string category { get; set; }
@@ -142,16 +156,18 @@ namespace InsurCloud.Vehicle.Api.Model.EdmundsMake
         public string equipmentType { get; set; }
         public string manufactureOptionName { get; set; }
         public string manufactureOptionCode { get; set; }
-        public string category { get; set; }        
+        public string description { get; set; }
+        public string category { get; set; }
     }
 
     public class ColorOption : Option
     {
         public VehicleOptionColorChips colorChips { get; set; }
-        public List<FabricType> fabricTypes { get; set; }        
+        public List<FabricType> fabricTypes { get; set; }
     }
 
-    public class FabricType {
+    public class FabricType
+    {
         public string name { get; set; }
         public string value { get; set; }
     }
@@ -159,19 +175,21 @@ namespace InsurCloud.Vehicle.Api.Model.EdmundsMake
     public class VehicleOptionColorChips
     {
         public ColorChipPrimary primary { get; set; }
-        public ColorChipPrimary secondary { get; set; }   
+        public ColorChipPrimary secondary { get; set; }
     }
 
-    public class ColorChipPrimary{
+    public class ColorChipPrimary
+    {
         public string r { get; set; }
         public string g { get; set; }
         public string b { get; set; }
         public string hex { get; set; }
     }
 
-    public class ModelYear {
-        public string id {get; set;}
-        public int year {get; set;}
+    public class ModelYear
+    {
+        public string id { get; set; }
+        public int year { get; set; }
     }
 
     public class VehiclePhoto
