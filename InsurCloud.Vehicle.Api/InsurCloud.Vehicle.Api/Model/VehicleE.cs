@@ -104,7 +104,7 @@ namespace InsurCloud.Vehicle.Api.Model.EdmundsMake
         public float compressionRatio { get; set; }
         public int cylinder { get; set; }
         public float size { get; set; }
-        public int displacement { get; set; }
+        public float displacement { get; set; }
         public string configuration { get; set; }
         public string fuelType { get; set; }
         public int horsepower { get; set; }
@@ -121,7 +121,7 @@ namespace InsurCloud.Vehicle.Api.Model.EdmundsMake
         public string name { get; set; }
         public string automaticType { get; set; }
         public string transmissionType { get; set; }
-        public int numberOfSpeeds { get; set; }
+        public string numberOfSpeeds { get; set; }
     }
 
     public class Options
@@ -147,13 +147,19 @@ namespace InsurCloud.Vehicle.Api.Model.EdmundsMake
 
     public class ColorOption : Option
     {
-        public List<VehicleOptionColorChips> colorChips { get; set; }
-        public string fabricType { get; set; }        
+        public VehicleOptionColorChips colorChips { get; set; }
+        public List<FabricType> fabricTypes { get; set; }        
+    }
+
+    public class FabricType {
+        public string name { get; set; }
+        public string value { get; set; }
     }
 
     public class VehicleOptionColorChips
     {
-        public ColorChipPrimary primary { get; set; }   
+        public ColorChipPrimary primary { get; set; }
+        public ColorChipPrimary secondary { get; set; }   
     }
 
     public class ColorChipPrimary{

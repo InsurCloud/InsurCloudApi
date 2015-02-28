@@ -1,4 +1,5 @@
 ﻿using InsurCloud.Vehicle.Api.Model.EdmundsMake;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -90,15 +91,15 @@ namespace InsurCloud.Vehicle.Api.Controller
                 HttpResponseMessage response = await client.GetAsync(url);
                 if (response.IsSuccessStatusCode)
                 {
-                    t = await response.Content.ReadAsAsync<Model.EdmundsMake.Model>();
-                    foreach (VehicleModelYear y in t.years)
-                    {
-                        for(int a = 0; a < y.styles.Count; a++)
-                        {
-                            ExtendedModelStyle newStyle = await GetStyleDetails(y.styles[a]);
-                            styles.Add(newStyle);
-                        }
-                    }
+                    return await response.Content.ReadAsAsync<Model.EdmundsMake.Model>();
+                    //foreach (VehicleModelYear y in t.years)
+                    //{
+                    //    for(int a = 0; a < y.styles.Count; a++)
+                    //    {
+                    //        ExtendedModelStyle newStyle = await GetStyleDetails(y.styles[a]);
+                    //        styles.Add(newStyle);
+                    //    }
+                    //}
                 }
             }
             return null;
@@ -117,8 +118,12 @@ namespace InsurCloud.Vehicle.Api.Controller
                 HttpResponseMessage response = await client.GetAsync(url);
                 if (response.IsSuccessStatusCode)
                 {
-                    ExtendedModelStyle result = await response.Content.ReadAsAsync<ExtendedModelStyle>();
-                    return result;
+                    //JObject test = await response.Content.ReadAsAsync<JObject>();
+                    //ExtendedModelStyle result = await response.Content.ReadAsAsync<ExtendedModelStyle>();
+                    //ExtendedModelStyle result = new ExtendedModelStyle();
+                    //return result;
+                    return await response.Content.ReadAsAsync<ExtendedModelStyle>();
+                    
                 }
             }
             return null;
