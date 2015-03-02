@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace InsurCloud.Vehicle.Api.Model
+namespace InsurCloud.Auth.Api.Models
 {
     public class VehicleOption
     {

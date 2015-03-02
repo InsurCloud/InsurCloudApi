@@ -159,13 +159,16 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AgencyController.cs" />
     <Compile Include="Controllers\DiaryController.cs" />
+    <Compile Include="Controllers\EdmundsController.cs" />
     <Compile Include="Controllers\PolicyController.cs" />
     <Compile Include="Controllers\QuoteController.cs" />
     <Compile Include="Models\AgencyUserView.cs" />
     <Compile Include="Models\DiaryNotifcationView.cs" />
     <Compile Include="Models\PolicySearchResult.cs" />
     <Compile Include="Models\PolicyView.cs" />
+    <Compile Include="Models\QuoteView.cs" />
     <Compile Include="Models\UserViewModels.cs" />
+    <Compile Include="Models\VehicleOption.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
@@ -178,6 +181,10 @@
     <ProjectReference Include="..\..\..\CoreLibs\CoreAuthentication\CoreAuthentication\CoreAuthentication.csproj">
       <Project>{0665fef6-1df3-45a3-a292-e7d217b3926f}</Project>
       <Name>CoreAuthentication</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\CoreLibs\InsurCloud.Edmunds\EdmundsVehicles\EdmundsVehicles.csproj">
+      <Project>{f6baaf56-74d2-476a-9207-77becebe1e27}</Project>
+      <Name>EdmundsVehicles</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -124,5 +124,50 @@ namespace InsurCloud.Auth.Api.Controllers
                 return InternalServerError();
             }
         }
+
+        [Authorize]
+        [HttpPost]
+        [Route("v1/quote", Name = "saveQuote")]
+        public async Task<IHttpActionResult> SaveQuote(QuoteEntryView quote)
+        {
+            List<BasicRate> rates = new List<BasicRate>();
+            BasicRate rate = new BasicRate();
+            rate.Program = new ProgramInfo();
+            rate.Program.CarrierName = "Renaissance";
+            rate.Program.CompanyName = "Renaissance";
+            rate.Program.ProductLine = "Personal";
+            rate.Program.Product = "Private Passenger";
+            rate.Program.Program = "Classic";
+            rate.Program.TermMonths = 6;
+            rate.Program.ProgramId = 242;
+            rate.Program.StateAbbreviation = "TX";
+            rate.Premium = 751.29F;
+            rate.Installments = new List<Installment>();
+            for (int a = 0; a < rate.Program.TermMonths; a++)
+            {
+                Installment i = new Installment();
+                i.InstallmentNumber = a + 1;
+                if (i.InstallmentNumber == 1)
+                {
+                    i.DueDate = DateTime.Now;
+                    i.InstallmentFee = 0F;
+                }
+                else
+                {
+                    i.DueDate = DateTime.Now.AddDays(35);
+                    if (i.InstallmentNumber > 1)
+                    {
+                        i.DueDate = i.DueDate.AddMonths(i.InstallmentNumber - 1);
+                    }
+                    i.InstallmentFee = 5.50F;
+                }
+                rate.Installments.Add(i);
+            }
+            rate.Fees = 50.0F;
+            rate.CoverageLevel = "Minimum";
+                        
+            return Ok(rate);
+        }
+    
     }
 }
