@@ -12,6 +12,30 @@ namespace InsurCloud.Auth.Api.Models
         public DateTime EffectiveDate { get; set; }
         public DateTime RateDate { get; set; }
         public List<QuoteVehicle> Vehicles {get; set;}
+        public QuotePolicyLevelCoverage Coverages { get; set; }
+    }
+
+    public class QuotePolicyLevelCoverage
+    {
+        public string Id { get; set; }
+        public string DisplayName { get; set; }
+        public bool Selected { get; set; }
+        public List<QuoteCoverageGrouping> policyCoverages { get; set; }
+    }
+    public class QuoteCoverageGrouping
+    {
+        public QuoteCoverageGroupingItem coverageGrouping { get; set; }
+    }
+    public class QuoteCoverageGroupingItem
+    {
+        public string Name { get; set; }
+        public List<QuoteCoverage> coverages { get; set; }
+    }
+    public class QuoteCoverage
+    {
+        public string CoverageCode { get; set; }
+        public string CoverageGroup { get; set; }
+        public string CoverageLimit { get; set; }
     }
 
     public class QuoteVehicle
@@ -25,6 +49,7 @@ namespace InsurCloud.Auth.Api.Models
         public int CommuteMiles { get; set; }
         public int CommuteDaysPerWeek { get; set; }
         public int MilesDriverPerYear { get; set; }
+        public List<QuoteCoverage> Coverages { get; set; }
     }
 
     public class QuoteDriver

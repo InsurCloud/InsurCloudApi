@@ -165,8 +165,8 @@ namespace InsurCloud.Auth.Api.Controllers
             }
             rate.Fees = 50.0F;
             rate.CoverageLevel = "Minimum";
-                        
-            return Ok(rate);
+            rates.Add(rate);                        
+            return Ok(rates);
         }
     
     }
