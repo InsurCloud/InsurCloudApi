@@ -1,4 +1,5 @@
 ﻿using CoreCommon.Attributes;
+using CoreQuote.Model;
 using InsurCloud.Auth.Api.Models;
 using Microsoft.Owin.Security;
 using System;
@@ -15,7 +16,7 @@ namespace InsurCloud.Auth.Api.Controllers
     [RoutePrefix("api/Quote")]
     public class QuoteController : ApiController
     {
-        public static List<QuoteEntryView> quotes = new List<QuoteEntryView>();
+        public static List<Quote> quotes = new List<Quote>();
 
         private IAuthenticationManager Authentication
         {
@@ -30,7 +31,7 @@ namespace InsurCloud.Auth.Api.Controllers
             try
             {
 
-                QuoteEntryView quote = quotes.Where(c => c.QuoteUniqueId == id).FirstOrDefault();
+                Quote quote = quotes.Where(c => c.QuoteUniqueId == id).FirstOrDefault();
                 if (quote == null)
                 {
                     return NotFound();
@@ -64,11 +65,11 @@ namespace InsurCloud.Auth.Api.Controllers
             }
         }
 
-        private List<QuoteSearchResult> getSearchResults(List<QuoteEntryView> items)
+        private List<QuoteSearchResult> getSearchResults(List<Quote> items)
         {
             List<QuoteSearchResult> result = new List<QuoteSearchResult>();
 
-            foreach (QuoteEntryView view in quotes)
+            foreach (Quote view in quotes)
             {
                 QuoteSearchResult n = new QuoteSearchResult();
                 n.QuoteNumber = view.QuoteUniqueId;
@@ -114,14 +115,14 @@ namespace InsurCloud.Auth.Api.Controllers
         {
             try
             {
-                QuoteEntryView quoteView = new QuoteEntryView();
+                Quote quoteView = new Quote();
                 quoteView.QuoteUniqueId = Guid.NewGuid().ToString();
                 quoteView.QuoteStatus = "Lead";
                 quoteView.EffectiveDate = DateTime.Now;
                 quoteView.EffectiveDateFormatted = quoteView.EffectiveDate.ToString("MM/dd/yyyy");
                 quoteView.RateDate = DateTime.Now;
                 quoteView.RateDateFormatted = quoteView.RateDate.ToString("MM/dd/yyyy");
-                quoteView.Insured = new QuoteInsured();
+                quoteView.Insured = new Insured();
                 quoteView.Insured.FirstName = request.Insured.FirstName;
                 quoteView.Insured.LastName = request.Insured.LastName;
                 quoteView.Insured.PhoneNumber = request.Insured.PhoneNumber;
@@ -135,20 +136,20 @@ namespace InsurCloud.Auth.Api.Controllers
                 {
                     quoteView.Insured.MaritalStatus = "M";
                 }
-                quoteView.Vehicles = new List<QuoteVehicle>();
+                quoteView.Vehicles = new List<Vehicle>();
                 for (int i = 0; i < request.NumberOfVehicles; i++)
                 {
-                    QuoteVehicle veh = new QuoteVehicle();
+                    Vehicle veh = new Vehicle();
                     veh.Number = 1;
                     veh.CommuteMiles = 10;
                     veh.CommuteDaysPerWeek = 5;
                     veh.GaragingZipCode = request.PostalCode;
                     veh.PhotoSrc = "img/IC_finalBUG.png";
-                    veh.Drivers = new List<QuoteDriver>();
+                    veh.Drivers = new List<Driver>();
                     quoteView.Vehicles.Add(veh);
                     if (i == 0)
                     {
-                        QuoteDriver drv = new QuoteDriver();
+                        Driver drv = new Driver();
                         drv.FirstName = request.Insured.FirstName;
                         drv.LastName = request.Insured.LastName;
                         drv.EmailAddress = request.Insured.EmailAddress;
@@ -173,7 +174,7 @@ namespace InsurCloud.Auth.Api.Controllers
                             drv.MaritalStatus = "M";
                         }
                         veh.Drivers.Add(drv);
-                        quoteView.Drivers = new List<QuoteDriver>();
+                        quoteView.Drivers = new List<Driver>();
                         quoteView.Drivers.Add(drv);
                     }
                 }
@@ -194,19 +195,19 @@ namespace InsurCloud.Auth.Api.Controllers
         [Authorize]
         [HttpPost]
         [Route("v1/quote", Name = "saveQuote")]
-        public async Task<IHttpActionResult> SaveQuote(QuoteEntryView quote)
+        public async Task<IHttpActionResult> SaveQuote(Quote quote)
         {
             quote.QuoteStatus = "Quote";
 
-            foreach (QuoteDriver drv in quote.Drivers)
+            foreach (Driver drv in quote.Drivers)
             {
                 DateTime dt;
                 DateTime.TryParse(drv.BirthDateFormatted, out dt);
                 drv.BirthDate = dt;       
             }
-            foreach (QuoteVehicle veh in quote.Vehicles)
+            foreach (Vehicle veh in quote.Vehicles)
             {
-                foreach (QuoteDriver drv in veh.Drivers)
+                foreach (Driver drv in veh.Drivers)
                 {
                     DateTime dt;
                     DateTime.TryParse(drv.BirthDateFormatted, out dt);

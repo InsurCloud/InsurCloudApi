@@ -21,15 +21,5 @@ namespace InsurCloud.Auth.Api.Models
         public bool IsPastDue { get; set; }
     }
 
-    public class QuoteSearchResult
-    {
-        public string QuoteNumber { get; set; }
-        public string QuoteStatus { get; set; }
-        public string PolicyNumber { get; set; }
-        public DateTime LastRateDate { get; set; }
-        public string LastRateDateFormatted { get; set; }
-        public string InsuredFullName { get; set; }
-        public string InsuredPhoneNumber { get; set; }
-        public double RateAmount { get; set; }
-    }
+    
 }

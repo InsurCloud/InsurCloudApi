@@ -1,4 +1,5 @@
 ﻿using CoreCommon.Attributes;
+using CoreQuote.Model;
 using EdmundsVehicles.Model;
 using InsurCloud.Auth.Api.Models;
 using Microsoft.Owin.Security;
@@ -18,7 +19,7 @@ namespace InsurCloud.Auth.Api.Controllers
     public class EdmundsController : ApiController
     {
 
-        private static List<VehicleOption> items = new List<VehicleOption>();
+        private static List<VehicleItem> items = new List<VehicleItem>();
 
         private IAuthenticationManager Authentication
         {
@@ -37,7 +38,7 @@ namespace InsurCloud.Auth.Api.Controllers
                     LoadItems();
                 }
 
-                List<VehicleOption> result = items.OrderBy(u => u.value).Where(c => c.value.StartsWith(query)).Take(15).ToList();
+                List<VehicleItem> result = items.OrderBy(u => u.Value).Where(c => c.Value.StartsWith(query)).Take(15).ToList();
 
                 return Ok(result);
 
@@ -54,9 +55,9 @@ namespace InsurCloud.Auth.Api.Controllers
             var repo = new EdmundsVehicles.Context.VehicleContext();
             foreach (EdmundsVehicles.Model.Vehicle veh in repo.Vehicles)
             {
-                VehicleOption v = new VehicleOption();
-                v.id = veh.modelStyleId;
-                v.value = String.Concat(veh.modelYear.ToString(), " ", veh.makeName, " ", veh.modelName, " ", veh.modelStyleName);
+                VehicleItem v = new VehicleItem();
+                v.Id = veh.modelStyleId;
+                v.Value = String.Concat(veh.modelYear.ToString(), " ", veh.makeName, " ", veh.modelName, " ", veh.modelStyleName);
                 items.Add(v);
             }
 
