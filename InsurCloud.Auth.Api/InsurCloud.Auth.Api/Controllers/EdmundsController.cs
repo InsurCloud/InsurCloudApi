@@ -37,7 +37,7 @@ namespace InsurCloud.Auth.Api.Controllers
                     LoadItems();
                 }
 
-                List<VehicleOption> result = items.OrderBy(u => u.value).Where(c => c.value.StartsWith(query)).Take(100).ToList();
+                List<VehicleOption> result = items.OrderBy(u => u.value).Where(c => c.value.StartsWith(query)).Take(15).ToList();
 
                 return Ok(result);
 

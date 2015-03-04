@@ -15,6 +15,8 @@ namespace InsurCloud.Auth.Api.Controllers
     [RoutePrefix("api/Quote")]
     public class QuoteController : ApiController
     {
+        public static List<QuoteEntryView> quotes = new List<QuoteEntryView>();
+
         private IAuthenticationManager Authentication
         {
             get { return Request.GetOwinContext().Authentication; }
@@ -28,52 +30,16 @@ namespace InsurCloud.Auth.Api.Controllers
             try
             {
 
-                if (id == "78910")
+                QuoteEntryView quote = quotes.Where(c => c.QuoteUniqueId == id).FirstOrDefault();
+                if (quote == null)
                 {
                     return NotFound();
                 }
                 else
                 {
-                    QuoteView policy = new QuoteView();
-                    policy.QuoteStatus = "Lead";
-                    policy.QuoteUniqueId = Guid.NewGuid().ToString();
-                    policy.PolicyNumber = "";
-                    policy.Company.CarrierName = "Renissance";
-                    policy.Company.CompanyName = "Renissance Mutual";
-                    policy.Company.ContactInfo.Add(new ContactView { Address = new Address { Address1 = "5501 LBJ Freeway", Address2 = "Suite 1200", City = "Dallas", State = "TX", PostalCode = "75240", County = "Dallas" }, ContactType = "Billing", PhoneNumber = "1(800)555-1234", EmailAddress = "underwriting@renissance.com" });
-                    policy.Company.ContactInfo.Add(new ContactView { Address = new Address { Address1 = "5501 LBJ Freeway", Address2 = "Suite 1200", City = "Dallas", State = "TX", PostalCode = "75240", County = "Dallas" }, ContactType = "Claims (Existing)", PhoneNumber = "1(800)555-2234", EmailAddress = "claims@renissance.com" });
-                    policy.Company.ContactInfo.Add(new ContactView { Address = new Address { Address1 = "5501 LBJ Freeway", Address2 = "Suite 1200", City = "Dallas", State = "TX", PostalCode = "75240", County = "Dallas" }, ContactType = "Claims (New)", PhoneNumber = "1(800)555-3234", EmailAddress = "newclaim@renissance.com" });
-                    policy.Company.ContactInfo.Add(new ContactView { Address = new Address { Address1 = "5501 LBJ Freeway", Address2 = "Suite 1200", City = "Dallas", State = "TX", PostalCode = "75240", County = "Dallas" }, ContactType = "Underwriting", PhoneNumber = "1(800)555-1234", EmailAddress = "underwriting@renissance.com" });
-                    policy.Company.ImageURL = "";
-                    policy.Company.ProductLine = "Personal";
-                    policy.Company.Product = "Private Auto";
-                    policy.Company.StateAbbreviation = "TX";
-                    policy.Company.Program = "Non-Standard";
-                    policy.CoveredUnits.Add(new PersonalAutoCoveredUnit { IndexNumber = 1, Address = new Address { PostalCode = "75241" }, ModelYear = 2011, Make = "Dodge", VIN = "1D7RB1CT2BS505077", AssignedDriverNumber = 1, Description = "2011 Dodge" });
-                    policy.CoveredUnits[0].Coverages().Add(new Coverage { CoverageCode = "BI:30/60:L:P", CovGroupName = "Bodily Injury", CovGroupAbbr = "BI", IndexNumber = 1, LimitDeductibleDescription = "$30,000 per person, $60,000 per accident", WrittenPremium = 333.00 });
-                    policy.CoveredUnits[0].Coverages().Add(new Coverage { CoverageCode = "PD:25:L:P", CovGroupName = "Property Damage", CovGroupAbbr = "PD", IndexNumber = 2, LimitDeductibleDescription = "$25,000 per incident", WrittenPremium = 222.00 });
-                    policy.CoveredUnits.Add(new PersonalAutoCoveredUnit { IndexNumber = 2, Address = new Address { PostalCode = "75241" }, ModelYear = 1997, Make = "Buick", VIN = "2G4WB52K3V1436641", AssignedDriverNumber = 2, Description = "1997 Buick" });
-                    policy.CoveredUnits[1].Coverages().Add(new Coverage { CoverageCode = "BI:30/60:L:P", CovGroupName = "Bodily Injury", CovGroupAbbr = "BI", IndexNumber = 1, LimitDeductibleDescription = "$30,000 per person, $60,000 per accident", WrittenPremium = 222.00 });
-                    policy.CoveredUnits[1].Coverages().Add(new Coverage { CoverageCode = "PD:25:L:P", CovGroupName = "Property Damage", CovGroupAbbr = "PD", IndexNumber = 2, LimitDeductibleDescription = "$25,000 per incident", WrittenPremium = 210.00 });
-                    policy.EffectiveDate = new DateTime(2014, 12, 11);
-                    policy.ExpirationDate = new DateTime(2014, 6, 11);
-                    HouseholdMember insured = new HouseholdMember { IndexNumber = 1, RelationToInsured = "Self", ContactInfo = new ContactView { Address = new Address { Address1 = "3225 Golfing Green Drive", City = "Dallas", State = "TX", PostalCode = "75234", County = "Dallas" }, EmailAddress = "mprice@insurcloud.com", PhoneNumber = "(214)240-8085" }, BirthDate = new DateTime(1974, 7, 3), Gender = "Male", MaritalStatus = "Married", FirstName = "Matt", LastName = "Price", SetupForENotification = "Yes", RatedAge = 40 };
-                    HouseholdMember jointInsured = new HouseholdMember { IndexNumber = 2, RelationToInsured = "Spouse", ContactInfo = new ContactView { Address = new Address { Address1 = "3225 Golfing Green Drive", City = "Dallas", State = "TX", PostalCode = "75234", County = "Dallas" }, EmailAddress = "", PhoneNumber = "" }, BirthDate = new DateTime(1971, 4, 30), Gender = "Female", MaritalStatus = "Married", FirstName = "Colleen", LastName = "Price", SetupForENotification = "No", RatedAge = 43 };
-                    jointInsured.Violations.Add(new Violation { IndexNumber = 1, Points = 1, ViolationDescription = "Speeding, Generally", ViolationDate = new DateTime(2013, 3, 17) });
-                    jointInsured.Violations.Add(new Violation { IndexNumber = 2, Points = 0, ViolationDescription = "SR-22 Filling", ViolationDate = new DateTime(2015, 2, 13) });
-                    policy.PrimaryNamedInsured = insured;
-                    policy.JointNamedInsured = jointInsured;
-                    policy.HouseholdMembers.Add(insured);
-                    policy.HouseholdMembers.Add(jointInsured);
-                    policy.HouseholdMembers.Add(new HouseholdMember { IndexNumber = 1, RelationToInsured = "Child", ContactInfo = new ContactView { Address = new Address { Address1 = "3225 Golfing Green Drive", City = "Dallas", State = "TX", PostalCode = "75234", County = "Dallas" }, EmailAddress = "", PhoneNumber = "" }, BirthDate = new DateTime(2000, 3, 1), Gender = "Female", MaritalStatus = "Single", FirstName = "Ella", LastName = "Price", SetupForENotification = "No", RatedAge = 15 });
-
-                    policy.PayPlan = "Installments";
-                    policy.PolicyTermType = "New";
-                    policy.Producer = new ProducerView { AgencyInfo = new AgencyLocationView { AgencyId = 55555, DisplayName = "Bob's Agency", ImageURL = "" }, ContactInfo = new ContactView { Address = new Address { Address1 = "1423 Test Way", City = "Test", State = "TX", County = "Dallas", PostalCode = "75432" }, PhoneNumber = "555-444-1234", EmailAddress = "jmartin@agency.com" }, FirstName = "Joseph", LastName = "Martin", ProducerUserId = "123413415" };
-                    policy.Producer.AgencyInfo.ContactInfo.Add(new ContactView { Address = new Address { Address1 = "1423 Test Way", City = "Test", State = "TX", County = "Dallas", PostalCode = "75432" }, ContactType = "Main", EmailAddress = "bobsagency@agency.com", PhoneNumber = "1(800)555-4444", Name = "Main Street" });
-
-                    return Ok(policy);
+                    return Ok(quote);
                 }
+                
             }
             catch
             {
@@ -88,8 +54,9 @@ namespace InsurCloud.Auth.Api.Controllers
         {
             try
             {
-                List<QuoteSearchResult> results = TestResults();
-                return Ok(results.Where(p => p.PolicyNumber == searchText || p.InsuredFullName.Contains(searchText) || p.InsuredPhoneNumber == searchText).ToList());
+                var resultSet = quotes.Where(c => c.QuoteUniqueId == searchText || c.Insured.FirstName.Contains(searchText) || c.Insured.LastName.Contains(searchText) || c.Insured.PhoneNumber.Contains(searchText) || c.Insured.EmailAddress.Contains(searchText)).ToList();
+                List<QuoteSearchResult> result = getSearchResults(resultSet);
+                return Ok(result);
             }
             catch
             {
@@ -97,17 +64,30 @@ namespace InsurCloud.Auth.Api.Controllers
             }
         }
 
-
-        private List<QuoteSearchResult> TestResults()
+        private List<QuoteSearchResult> getSearchResults(List<QuoteEntryView> items)
         {
-            List<QuoteSearchResult> results = new List<QuoteSearchResult>();
-            results.Add(new QuoteSearchResult { QuoteNumber = "242000012345", RateAmount = 750.51, LastRateDate = new DateTime(2015, 2, 25), LastRateDateFormatted = "02/25/2015", InsuredFullName = "Milton Price", InsuredPhoneNumber = "(214)240-8085", QuoteStatus = "Quote" });
-            results.Add(new QuoteSearchResult { QuoteNumber = "242000012346", RateAmount = 451.81, LastRateDate = new DateTime(2015, 2, 26), LastRateDateFormatted = "02/26/2015", InsuredFullName = "Jack Russell", InsuredPhoneNumber = "(972)065-0056", QuoteStatus = "Application" });
-            results.Add(new QuoteSearchResult { QuoteNumber = "242000012347", RateAmount = 0.0, LastRateDate = new DateTime(2015, 2, 24), LastRateDateFormatted = "02/24/2015", InsuredFullName = "Palma Granite", InsuredPhoneNumber = "(214)326-1648", QuoteStatus = "Lead" });
-            results.Add(new QuoteSearchResult { QuoteNumber = "242000012348", RateAmount = 1254.48, LastRateDate = new DateTime(2015, 1, 31), LastRateDateFormatted = "01/31/2015", InsuredFullName = "Arnold Palmer", InsuredPhoneNumber = "(476)652-0543", QuoteStatus = "Quote" });
-            results.Add(new QuoteSearchResult { QuoteNumber = "242000012349", RateAmount = 354.24, LastRateDate = new DateTime(2015, 2, 15), LastRateDateFormatted = "02/15/2015", PolicyNumber = "0012341234", InsuredFullName = "Jamie Foxx", InsuredPhoneNumber = "(817)220-8465", QuoteStatus = "Policy" });
-            return results;
-        }
+            List<QuoteSearchResult> result = new List<QuoteSearchResult>();
+
+            foreach (QuoteEntryView view in quotes)
+            {
+                QuoteSearchResult n = new QuoteSearchResult();
+                n.QuoteNumber = view.QuoteUniqueId;
+                n.InsuredFullName = string.Concat(view.Insured.FirstName, " ", view.Insured.LastName);
+                n.InsuredPhoneNumber = view.Insured.PhoneNumber;
+                n.LastRateDate = view.RateDate;
+                n.LastRateDateFormatted = n.LastRateDate.ToString("MM/dd/yyyy");
+                n.QuoteStatus = view.QuoteStatus;
+                n.RateAmount = 0.00;
+                if (view.Rates != null && view.Rates.Count > 0)
+                {
+                    n.RateAmount = view.Rates[0].Premium + view.Rates[0].Fees;
+                }
+                result.Add(n);
+            }
+
+            return result;
+
+        }       
 
         [Authorize]
         [HttpGet]
@@ -116,8 +96,10 @@ namespace InsurCloud.Auth.Api.Controllers
         {
             try
             {
-                List<QuoteSearchResult> results = TestResults();
-                return Ok(results);
+
+                List<QuoteSearchResult> result = new List<QuoteSearchResult>();
+                result = getSearchResults(quotes);
+                return Ok(result);
             }
             catch
             {
@@ -127,28 +109,195 @@ namespace InsurCloud.Auth.Api.Controllers
 
         [Authorize]
         [HttpPost]
+        [Route("v1/newQuote", Name= "startNewQuote")]
+        public async Task<IHttpActionResult> StartNewQuote(NewQuoteRequest request)
+        {
+            try
+            {
+                QuoteEntryView quoteView = new QuoteEntryView();
+                quoteView.QuoteUniqueId = Guid.NewGuid().ToString();
+                quoteView.QuoteStatus = "Lead";
+                quoteView.EffectiveDate = DateTime.Now;
+                quoteView.EffectiveDateFormatted = quoteView.EffectiveDate.ToString("MM/dd/yyyy");
+                quoteView.RateDate = DateTime.Now;
+                quoteView.RateDateFormatted = quoteView.RateDate.ToString("MM/dd/yyyy");
+                quoteView.Insured = new QuoteInsured();
+                quoteView.Insured.FirstName = request.Insured.FirstName;
+                quoteView.Insured.LastName = request.Insured.LastName;
+                quoteView.Insured.PhoneNumber = request.Insured.PhoneNumber;
+                quoteView.Insured.EmailAddress = request.Insured.EmailAddress;
+                quoteView.Insured.Address.PostalCode = request.PostalCode;
+                quoteView.Insured.Address.City = "Dallas";
+                quoteView.Insured.Address.State = "TX";
+                quoteView.Insured.DiscountInfo.CurrentlyInsured = request.PriorCoverage;
+                quoteView.Insured.DiscountInfo.Homeowner = request.Homeowner;
+                if (request.Married)
+                {
+                    quoteView.Insured.MaritalStatus = "M";
+                }
+                quoteView.Vehicles = new List<QuoteVehicle>();
+                for (int i = 0; i < request.NumberOfVehicles; i++)
+                {
+                    QuoteVehicle veh = new QuoteVehicle();
+                    veh.Number = 1;
+                    veh.CommuteMiles = 10;
+                    veh.CommuteDaysPerWeek = 5;
+                    veh.GaragingZipCode = request.PostalCode;
+                    veh.PhotoSrc = "img/IC_finalBUG.png";
+                    veh.Drivers = new List<QuoteDriver>();
+                    quoteView.Vehicles.Add(veh);
+                    if (i == 0)
+                    {
+                        QuoteDriver drv = new QuoteDriver();
+                        drv.FirstName = request.Insured.FirstName;
+                        drv.LastName = request.Insured.LastName;
+                        drv.EmailAddress = request.Insured.EmailAddress;
+                        drv.PhoneNumber = request.Insured.PhoneNumber;
+                        drv.RelationToInsured = "Self";
+                        drv.IsPrimaryNamedInsured = true;
+                        drv.Number = 1;
+                        drv.PrimaryDriver = true;
+                        drv.BirthDate = DateTime.MinValue;
+                        drv.BirthDateFormatted = "";
+                        drv.PhysicalAddress.PostalCode = request.PostalCode;
+                        drv.PhysicalAddress.City = "Dallas";
+                        drv.PhysicalAddress.State = "TX";
+                        drv.mailingSameAsPhysical = true;
+                        drv.MailingAddress.State = "TX";
+                        drv.DiscountInfo.CurrentlyInsured = request.PriorCoverage;
+                        drv.DiscountInfo.Homeowner = request.Homeowner;
+                        drv.DiscountInfo.PriorRate = 0.00;
+                        drv.License.AgeFirstLicensed = 16;
+                        if (request.Married)
+                        {
+                            drv.MaritalStatus = "M";
+                        }
+                        veh.Drivers.Add(drv);
+                        quoteView.Drivers = new List<QuoteDriver>();
+                        quoteView.Drivers.Add(drv);
+                    }
+                }
+                quotes.Add(quoteView);
+                QuoteSearchResult quote = new QuoteSearchResult();
+                quote.InsuredFullName = string.Concat(quoteView.Insured.FirstName, " ", quoteView.Insured.LastName);
+                quote.QuoteNumber = quoteView.QuoteUniqueId;
+                quote.QuoteStatus = quoteView.QuoteStatus;
+                return Ok(quote);
+            }
+            catch
+            {
+                return InternalServerError();
+            }
+            
+        }
+
+        [Authorize]
+        [HttpPost]
         [Route("v1/quote", Name = "saveQuote")]
         public async Task<IHttpActionResult> SaveQuote(QuoteEntryView quote)
         {
-            List<BasicRate> rates = new List<BasicRate>();
-            BasicRate rate = new BasicRate();
-            rate.Program = new ProgramInfo();
-            rate.Program.CarrierName = "Renaissance";
-            rate.Program.CompanyName = "Renaissance";
-            rate.Program.ProductLine = "Personal";
-            rate.Program.Product = "Private Passenger";
-            rate.Program.Program = "Classic";
-            rate.Program.TermMonths = 6;
-            rate.Program.ProgramId = 242;
-            rate.Program.StateAbbreviation = "TX";
-            rate.Premium = 751.29F;
+            quote.QuoteStatus = "Quote";
+
+            foreach (QuoteDriver drv in quote.Drivers)
+            {
+                DateTime dt;
+                DateTime.TryParse(drv.BirthDateFormatted, out dt);
+                drv.BirthDate = dt;       
+            }
+            foreach (QuoteVehicle veh in quote.Vehicles)
+            {
+                foreach (QuoteDriver drv in veh.Drivers)
+                {
+                    DateTime dt;
+                    DateTime.TryParse(drv.BirthDateFormatted, out dt);
+                    drv.BirthDate = dt;                    
+                }
+            }
+
+            ProgramInfo p = new ProgramInfo();
+            p.CarrierName = "Renaissance";
+            p.CompanyName = "Renaissance";
+            p.ProductLine = "Personal";
+            p.Product = "Private Passenger";
+            p.Program = "Classic";
+            p.TermMonths = 6;
+            p.ProgramId = 242;
+            p.StateAbbreviation = "TX";
+
+            List<Rate> rates = new List<Rate>();
+
+            if (quote.Coverages.Id == "Minimum")
+            {
+                PayPlan pp = new PayPlan("0:100:0.00");
+                rates.Add(SetupRate(p, pp, 425.00, 50.00, quote.Coverages.Id));
+
+                pp = new PayPlan("5:20:5.50");
+                rates.Add(SetupRate(p, pp, 472.00, 50.00, quote.Coverages.Id));
+            }
+            else if (quote.Coverages.Id == "Basic")
+            {
+                PayPlan pp = new PayPlan("0:100:0.00");
+                rates.Add(SetupRate(p, pp, 540.00, 50.00, quote.Coverages.Id));
+
+                pp = new PayPlan("5:20:5.50");
+                rates.Add(SetupRate(p, pp, 587.00, 50.00, quote.Coverages.Id));
+            }
+            else
+            {
+                PayPlan pp = new PayPlan("0:100:0.00");
+                rates.Add(SetupRate(p, pp, 753.00, 50.00, quote.Coverages.Id));
+
+                pp = new PayPlan("5:20:5.50");
+                rates.Add(SetupRate(p, pp, 801.00, 50.00, quote.Coverages.Id));
+            }
+
+            quote.Rates = rates;
+
+            for (int i = 0; i < quotes.Count; i++)
+            {
+                if (quotes[i].QuoteUniqueId == quote.QuoteUniqueId)
+                {
+                    quotes[i] = quote;
+                }
+            }
+
+            return Ok(quote);
+        }
+
+        private Rate SetupRate(ProgramInfo p, PayPlan pp, double Premium, double Fees, string coverageLevel)
+        {
+            
+            Rate rate = new Rate();
+            
+            rate.Program = p;
+            rate.PayPlan = pp;
+            rate.Premium = Premium;
+            rate.Fees = Fees;
+            rate.CoverageLevel = coverageLevel;
             rate.Installments = new List<Installment>();
-            for (int a = 0; a < rate.Program.TermMonths; a++)
+            
+            double premiumAndFees = rate.Premium + rate.Fees;
+
+            rate.PayPlan.DownPaymentAmount = Math.Round((premiumAndFees) * ((double)rate.PayPlan.DownPaymentPercent / 100.00), 2);
+            if (rate.PayPlan.NumberOfInstallments == 0)
+            {
+                rate.PayPlan.InstallmentAmount = 0.00;
+            }
+            else
+            {
+                rate.PayPlan.InstallmentAmount = Math.Round((premiumAndFees - rate.PayPlan.DownPaymentAmount) / rate.PayPlan.NumberOfInstallments);
+            }
+            
+            rate.PayPlan.InstallmentPlusFeeAmount = rate.PayPlan.InstallmentAmount + rate.PayPlan.InstallmentFeeAmount;
+            double lastInstallAmount = Math.Round(premiumAndFees - (rate.PayPlan.DownPaymentAmount + ((rate.PayPlan.NumberOfInstallments - 1) * rate.PayPlan.InstallmentAmount)), 2);
+
+            for (int a = 0; a < rate.PayPlan.NumberOfInstallments; a++)
             {
                 Installment i = new Installment();
                 i.InstallmentNumber = a + 1;
                 if (i.InstallmentNumber == 1)
                 {
+                    i.Amount = rate.PayPlan.DownPaymentAmount;
                     i.DueDate = DateTime.Now;
                     i.InstallmentFee = 0F;
                 }
@@ -157,16 +306,23 @@ namespace InsurCloud.Auth.Api.Controllers
                     i.DueDate = DateTime.Now.AddDays(35);
                     if (i.InstallmentNumber > 1)
                     {
+                        if (a == rate.PayPlan.NumberOfInstallments - 1)
+                        {
+                            i.Amount = lastInstallAmount;
+                        }
+                        else
+                        {
+                            i.Amount = rate.PayPlan.InstallmentAmount;
+                        }
                         i.DueDate = i.DueDate.AddMonths(i.InstallmentNumber - 1);
                     }
-                    i.InstallmentFee = 5.50F;
+                    i.InstallmentFee = rate.PayPlan.InstallmentFeeAmount;
                 }
+
                 rate.Installments.Add(i);
             }
-            rate.Fees = 50.0F;
-            rate.CoverageLevel = "Minimum";
-            rates.Add(rate);                        
-            return Ok(rates);
+
+            return rate;
         }
     
     }
