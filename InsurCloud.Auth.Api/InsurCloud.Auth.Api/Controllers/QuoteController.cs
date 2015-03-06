@@ -1,5 +1,7 @@
 ﻿using CoreCommon.Attributes;
+using CoreAgency.Repository;
 using CoreQuote.Model;
+using CoreQuote.Repository;
 using InsurCloud.Auth.Api.Models;
 using Microsoft.Owin.Security;
 using System;
@@ -9,6 +11,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using CoreAuthentication.Repository;
 
 namespace InsurCloud.Auth.Api.Controllers
 {
@@ -17,6 +20,8 @@ namespace InsurCloud.Auth.Api.Controllers
     public class QuoteController : ApiController
     {
         public static List<Quote> quotes = new List<Quote>();
+
+        public AuthRepository authRepo = new AuthRepository();
 
         private IAuthenticationManager Authentication
         {
@@ -69,22 +74,25 @@ namespace InsurCloud.Auth.Api.Controllers
         {
             List<QuoteSearchResult> result = new List<QuoteSearchResult>();
 
-            foreach (Quote view in quotes)
-            {
-                QuoteSearchResult n = new QuoteSearchResult();
-                n.QuoteNumber = view.QuoteUniqueId;
-                n.InsuredFullName = string.Concat(view.Insured.FirstName, " ", view.Insured.LastName);
-                n.InsuredPhoneNumber = view.Insured.PhoneNumber;
-                n.LastRateDate = view.RateDate;
-                n.LastRateDateFormatted = n.LastRateDate.ToString("MM/dd/yyyy");
-                n.QuoteStatus = view.QuoteStatus;
-                n.RateAmount = 0.00;
-                if (view.Rates != null && view.Rates.Count > 0)
-                {
-                    n.RateAmount = view.Rates[0].Premium + view.Rates[0].Fees;
-                }
-                result.Add(n);
-            }
+            QuoteRepository quoteRepo = new QuoteRepository("Renaissance");
+            //quoteRepo.SearchQuotes();
+
+            //foreach (Quote view in quotes)
+            //{
+            //    QuoteSearchResult n = new QuoteSearchResult();
+            //    n.QuoteNumber = view.QuoteUniqueId;
+            //    n.InsuredFullName = string.Concat(view.Insured.FirstName, " ", view.Insured.LastName);
+            //    n.InsuredPhoneNumber = view.Insured.PhoneNumber;
+            //    n.LastRateDate = view.RateDate;
+            //    n.LastRateDateFormatted = n.LastRateDate.ToString("MM/dd/yyyy");
+            //    n.QuoteStatus = view.QuoteStatus;
+            //    n.RateAmount = 0.00;
+            //    if (view.Rates != null && view.Rates.Count > 0)
+            //    {
+            //        n.RateAmount = view.Rates[0].Premium + view.Rates[0].Fees;
+            //    }
+            //    result.Add(n);
+            //}
 
             return result;
 
@@ -116,6 +124,7 @@ namespace InsurCloud.Auth.Api.Controllers
             try
             {
                 Quote quoteView = new Quote();
+                
                 quoteView.QuoteUniqueId = Guid.NewGuid().ToString();
                 quoteView.QuoteStatus = "Lead";
                 quoteView.EffectiveDate = DateTime.Now;

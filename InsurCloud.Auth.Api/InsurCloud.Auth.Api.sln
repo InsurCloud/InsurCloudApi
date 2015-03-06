@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EdmundsVehicles", "..\..\Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreQuote", "..\..\CoreLibs\CoreQuote\CoreQuote.csproj", "{779BD6EE-34CC-495D-B64C-703BA8AF963E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreCommon", "..\..\CoreLibs\CoreCommon\CoreCommon.csproj", "{DFC3E9A7-EDC5-46B9-87EF-ADD907021A43}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{779BD6EE-34CC-495D-B64C-703BA8AF963E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{779BD6EE-34CC-495D-B64C-703BA8AF963E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{779BD6EE-34CC-495D-B64C-703BA8AF963E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFC3E9A7-EDC5-46B9-87EF-ADD907021A43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFC3E9A7-EDC5-46B9-87EF-ADD907021A43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFC3E9A7-EDC5-46B9-87EF-ADD907021A43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFC3E9A7-EDC5-46B9-87EF-ADD907021A43}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
