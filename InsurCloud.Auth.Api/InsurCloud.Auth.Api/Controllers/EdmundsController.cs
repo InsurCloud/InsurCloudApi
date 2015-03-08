@@ -1,4 +1,5 @@
 ﻿using CoreCommon.Attributes;
+using CoreCommon.Model;
 using CoreQuote.Model;
 using EdmundsVehicles.Model;
 using InsurCloud.Auth.Api.Models;

@@ -3,7 +3,11 @@ using CoreAgency.Repository;
 using CoreQuote.Model;
 using CoreQuote.Repository;
 using InsurCloud.Auth.Api.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using Microsoft.Owin.Security.OAuth;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +16,10 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using CoreAuthentication.Repository;
+using CoreAuthentication.Model;
+using CoreAgency.Model;
+using CoreAuthentication.Enum;
+using CoreCommon.Model;
 
 namespace InsurCloud.Auth.Api.Controllers
 {
@@ -19,9 +27,8 @@ namespace InsurCloud.Auth.Api.Controllers
     [RoutePrefix("api/Quote")]
     public class QuoteController : ApiController
     {
-        public static List<Quote> quotes = new List<Quote>();
-
-        public AuthRepository authRepo = new AuthRepository();
+        public AuthRepository _authRepo = new AuthRepository();
+        public AgencyRepository _agencyRepo = new AgencyRepository();
 
         private IAuthenticationManager Authentication
         {
@@ -35,17 +42,25 @@ namespace InsurCloud.Auth.Api.Controllers
         {
             try
             {
-
-                Quote quote = quotes.Where(c => c.QuoteUniqueId == id).FirstOrDefault();
-                if (quote == null)
+                QuoteRepository quoteRepo = new QuoteRepository("renaissance");
+                ExtendedIdentityUser user = await _authRepo.FindCurrentUser(User.Identity.GetUserName());
+                if (user != null && user.UserType.UserTypeId == (int)UserTypes.Agency)
                 {
-                    return NotFound();
+                    AgencyUser agencyUser = await getCurrentAgencyUser(user);
+                    if (agencyUser != null)
+                    {
+                        Quote q = await quoteRepo.Load(agencyUser.Location.Agency.AgencyId.ToString(), id);
+                        return Ok(q);
+                    }
+                    else
+                    {
+                        return BadRequest("Unable to locate Agency User");
+                    }
                 }
                 else
                 {
-                    return Ok(quote);
+                    return BadRequest("Unable to locate User");
                 }
-                
             }
             catch
             {
@@ -56,13 +71,13 @@ namespace InsurCloud.Auth.Api.Controllers
         [Authorize]
         [HttpGet]
         [Route("v1/quotes/{searchText}", Name = "quoteSearch")]
-        public async Task<IHttpActionResult> QuoteSearch(string searchText)
+        public async Task<IHttpActionResult> QuoteSearch(string searchText, bool showAllAgency = false)
         {
             try
             {
-                var resultSet = quotes.Where(c => c.QuoteUniqueId == searchText || c.Insured.FirstName.Contains(searchText) || c.Insured.LastName.Contains(searchText) || c.Insured.PhoneNumber.Contains(searchText) || c.Insured.EmailAddress.Contains(searchText)).ToList();
-                List<QuoteSearchResult> result = getSearchResults(resultSet);
-                return Ok(result);
+                
+                List<QuoteSearchResult> result = await getSearchResults(searchText, 20, showAllAgency);
+                return Ok(result.Where(c => c.QuoteUniqueId == searchText || c.QuoteNumber == searchText || c.InsuredFullName.Contains(searchText) || c.InsuredFirstName.Contains(searchText) || c.InsuredLastName.Contains(searchText) || c.InsuredPhoneNumber.Contains(searchText) || c.InsuredEmailAddress.Contains(searchText)).ToList());
             }
             catch
             {
@@ -70,44 +85,70 @@ namespace InsurCloud.Auth.Api.Controllers
             }
         }
 
-        private List<QuoteSearchResult> getSearchResults(List<Quote> items)
+        private async Task<AgencyUser> getCurrentAgencyUser(ExtendedIdentityUser user)
         {
-            List<QuoteSearchResult> result = new List<QuoteSearchResult>();
+            
+            if (user != null)
+            {
+                AgencyUser agencyUser = await _agencyRepo.GetAgencyUser(user.Id);
+                if (agencyUser != null)
+                {
+                    return agencyUser;
+                }
+                else
+                {
+                    throw new ArgumentException("Unable to locate current user");
+                }                
+                
+            }
+            else
+            {
+                throw new ArgumentException("Severe error captured. Please log back in and retry");
+            }
+        }
 
+        private async Task<List<QuoteSearchResult>> getSearchResults(string searchText, int numberToReturn, bool showAllAgency)
+        {
+            
             QuoteRepository quoteRepo = new QuoteRepository("Renaissance");
-            //quoteRepo.SearchQuotes();
+            ExtendedIdentityUser user = await _authRepo.FindCurrentUser(User.Identity.GetUserName());
+            if (user != null && user.UserType.UserTypeId == (int)UserTypes.Agency)
+            {
+                AgencyUser agencyUser = await getCurrentAgencyUser(user);
+                if (agencyUser != null)
+                {
+                    var results = quoteRepo.SearchQuotes(agencyUser.Location.Agency.AgencyId, agencyUser.UserId, numberToReturn, showAllAgency).ToList();
+                    if (searchText != "")
+                    {
+                        return results.Where(c => c.QuoteUniqueId == searchText || c.QuoteNumber == searchText || c.InsuredFullName.Contains(searchText) || c.InsuredFirstName.Contains(searchText) || c.InsuredLastName.Contains(searchText) || c.InsuredPhoneNumber.Contains(searchText) || c.InsuredEmailAddress.Contains(searchText)).ToList();
+                    }
+                    return results;
+                }
+                else
+                {
+                    throw new ArgumentException("Unable to locate current user's agency");
+                }
 
-            //foreach (Quote view in quotes)
-            //{
-            //    QuoteSearchResult n = new QuoteSearchResult();
-            //    n.QuoteNumber = view.QuoteUniqueId;
-            //    n.InsuredFullName = string.Concat(view.Insured.FirstName, " ", view.Insured.LastName);
-            //    n.InsuredPhoneNumber = view.Insured.PhoneNumber;
-            //    n.LastRateDate = view.RateDate;
-            //    n.LastRateDateFormatted = n.LastRateDate.ToString("MM/dd/yyyy");
-            //    n.QuoteStatus = view.QuoteStatus;
-            //    n.RateAmount = 0.00;
-            //    if (view.Rates != null && view.Rates.Count > 0)
-            //    {
-            //        n.RateAmount = view.Rates[0].Premium + view.Rates[0].Fees;
-            //    }
-            //    result.Add(n);
-            //}
+            }
+            else
+            {
+                throw new ArgumentException("Can not identify agency user");
+            }
 
-            return result;
+            return null;
 
         }       
 
         [Authorize]
         [HttpGet]
         [Route("v1/quotes", Name = "quoteSearchAll")]
-        public async Task<IHttpActionResult> QuoteSearchAll()
+        public async Task<IHttpActionResult> QuoteSearchAll(bool showAllAgency)
         {
             try
             {
 
                 List<QuoteSearchResult> result = new List<QuoteSearchResult>();
-                result = getSearchResults(quotes);
+                result = await getSearchResults("", 0, showAllAgency);
                 return Ok(result);
             }
             catch
@@ -123,14 +164,38 @@ namespace InsurCloud.Auth.Api.Controllers
         {
             try
             {
+                AgencyUser agencyUser;
+                ExtendedIdentityUser user = await _authRepo.FindCurrentUser(User.Identity.GetUserName());
+                if (user != null && user.UserType.UserTypeId == (int)UserTypes.Agency)
+                {
+                    agencyUser = await getCurrentAgencyUser(user);
+                    if (agencyUser == null)
+                    {
+                        return BadRequest("Cannot find agency user information");
+                    }
+                }
+                else
+                {
+                    return BadRequest("Cannot find agency user information");
+                }
+
                 Quote quoteView = new Quote();
-                
                 quoteView.QuoteUniqueId = Guid.NewGuid().ToString();
+                quoteView.TermMonths = 6;
+                quoteView.CarrierId = 1;
+                quoteView.CarrierName = "Renaissance";
+                quoteView.Product = "Private Auto";
+                quoteView.ProductLine = "Peronsal";
+                quoteView.ProgramCode = "242";
+                quoteView.AgencyId = agencyUser.Location.Agency.AgencyId;
+                quoteView.ProducerUserId = agencyUser.UserId;
+                quoteView.CreatedByUserId = quoteView.ProducerUserId;
+                quoteView.CreateDate = DateTime.Now;
+                quoteView.ModifyDate = quoteView.CreateDate;
+                quoteView.ModifiedByUserId = quoteView.ProducerUserId;
                 quoteView.QuoteStatus = "Lead";
-                quoteView.EffectiveDate = DateTime.Now;
-                quoteView.EffectiveDateFormatted = quoteView.EffectiveDate.ToString("MM/dd/yyyy");
-                quoteView.RateDate = DateTime.Now;
-                quoteView.RateDateFormatted = quoteView.RateDate.ToString("MM/dd/yyyy");
+                quoteView.EffectiveDate.DateValue = DateTime.Now;
+                quoteView.RateDate.DateValue = DateTime.Now;
                 quoteView.Insured = new Insured();
                 quoteView.Insured.FirstName = request.Insured.FirstName;
                 quoteView.Insured.LastName = request.Insured.LastName;
@@ -145,7 +210,11 @@ namespace InsurCloud.Auth.Api.Controllers
                 {
                     quoteView.Insured.MaritalStatus = "M";
                 }
-                quoteView.Vehicles = new List<Vehicle>();
+                else
+                {
+                    quoteView.Insured.MaritalStatus = "S";
+                }
+                //quoteView.CoveredUnits;
                 for (int i = 0; i < request.NumberOfVehicles; i++)
                 {
                     Vehicle veh = new Vehicle();
@@ -155,7 +224,7 @@ namespace InsurCloud.Auth.Api.Controllers
                     veh.GaragingZipCode = request.PostalCode;
                     veh.PhotoSrc = "img/IC_finalBUG.png";
                     veh.Drivers = new List<Driver>();
-                    quoteView.Vehicles.Add(veh);
+                    quoteView.CoveredUnits.Add(veh);
                     if (i == 0)
                     {
                         Driver drv = new Driver();
@@ -182,16 +251,23 @@ namespace InsurCloud.Auth.Api.Controllers
                         {
                             drv.MaritalStatus = "M";
                         }
+                        else
+                        {
+                            quoteView.Insured.MaritalStatus = "S";
+                        }
                         veh.Drivers.Add(drv);
-                        quoteView.Drivers = new List<Driver>();
-                        quoteView.Drivers.Add(drv);
+                        
+                        quoteView.HouseholdMembers.Add(drv);
                     }
                 }
-                quotes.Add(quoteView);
+
+                QuoteRepository repo = new QuoteRepository("renaissance");
+                quoteView.QuoteNumber = await repo.Upsert(quoteView, agencyUser);
                 QuoteSearchResult quote = new QuoteSearchResult();
                 quote.InsuredFullName = string.Concat(quoteView.Insured.FirstName, " ", quoteView.Insured.LastName);
-                quote.QuoteNumber = quoteView.QuoteUniqueId;
+                quote.QuoteUniqueId = quoteView.QuoteUniqueId;
                 quote.QuoteStatus = quoteView.QuoteStatus;
+                quote.QuoteNumber = quoteView.QuoteNumber;
                 return Ok(quote);
             }
             catch
@@ -206,73 +282,86 @@ namespace InsurCloud.Auth.Api.Controllers
         [Route("v1/quote", Name = "saveQuote")]
         public async Task<IHttpActionResult> SaveQuote(Quote quote)
         {
-            quote.QuoteStatus = "Quote";
 
-            foreach (Driver drv in quote.Drivers)
+            ExtendedIdentityUser user = await _authRepo.FindCurrentUser(User.Identity.GetUserName());
+            if (user != null && user.UserType.UserTypeId == (int)UserTypes.Agency)
             {
-                DateTime dt;
-                DateTime.TryParse(drv.BirthDateFormatted, out dt);
-                drv.BirthDate = dt;       
-            }
-            foreach (Vehicle veh in quote.Vehicles)
-            {
-                foreach (Driver drv in veh.Drivers)
+                AgencyUser agencyUser = await getCurrentAgencyUser(user);
+                if (agencyUser != null)
                 {
-                    DateTime dt;
-                    DateTime.TryParse(drv.BirthDateFormatted, out dt);
-                    drv.BirthDate = dt;                    
+
+                    quote.ProducerUserId = agencyUser.UserId;
+                    foreach (Driver drv in quote.HouseholdMembers)
+                    {
+                        DateTime dt;
+                        DateTime.TryParse(drv.BirthDateFormatted, out dt);
+                        drv.BirthDate = dt;
+                    }
+                    foreach (Vehicle veh in quote.CoveredUnits)
+                    {
+                        foreach (Driver drv in veh.Drivers)
+                        {
+                            DateTime dt;
+                            DateTime.TryParse(drv.BirthDateFormatted, out dt);
+                            drv.BirthDate = dt;
+                        }
+                    }
+
+                    ProgramInfo p = new ProgramInfo();
+                    p.CarrierName = "Renaissance";
+                    p.CompanyName = "Renaissance";
+                    p.ProductLine = "Personal";
+                    p.Product = "Private Passenger";
+                    p.Program = "Classic";
+                    p.TermMonths = 6;
+                    p.ProgramId = 242;
+                    p.StateAbbreviation = "TX";
+
+                    List<Rate> rates = new List<Rate>();
+
+                    if (quote.Coverages.Id == "Minimum")
+                    {
+                        PayPlan pp = new PayPlan("0:100:0.00");
+                        rates.Add(SetupRate(p, pp, 425.00, 50.00, quote.Coverages.Id));
+
+                        pp = new PayPlan("5:20:5.50");
+                        rates.Add(SetupRate(p, pp, 472.00, 50.00, quote.Coverages.Id));
+                    }
+                    else if (quote.Coverages.Id == "Basic")
+                    {
+                        PayPlan pp = new PayPlan("0:100:0.00");
+                        rates.Add(SetupRate(p, pp, 540.00, 50.00, quote.Coverages.Id));
+
+                        pp = new PayPlan("5:20:5.50");
+                        rates.Add(SetupRate(p, pp, 587.00, 50.00, quote.Coverages.Id));
+                    }
+                    else
+                    {
+                        PayPlan pp = new PayPlan("0:100:0.00");
+                        rates.Add(SetupRate(p, pp, 753.00, 50.00, quote.Coverages.Id));
+
+                        pp = new PayPlan("5:20:5.50");
+                        rates.Add(SetupRate(p, pp, 801.00, 50.00, quote.Coverages.Id));
+                    }
+
+                    quote.Rates = rates;
+                    
+                    QuoteRepository quoteRepo = new QuoteRepository(quote.CarrierName);
+                    string quoteNumber = await quoteRepo.Upsert(quote, agencyUser);
+                    quote.QuoteNumber = quoteNumber;
+                    return Ok(quote);
                 }
-            }
-
-            ProgramInfo p = new ProgramInfo();
-            p.CarrierName = "Renaissance";
-            p.CompanyName = "Renaissance";
-            p.ProductLine = "Personal";
-            p.Product = "Private Passenger";
-            p.Program = "Classic";
-            p.TermMonths = 6;
-            p.ProgramId = 242;
-            p.StateAbbreviation = "TX";
-
-            List<Rate> rates = new List<Rate>();
-
-            if (quote.Coverages.Id == "Minimum")
-            {
-                PayPlan pp = new PayPlan("0:100:0.00");
-                rates.Add(SetupRate(p, pp, 425.00, 50.00, quote.Coverages.Id));
-
-                pp = new PayPlan("5:20:5.50");
-                rates.Add(SetupRate(p, pp, 472.00, 50.00, quote.Coverages.Id));
-            }
-            else if (quote.Coverages.Id == "Basic")
-            {
-                PayPlan pp = new PayPlan("0:100:0.00");
-                rates.Add(SetupRate(p, pp, 540.00, 50.00, quote.Coverages.Id));
-
-                pp = new PayPlan("5:20:5.50");
-                rates.Add(SetupRate(p, pp, 587.00, 50.00, quote.Coverages.Id));
+                else
+                {
+                    return BadRequest("Unable to locate agency user");
+                }
             }
             else
             {
-                PayPlan pp = new PayPlan("0:100:0.00");
-                rates.Add(SetupRate(p, pp, 753.00, 50.00, quote.Coverages.Id));
-
-                pp = new PayPlan("5:20:5.50");
-                rates.Add(SetupRate(p, pp, 801.00, 50.00, quote.Coverages.Id));
+                return BadRequest("Unable to locate user");
             }
-
-            quote.Rates = rates;
-
-            for (int i = 0; i < quotes.Count; i++)
-            {
-                if (quotes[i].QuoteUniqueId == quote.QuoteUniqueId)
-                {
-                    quotes[i] = quote;
-                }
-            }
-
-            return Ok(quote);
         }
+        
 
         private Rate SetupRate(ProgramInfo p, PayPlan pp, double Premium, double Fees, string coverageLevel)
         {
