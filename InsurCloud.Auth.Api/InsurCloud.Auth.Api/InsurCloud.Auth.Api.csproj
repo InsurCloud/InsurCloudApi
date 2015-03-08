@@ -38,10 +38,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CoreCommon, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\CoreLibs\CoreCommon\bin\Debug\CoreCommon.dll</HintPath>
-    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.dll</HintPath>
@@ -202,6 +198,14 @@
     <ProjectReference Include="..\..\..\CoreLibs\CoreAuthentication\CoreAuthentication\CoreAuthentication.csproj">
       <Project>{0665fef6-1df3-45a3-a292-e7d217b3926f}</Project>
       <Name>CoreAuthentication</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\CoreLibs\CoreCommon\CoreCommon.csproj">
+      <Project>{dfc3e9a7-edc5-46b9-87ef-add907021a43}</Project>
+      <Name>CoreCommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\CoreLibs\CorePolicy\CorePolicy\CorePolicy.csproj">
+      <Project>{79e74896-6eec-41f5-8df3-0fada6c6258a}</Project>
+      <Name>CorePolicy</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\CoreLibs\CoreQuote\CoreQuote.csproj">
       <Project>{779bd6ee-34cc-495d-b64c-703ba8af963e}</Project>
