@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreCommon", "..\..\CoreLib
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CorePolicy", "..\..\CoreLibs\CorePolicy\CorePolicy\CorePolicy.csproj", "{79E74896-6EEC-41F5-8DF3-0FADA6C6258A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreCarrier", "..\..\CoreLibs\CoreCarrier\CoreCarrier\CoreCarrier.csproj", "{15C670F5-A9AF-4108-B2E2-5B2F981B06D9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{79E74896-6EEC-41F5-8DF3-0FADA6C6258A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{79E74896-6EEC-41F5-8DF3-0FADA6C6258A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{79E74896-6EEC-41F5-8DF3-0FADA6C6258A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15C670F5-A9AF-4108-B2E2-5B2F981B06D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15C670F5-A9AF-4108-B2E2-5B2F981B06D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15C670F5-A9AF-4108-B2E2-5B2F981B06D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15C670F5-A9AF-4108-B2E2-5B2F981B06D9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
