@@ -20,6 +20,7 @@ using CoreAuthentication.Model;
 using CoreAgency.Model;
 using CoreAuthentication.Enum;
 using CoreCommon.Model;
+using CorePolicy.Repository;
 
 namespace InsurCloud.Auth.Api.Controllers
 {
@@ -261,6 +262,11 @@ namespace InsurCloud.Auth.Api.Controllers
                     }
                 }
 
+                quoteView.UnderwritingQuestions = new List<UnderwritingQuestion>();
+                quoteView.UnderwritingQuestions.Add(new UnderwritingQuestion { QuestionText = "This is question number one?" });
+                quoteView.UnderwritingQuestions.Add(new UnderwritingQuestion { QuestionText = "This is question number two?" });
+                quoteView.UnderwritingQuestions.Add(new UnderwritingQuestion { QuestionText = "This is question number three?" });
+
                 QuoteRepository repo = new QuoteRepository("renaissance");
                 quoteView.QuoteNumber = await repo.Upsert(quoteView, agencyUser);
                 QuoteSearchResult quote = new QuoteSearchResult();
@@ -268,6 +274,8 @@ namespace InsurCloud.Auth.Api.Controllers
                 quote.QuoteUniqueId = quoteView.QuoteUniqueId;
                 quote.QuoteStatus = quoteView.QuoteStatus;
                 quote.QuoteNumber = quoteView.QuoteNumber;
+
+                
                 return Ok(quote);
             }
             catch
@@ -424,5 +432,55 @@ namespace InsurCloud.Auth.Api.Controllers
             return rate;
         }
     
+        [Authorize]
+        [HttpPost]
+        [Route("v1/bind", Name= "bindQuote")]
+        public async Task<IHttpActionResult> BindQuote(Quote quote)
+        {
+            ExtendedIdentityUser user = await _authRepo.FindCurrentUser(User.Identity.GetUserName());
+            if (user != null && user.UserType.UserTypeId == (int)UserTypes.Agency)
+            {
+                AgencyUser agencyUser = await getCurrentAgencyUser(user);
+                if (agencyUser != null)
+                {
+                    PPAPolicy policy = new PPAPolicy();
+                    policy.AgencyId = quote.AgencyId;
+                    policy.BankInfo = quote.BankInfo;
+                    policy.ChangeEffectiveDate = new DateTimeSortFormat();
+                    policy.ChangeEffectiveDate.DateValue = DateTime.Now;
+                    policy.Coverages = quote.Coverages;
+                    policy.CoveredUnits = quote.CoveredUnits;
+                    policy.CreateDate = DateTime.Now;
+                    policy.CreatedByUserId = agencyUser.UserId;
+                    policy.CreditCard = quote.CreditCard;
+                    policy.DownPaymentInfo = quote.DownPaymentInfo;
+                    policy.EffectiveDate = quote.EffectiveDate;
+                    policy.eNotify = quote.eNotify;
+                    policy.eSignature = quote.eSignature;
+                    policy.HouseholdMembers = quote.HouseholdMembers;
+                    policy.Insured = quote.Insured;
+                    policy.Lienholders = quote.Lienholders;
+                    policy.ModifiedByUserId = agencyUser.UserId;
+                    policy.ModifyDate = DateTime.Now;
+                    policy.PolicyIssuanceDate = new DateTimeSortFormat();
+                    policy.PolicyIssuanceDate.DateValue = DateTime.Now;
+                    policy.PolicyStatus = "Issued";
+                    policy.PolicyUniqueId = Guid.NewGuid().ToString();
+                    policy.ProducerUserId = agencyUser.UserId;
+                    policy.QuoteNumber = quote.QuoteNumber;
+                    policy.QuoteUniqueId = quote.QuoteUniqueId;
+                    policy.Rate = quote.Rate;
+                    policy.RateDate = quote.RateDate;
+                    policy.TermMonths = quote.TermMonths;
+                    policy.TransactionNumber = 1;
+                    policy.UnderwritingQuestions = quote.UnderwritingQuestions;
+
+                    PolicyRepository policyRepo = new PolicyRepository(quote.CarrierName.ToLower());
+                    policy = await policyRepo.AgentPPAPolicyUpsert(policy, agencyUser);
+                    return Ok(policy);
+                }
+            }
+            return InternalServerError();
+        }
     }
 }
