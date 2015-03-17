@@ -466,8 +466,8 @@ namespace InsurCloud.Auth.Api.Controllers
     
         [Authorize]
         [HttpPost]
-        [Route("v1/bind", Name= "bindQuote")]
-        public async Task<IHttpActionResult> BindQuote(Quote quote)
+        [Route("v1/issuecoverage", Name= "issueCoverage")]
+        public async Task<IHttpActionResult> IssueCoverage(Quote quote)
         {
             ExtendedIdentityUser user = await _authRepo.FindCurrentUser(User.Identity.GetUserName());
             if (user != null && user.UserType.UserTypeId == (int)UserTypes.Agency)
@@ -514,5 +514,42 @@ namespace InsurCloud.Auth.Api.Controllers
             }
             return InternalServerError();
         }
+
+
+        [Authorize]
+        [HttpPost]
+        [Route("v1/validateupload", Name="validateUpload")]
+        public async Task<IHttpActionResult> ValidateUpload(Quote quote)
+        {
+            return await SaveQuote(quote);
+        }
+
+        [Authorize]
+        [HttpGet]
+        [Route("v1/auditUpload", Name = "auditUpload")]
+        public async Task<IHttpActionResult> AuditUpload(string policyUniqueID)
+        {
+            return Ok();
+        }
+
+        [Authorize]
+        [HttpGet]
+        [Route("v1/generateDocuments", Name = "generateDocuments")]
+        public async Task<IHttpActionResult> GenerateDocuments(string policyUniqueID)
+        {
+            return Ok();
+        }
+
+        [Authorize]
+        [HttpGet]
+        [Route("v1/sendNewPolicyNotifications", Name = "sendNewPolicyNotifications")]
+        public async Task<IHttpActionResult> SendNewPolicyNotifications(string policyUniqueID)
+        {
+            return Ok();
+        }
+
+
+
+
     }
 }
