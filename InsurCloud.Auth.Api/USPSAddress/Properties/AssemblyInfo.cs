@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("InsurCloudPolicy.Api.Tests")]
+[assembly: AssemblyTitle("USPSAddress")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("InsurCloudPolicy.Api.Tests")]
+[assembly: AssemblyProduct("USPSAddress")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("0cde3376-c936-49d8-8af7-a5d32b0a8ec8")]
+[assembly: Guid("b7ed06cd-122b-4984-9072-6ba69c2e3e0d")]
 
 // Version information for an assembly consists of the following four values:
 //

@@ -21,6 +21,7 @@ using CoreAgency.Model;
 using CoreAuthentication.Enum;
 using CoreCommon.Model;
 using CorePolicy.Repository;
+using CorePolicy.Model;
 
 namespace InsurCloud.Auth.Api.Controllers
 {
@@ -203,8 +204,8 @@ namespace InsurCloud.Auth.Api.Controllers
                 quoteView.Insured.PhoneNumber = request.Insured.PhoneNumber;
                 quoteView.Insured.EmailAddress = request.Insured.EmailAddress;
                 quoteView.Insured.Address.PostalCode = request.PostalCode;
-                quoteView.Insured.Address.City = "Dallas";
-                quoteView.Insured.Address.State = "TX";
+                quoteView.Insured.Address.City = request.ZipCode.City;
+                quoteView.Insured.Address.State = request.ZipCode.State;
                 quoteView.Insured.DiscountInfo.CurrentlyInsured = request.PriorCoverage;
                 quoteView.Insured.DiscountInfo.Homeowner = request.Homeowner;
                 if (request.Married)
@@ -215,7 +216,8 @@ namespace InsurCloud.Auth.Api.Controllers
                 {
                     quoteView.Insured.MaritalStatus = "S";
                 }
-                //quoteView.CoveredUnits;
+
+                
                 for (int i = 0; i < request.NumberOfVehicles; i++)
                 {
                     Vehicle veh = new Vehicle();
@@ -224,44 +226,67 @@ namespace InsurCloud.Auth.Api.Controllers
                     veh.CommuteDaysPerWeek = 5;
                     veh.GaragingZipCode = request.PostalCode;
                     veh.PhotoSrc = "img/IC_finalBUG.png";
-                    veh.Drivers = new List<Driver>();
-                    quoteView.CoveredUnits.Add(veh);
-                    if (i == 0)
-                    {
-                        Driver drv = new Driver();
-                        drv.FirstName = request.Insured.FirstName;
-                        drv.LastName = request.Insured.LastName;
-                        drv.EmailAddress = request.Insured.EmailAddress;
-                        drv.PhoneNumber = request.Insured.PhoneNumber;
-                        drv.RelationToInsured = "Self";
-                        drv.IsPrimaryNamedInsured = true;
-                        drv.Number = 1;
-                        drv.PrimaryDriver = true;
-                        drv.BirthDate = DateTime.MinValue;
-                        drv.BirthDateFormatted = "";
-                        drv.PhysicalAddress.PostalCode = request.PostalCode;
-                        drv.PhysicalAddress.City = "Dallas";
-                        drv.PhysicalAddress.State = "TX";
-                        drv.mailingSameAsPhysical = true;
-                        drv.MailingAddress.State = "TX";
-                        drv.DiscountInfo.CurrentlyInsured = request.PriorCoverage;
-                        drv.DiscountInfo.Homeowner = request.Homeowner;
-                        drv.DiscountInfo.PriorRate = 0.00;
-                        drv.License.AgeFirstLicensed = 16;
-                        if (request.Married)
-                        {
-                            drv.MaritalStatus = "M";
-                        }
-                        else
-                        {
-                            quoteView.Insured.MaritalStatus = "S";
-                        }
-                        veh.Drivers.Add(drv);
-                        
-                        quoteView.HouseholdMembers.Add(drv);
-                    }
+                    quoteView.CoveredUnits.Add(veh);                    
+                }
+                
+                Driver drv = new Driver();
+                drv.FirstName = request.Insured.FirstName;
+                drv.LastName = request.Insured.LastName;
+                drv.EmailAddress = request.Insured.EmailAddress;
+                drv.PhoneNumber = request.Insured.PhoneNumber;
+                drv.RelationToInsured = "Self";
+                drv.IsPrimaryNamedInsured = true;
+                drv.Number = 1;
+                drv.PrimaryDriver = true;
+                drv.BirthDate = DateTime.MinValue;
+                drv.BirthDateFormatted = "";
+                drv.PhysicalAddress.PostalCode = request.PostalCode;
+                drv.PhysicalAddress.City = "Dallas";
+                drv.PhysicalAddress.State = "TX";
+                drv.mailingSameAsPhysical = true;
+                drv.MailingAddress.State = "TX";
+                drv.DiscountInfo.CurrentlyInsured = request.PriorCoverage;
+                drv.DiscountInfo.Homeowner = request.Homeowner;
+                drv.DiscountInfo.PriorRate = 0.00;
+                drv.License.AgeFirstLicensed = 16;
+                drv.DriverStatus = "Active";
+                drv.MaritalStatus = quoteView.Insured.MaritalStatus;
+
+                if (request.Married)
+                {
+                    drv.MaritalStatus = "M";
+                }
+                else
+                {
+                    quoteView.Insured.MaritalStatus = "S";
                 }
 
+                quoteView.HouseholdMembers.Add(drv);
+
+                for (int a = 1; a < request.NumberOfDrivers; a++)
+                {
+                    Driver newDrv = new Driver();
+                    if (a == 2 && quoteView.Insured.MaritalStatus == "M")
+                    {
+                        newDrv.RelationToInsured = "Spouse";
+                        newDrv.MaritalStatus = "M";
+                    }
+                    else
+                    {
+                        newDrv.RelationToInsured = "Other";
+                        newDrv.MaritalStatus = "S";
+                    }
+                    newDrv.LivesWithPrimaryNamedInsured = true;
+                    newDrv.IsPrimaryNamedInsured = false;
+                    newDrv.Number = a;
+                    newDrv.BirthDate = DateTime.MinValue;
+                    newDrv.BirthDateFormatted = "";
+                    newDrv.License.AgeFirstLicensed = 16;
+                    newDrv.DriverStatus = "Active";
+
+                    quoteView.HouseholdMembers.Add(newDrv);                    
+                }
+                
                 quoteView.UnderwritingQuestions = new List<UnderwritingQuestion>();
                 quoteView.UnderwritingQuestions.Add(new UnderwritingQuestion { QuestionText = "This is question number one?" });
                 quoteView.UnderwritingQuestions.Add(new UnderwritingQuestion { QuestionText = "This is question number two?" });
@@ -286,6 +311,22 @@ namespace InsurCloud.Auth.Api.Controllers
         }
 
         [Authorize]
+        [HttpGet]
+        [Route("v1/coveragedefaults/", Name = "GetCoverageDefaults")]
+        public async Task<IHttpActionResult> GetCoverageDefaults()
+        {
+            try
+            {
+                QuoteRepository quoteRepo = new QuoteRepository("renaissance");
+                return Ok(await quoteRepo.GetCoverageDefaults());
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError();
+            }
+            
+        }
+        [Authorize]
         [HttpPost]
         [Route("v1/quote", Name = "saveQuote")]
         public async Task<IHttpActionResult> SaveQuote(Quote quote)
@@ -304,16 +345,7 @@ namespace InsurCloud.Auth.Api.Controllers
                         DateTime dt;
                         DateTime.TryParse(drv.BirthDateFormatted, out dt);
                         drv.BirthDate = dt;
-                    }
-                    foreach (Vehicle veh in quote.CoveredUnits)
-                    {
-                        foreach (Driver drv in veh.Drivers)
-                        {
-                            DateTime dt;
-                            DateTime.TryParse(drv.BirthDateFormatted, out dt);
-                            drv.BirthDate = dt;
-                        }
-                    }
+                    }                    
 
                     ProgramInfo p = new ProgramInfo();
                     p.CarrierName = "Renaissance";

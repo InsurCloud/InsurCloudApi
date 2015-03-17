@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using USPSAddress;
 
 namespace InsurCloud.Auth.Api.Models
 { 
@@ -10,8 +11,10 @@ namespace InsurCloud.Auth.Api.Models
         public NewQuoteRequest()
         {
             Insured = new NewQuoteInsured();
+            ZipCode = new ZipCode();
         }
         public string PostalCode { get; set; }
+        public ZipCode ZipCode { get; set; }
         public int NumberOfVehicles { get; set; }
         public int NumberOfDrivers { get; set; }
         public bool Homeowner { get; set; }
