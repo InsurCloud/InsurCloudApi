@@ -59,6 +59,12 @@ namespace InsurCloud.Auth.Api.Controllers
                 VehicleItem v = new VehicleItem();
                 v.Id = veh.modelStyleId;
                 v.Value = String.Concat(veh.modelYear.ToString(), " ", veh.makeName, " ", veh.modelName, " ", veh.modelStyleName);
+                v.ModelYear = veh.modelYear;
+                v.Make = veh.makeName;
+                v.Model = veh.modelName;
+                v.BodyStyle = veh.modelStyleName;
+                v.BodyStyleExt = veh.submodelName;
+                v.PartialVIN = "19UUA9F2&E";
                 items.Add(v);
             }
 

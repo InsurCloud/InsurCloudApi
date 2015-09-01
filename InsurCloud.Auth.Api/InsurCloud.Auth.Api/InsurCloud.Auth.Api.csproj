@@ -39,6 +39,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CorPolicy, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\InsurCloud.Rating\Dependencies\CorPolicy.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
@@ -200,6 +204,10 @@
       <Project>{7ad07608-17d4-4501-a5c5-c3b924273cf2}</Project>
       <Name>CoreAgency</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\CoreLibs\CoreAudit\CoreAudit.csproj">
+      <Project>{5b3fced6-64e3-4641-a497-e9d6e63d437f}</Project>
+      <Name>CoreAudit</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\CoreLibs\CoreAuthentication\CoreAuthentication\CoreAuthentication.csproj">
       <Project>{0665fef6-1df3-45a3-a292-e7d217b3926f}</Project>
       <Name>CoreAuthentication</Name>
@@ -211,6 +219,10 @@
     <ProjectReference Include="..\..\..\CoreLibs\CoreCommon\CoreCommon.csproj">
       <Project>{dfc3e9a7-edc5-46b9-87ef-add907021a43}</Project>
       <Name>CoreCommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\CoreLibs\CoreImaging\CoreImaging.csproj">
+      <Project>{8051d66d-af69-4f94-a430-3b0908ac3d54}</Project>
+      <Name>CoreImaging</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\CoreLibs\CorePolicy\CorePolicy\CorePolicy.csproj">
       <Project>{79e74896-6eec-41f5-8df3-0fada6c6258a}</Project>

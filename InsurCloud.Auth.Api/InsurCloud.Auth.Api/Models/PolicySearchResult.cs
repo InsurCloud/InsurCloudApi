@@ -7,6 +7,7 @@ namespace InsurCloud.Auth.Api.Models
 {
     public class PolicySearchResult
     {
+        public string PolicyUniqueId { get; set; }
         public string PolicyNumber { get; set; }
         public DateTime EffectiveDate { get; set; }
         public string EffectiveDateFormatted { get; set; }
@@ -16,9 +17,13 @@ namespace InsurCloud.Auth.Api.Models
         public string InsuredFullName { get; set; }
         public string InsuredPhoneNumber { get; set; }
         public double CurrentAmountDue { get; set; }
+        public double InstallmentAmount { get; set; }
+        public double InstallmentFeeAmount { get; set; }
         public DateTime DueDate { get; set; }
         public string DueDateFormatted { get; set; }
         public bool IsPastDue { get; set; }
+        public string PolicyTermTypeCode { get; set; }
+        public Int64 AgencyId { get; set; }
     }
 
     
